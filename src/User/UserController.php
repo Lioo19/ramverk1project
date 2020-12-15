@@ -86,7 +86,7 @@ class UserController implements ContainerInjectableInterface
         var_dump($session);
         // var_dump($login);
 
-        $page->add("anax/v2/article/default", [
+        $page->add("users/login", [
             "content" => $form->getHTML(),
         ]);
 
@@ -112,7 +112,7 @@ class UserController implements ContainerInjectableInterface
         $form = new CreateUserForm($this->di);
         $form->check();
 
-        $page->add("anax/v2/article/default", [
+        $page->add("users/create", [
             "content" => $form->getHTML(),
         ]);
 
@@ -137,7 +137,7 @@ class UserController implements ContainerInjectableInterface
         $form = new CreateUserForm($this->di);
         $form->check();
 
-        $page->add("anax/v2/article/default", [
+        $page->add("users/all", [
             "content" => $form->getHTML(),
         ]);
 
