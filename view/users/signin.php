@@ -19,7 +19,7 @@ if (isset($class)) {
 ?><article <?= classList($classes) ?>>
 <?= $content ?>
 <p>Not a member?<br>
-<a href="<?= url("user/create") ?>">Sign up</a></p>
+<a href="<?= url("user/signup") ?>">Sign up</a></p>
 <br>
 
 </article>

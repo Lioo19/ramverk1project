@@ -45,13 +45,13 @@ return [
         ],
         [
             "text" => "Sign in",
-            "url" => "user/login",
-            "title" => "Login",
+            "url" => "user/signin",
+            "title" => "Sign in",
             "submenu" => [
                 "items" => [
                     [
                         "text" => "Sign up",
-                        "url" => "user/create",
+                        "url" => "user/signup",
                         "title" => "Create new user",
                     ],
                 ],

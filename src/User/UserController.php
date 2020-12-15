@@ -74,7 +74,7 @@ class UserController implements ContainerInjectableInterface
      *
      * @return object as a response object
      */
-    public function loginAction() : object
+    public function signinAction() : object
     {
         $page = $this->di->get("page");
         $session = $this->di->get("session");
@@ -86,7 +86,7 @@ class UserController implements ContainerInjectableInterface
         var_dump($session);
         // var_dump($login);
 
-        $page->add("users/login", [
+        $page->add("users/signin", [
             "content" => $form->getHTML(),
         ]);
 
@@ -106,18 +106,18 @@ class UserController implements ContainerInjectableInterface
      *
      * @return object as a response object
      */
-    public function createAction() : object
+    public function signupAction() : object
     {
         $page = $this->di->get("page");
         $form = new CreateUserForm($this->di);
         $form->check();
 
-        $page->add("users/create", [
+        $page->add("users/signup", [
             "content" => $form->getHTML(),
         ]);
 
         return $page->render([
-            "title" => "A create user page",
+            "title" => "A signUp user page",
         ]);
     }
 
@@ -155,14 +155,14 @@ class UserController implements ContainerInjectableInterface
      *
      * @return object as a response object
      */
-    public function logoutAction() : object
+    public function signoutAction() : object
     {
         $page = $this->di->get("page");
         $session = $this->di->get("session");
 
         $session->destroy();
 
-        $page->add("users/logout", [
+        $page->add("users/signout", [
             "content" => "mep",
         ]);
 
