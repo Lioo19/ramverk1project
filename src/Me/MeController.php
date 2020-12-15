@@ -1,11 +1,11 @@
 <?php
 
-namespace Lioo19\User;
+namespace Lioo19\Me;
 
 use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
-use Lioo19\User\HTMLForm\UserLoginForm;
-use Lioo19\User\HTMLForm\CreateUserForm;
+use Lioo19\Me\HTMLForm\UserLoginForm;
+use Lioo19\Me\HTMLForm\CreateUserForm;
 
 // use Anax\Route\Exception\ForbiddenException;
 // use Anax\Route\Exception\NotFoundException;
@@ -14,7 +14,7 @@ use Lioo19\User\HTMLForm\CreateUserForm;
 /**
  * A sample controller to show how a controller class can be implemented.
  */
-class UserController implements ContainerInjectableInterface
+class MeController implements ContainerInjectableInterface
 {
     use ContainerInjectableTrait;
 
@@ -74,7 +74,7 @@ class UserController implements ContainerInjectableInterface
      *
      * @return object as a response object
      */
-    public function loginAction() : object
+    public function askAction() : object
     {
         $page = $this->di->get("page");
         $session = $this->di->get("session");
@@ -106,7 +106,7 @@ class UserController implements ContainerInjectableInterface
      *
      * @return object as a response object
      */
-    public function createAction() : object
+    public function tagsAction() : object
     {
         $page = $this->di->get("page");
         $form = new CreateUserForm($this->di);
@@ -114,56 +114,6 @@ class UserController implements ContainerInjectableInterface
 
         $page->add("anax/v2/article/default", [
             "content" => $form->getHTML(),
-        ]);
-
-        return $page->render([
-            "title" => "A create user page",
-        ]);
-    }
-
-
-    /**
-     * Method to extract all users from database - name and score
-     *
-     * @param datatype $variable Description
-     *
-     * @throws Exception
-     *
-     * @return object as a response object
-     */
-    public function allAction() : object
-    {
-        $page = $this->di->get("page");
-        $form = new CreateUserForm($this->di);
-        $form->check();
-
-        $page->add("anax/v2/article/default", [
-            "content" => $form->getHTML(),
-        ]);
-
-        return $page->render([
-            "title" => "A create user page",
-        ]);
-    }
-
-    /**
-     * Link to kill session (logout)
-     *
-     * @param datatype $variable Description
-     *
-     * @throws Exception
-     *
-     * @return object as a response object
-     */
-    public function logoutAction() : object
-    {
-        $page = $this->di->get("page");
-        $session = $this->di->get("session");
-
-        $session->destroy();
-
-        $page->add("users/logout", [
-            "content" => "mep",
         ]);
 
         return $page->render([
