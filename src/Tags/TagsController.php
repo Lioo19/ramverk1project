@@ -1,11 +1,11 @@
 <?php
 
-namespace Lioo19\Me;
+namespace Lioo19\Tags;
 
 use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
-use Lioo19\Me\HTMLForm\UserLoginForm;
-use Lioo19\Me\HTMLForm\CreateUserForm;
+use Lioo19\Tags\HTMLForm\UserLoginForm;
+use Lioo19\Tags\HTMLForm\CreateUserForm;
 
 // use Anax\Route\Exception\ForbiddenException;
 // use Anax\Route\Exception\NotFoundException;
@@ -14,7 +14,7 @@ use Lioo19\Me\HTMLForm\CreateUserForm;
 /**
  * A sample controller to show how a controller class can be implemented.
  */
-class MeController implements ContainerInjectableInterface
+class TagsController implements ContainerInjectableInterface
 {
     use ContainerInjectableTrait;
 
@@ -78,19 +78,23 @@ class MeController implements ContainerInjectableInterface
     {
         $page = $this->di->get("page");
         $session = $this->di->get("session");
-        $form = new UserLoginForm($this->di);
-        $form->check();
 
-        // $login = $session->set("login", null);
-        // $login = $session->get("login", null);
-        var_dump($session->get("user"));
-        // $login = $session->get("login");
-        // var_dump($login);
+        $login = $session->get("login");
+        //HÄR BEHÖVS EN HÄMNING AV USERNAME
+        //OCH LITE ANNAT TJAFS SÅKLART
+        //OCH EN POST REQ FÖR askAction!
+        if ($login) {
+            $page->add("questions/ask", [
+                "content" => "nope",
+            ]);
 
-        // var_dump($login);
+            return $page->render([
+                "title" => "A login page",
+            ]);
+        }
 
-        $page->add("anax/v2/article/default", [
-            "content" => $form->getHTML(),
+        $page->add("questions/noaccess", [
+            "content" => "blepp",
         ]);
 
         return $page->render([

@@ -78,16 +78,23 @@ class QuestionsController implements ContainerInjectableInterface
     {
         $page = $this->di->get("page");
         $session = $this->di->get("session");
-        $form = new UserLoginForm($this->di);
-        $form->check();
 
-        // $login = $session->set("login", null);
-        // $login = $session->get("login", null);
-        var_dump($session);
-        // var_dump($login);
+        $login = $session->get("login");
+        //HÄR BEHÖVS EN HÄMNING AV USERNAME
+        //OCH LITE ANNAT TJAFS SÅKLART
+        //OCH EN POST REQ FÖR askAction!
+        if ($login) {
+            $page->add("questions/ask", [
+                "content" => "nope",
+            ]);
 
-        $page->add("anax/v2/article/default", [
-            "content" => $form->getHTML(),
+            return $page->render([
+                "title" => "A login page",
+            ]);
+        }
+
+        $page->add("questions/noaccess", [
+            "content" => "blepp",
         ]);
 
         return $page->render([

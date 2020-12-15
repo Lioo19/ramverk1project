@@ -1,10 +1,10 @@
 <?php
 
-namespace Lioo19\User\HTMLForm;
+namespace Lioo19\Tags\HTMLForm;
 
 use Anax\HTMLForm\FormModel;
 use Psr\Container\ContainerInterface;
-use Lioo19\User\User;
+use Lioo19\Tags\Tags;
 
 /**
  * Example of FormModel implementation.
@@ -74,9 +74,9 @@ class UserLoginForm extends FormModel
             $session->set("login", null);
             return false;
         }
-        $user->getUserInfo($username);
         $session->set("login", "yes");
-        $session->set("user", $user->username);
+        $session->set("user", [$user->getUserInfo($username)]);
+
 
         $this->form->addOutput("User " . $user->username . " logged in.");
         return true;

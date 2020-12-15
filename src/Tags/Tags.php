@@ -1,12 +1,12 @@
 <?php
-namespace Lioo19\User;
+namespace Lioo19\Tags;
 
 use Anax\DatabaseActiveRecord\ActiveRecordModel;
 
 /**
  * A database driven model.
  */
-class User extends ActiveRecordModel
+class Tags extends ActiveRecordModel
 {
     /**
      * @var string $tableName name of the database table.
@@ -65,6 +65,7 @@ class User extends ActiveRecordModel
     public function getUserInfo($username)
     {
         $this->find("username", $username);
+        var_dump($this->created);
         $info = array($this->id, $this->username, $this->email, $this->created, $this->info, $this->reputation, $this->votes);
         return $info;
     }
