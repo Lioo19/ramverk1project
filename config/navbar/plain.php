@@ -5,33 +5,43 @@
 return [
     // Use for styling the menu
     "class" => "my-navbar",
- 
+
     // Here comes the menu items/structure
     "items" => [
         [
-            "text" => "Hem",
+            "text" => "Home",
             "url" => "",
-            "title" => "Första sidan, börja här.",
+            "title" => "Go home",
         ],
         [
-            "text" => "Redovisning",
-            "url" => "redovisning",
-            "title" => "Redovisningstexter från kursmomenten.",
+            "text" => "Questions",
+            "url" => "questions",
+            "title" => "Questions",
         ],
         [
-            "text" => "Om",
-            "url" => "om",
-            "title" => "Om denna webbplats.",
+            "text" => "Ask a Question",
+            "url" => "ask",
+            "title" => "Ask a Question",
         ],
         [
-            "text" => "Styleväljare",
-            "url" => "style",
-            "title" => "Välj stylesheet.",
+            "text" => "Tags",
+            "url" => "questions/tags",
+            "title" => "Filter Qs on tags",
         ],
         [
-            "text" => "Verktyg",
-            "url" => "verktyg",
-            "title" => "Verktyg och möjligheter för utveckling.",
+            "text" => "About",
+            "url" => "about",
+            "title" => "About this site",
+        ],
+        [
+            "text" => "Sign in",
+            "url" => "user/login",
+            "title" => "Login",
+        ],
+        [
+            "text" => "Sign up",
+            "url" => "user/create",
+            "title" => "Create new user",
         ],
     ],
 ];

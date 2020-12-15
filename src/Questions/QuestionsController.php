@@ -1,11 +1,11 @@
 <?php
 
-namespace Lioo19\User;
+namespace Lioo19\Questions;
 
 use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
-use Lioo19\User\HTMLForm\UserLoginForm;
-use Lioo19\User\HTMLForm\CreateUserForm;
+use Lioo19\Questions\HTMLForm\UserLoginForm;
+use Lioo19\Questions\HTMLForm\CreateUserForm;
 
 // use Anax\Route\Exception\ForbiddenException;
 // use Anax\Route\Exception\NotFoundException;
@@ -14,7 +14,7 @@ use Lioo19\User\HTMLForm\CreateUserForm;
 /**
  * A sample controller to show how a controller class can be implemented.
  */
-class UserController implements ContainerInjectableInterface
+class QuestionsController implements ContainerInjectableInterface
 {
     use ContainerInjectableTrait;
 
@@ -74,7 +74,7 @@ class UserController implements ContainerInjectableInterface
      *
      * @return object as a response object
      */
-    public function loginAction() : object
+    public function askAction() : object
     {
         $page = $this->di->get("page");
         $session = $this->di->get("session");
@@ -106,32 +106,7 @@ class UserController implements ContainerInjectableInterface
      *
      * @return object as a response object
      */
-    public function createAction() : object
-    {
-        $page = $this->di->get("page");
-        $form = new CreateUserForm($this->di);
-        $form->check();
-
-        $page->add("anax/v2/article/default", [
-            "content" => $form->getHTML(),
-        ]);
-
-        return $page->render([
-            "title" => "A create user page",
-        ]);
-    }
-
-
-    /**
-     * Description.
-     *
-     * @param datatype $variable Description
-     *
-     * @throws Exception
-     *
-     * @return object as a response object
-     */
-    public function allAction() : object
+    public function tagsAction() : object
     {
         $page = $this->di->get("page");
         $form = new CreateUserForm($this->di);

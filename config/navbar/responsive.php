@@ -7,47 +7,51 @@ return [
     "id" => "rm-menu",
     "wrapper" => null,
     "class" => "rm-default rm-mobile",
- 
+
     // Here comes the menu items
     "items" => [
         [
-            "text" => "Hem",
+            "text" => "Home",
             "url" => "",
-            "title" => "Första sidan, börja här.",
+            "title" => "Go home",
         ],
         [
-            "text" => "Redovisning",
-            "url" => "redovisning",
-            "title" => "Redovisningstexter från kursmomenten.",
+            "text" => "Questions",
+            "url" => "questions",
+            "title" => "Questions",
             "submenu" => [
                 "items" => [
                     [
-                        "text" => "Kmom01",
-                        "url" => "redovisning/kmom01",
-                        "title" => "Redovisning för kmom01.",
+                        "text" => "Ask a Question",
+                        "url" => "ask",
+                        "title" => "Ask a Question",
                     ],
                     [
-                        "text" => "Kmom02",
-                        "url" => "redovisning/kmom02",
-                        "title" => "Redovisning för kmom02.",
+                        "text" => "Tags",
+                        "url" => "questions/tags",
+                        "title" => "Filter Qs on tags",
                     ],
                 ],
             ],
         ],
         [
-            "text" => "Om",
-            "url" => "om",
-            "title" => "Om denna webbplats.",
+            "text" => "About",
+            "url" => "about",
+            "title" => "About this site",
         ],
         [
-            "text" => "Styleväljare",
-            "url" => "style",
-            "title" => "Välj stylesheet.",
-        ],
-        [
-            "text" => "Verktyg",
-            "url" => "verktyg",
-            "title" => "Verktyg och möjligheter för utveckling.",
+            "text" => "Sign in",
+            "url" => "user/login",
+            "title" => "Login",
+            "submenu" => [
+                "items" => [
+                    [
+                        "text" => "Sign up",
+                        "url" => "user/create",
+                        "title" => "Create new user",
+                    ],
+                ],
+            ],
         ],
     ],
 ];

@@ -1,10 +1,10 @@
 <?php
 
-namespace Lioo19\User\HTMLForm;
+namespace Lioo19\Questions\HTMLForm;
 
 use Anax\HTMLForm\FormModel;
 use Psr\Container\ContainerInterface;
-use Lioo19\User\User;
+use Lioo19\Questions\Questions;
 /**
  * Example of FormModel implementation.
  */
@@ -87,7 +87,7 @@ class CreateUserForm extends FormModel
             return false;
         }
 
-        $user = new User();
+        $user = new Questions();
         $user->setDb($this->di->get("dbqb"));
         $user->username = $username;
         $user->email = $email;

@@ -1,3 +1,5 @@
-#### Footer col 3
+#### Contact
 
-Med brödtext i ett stycke som säger något trevligt om just detta block, eller kanske en lista av länkar.
+Wanna get in touch?
+Best way to reach us is by [mail](game@game.game)  
+or on our [facebookpage](www.facebook.com)  
