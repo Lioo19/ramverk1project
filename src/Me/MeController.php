@@ -4,7 +4,7 @@ namespace Lioo19\Me;
 
 use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
-use Lioo19\Me\HTMLForm\UserLoginForm;
+use Lioo19\Me\HTMLForm\CreateUserForm2;
 use Lioo19\Me\HTMLForm\UpdateUserForm;
 use Lioo19\Me\Me;
 
@@ -95,6 +95,32 @@ class MeController implements ContainerInjectableInterface
 
         $page->add("me/update", [
             "content" => $form->getHTML(),
+            "data" => $this->data
+        ]);
+
+        return $page->render([
+            "title" => "Update profile",
+        ]);
+    }
+
+    /**
+     * Description.
+     *
+     * @param datatype $variable Description
+     *
+     * @throws Exception
+     *
+     * @return object as a response object
+     */
+    public function bAction() : object
+    {
+        $page = $this->di->get("page");
+        $form = new CreateUserForm2($this->di);
+        $form->check();
+
+        $page->add("me/update", [
+            "content" => $form->getHTML(),
+            "data" => $this->data
         ]);
 
         return $page->render([

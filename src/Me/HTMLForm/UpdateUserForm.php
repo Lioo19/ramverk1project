@@ -18,6 +18,13 @@ class UpdateUserForm extends FormModel
     public function __construct(ContainerInterface $di)
     {
         parent::__construct($di);
+        $session = $this->di->get("session");
+
+        $username = $session->get("user") ?? null;
+        $me = new Me();
+        $me->setDb($this->di->get("dbqb"));
+        $data = $me->getUserInfo($username);
+
         $this->form->create(
             [
                 "id" => __CLASS__,
@@ -26,31 +33,28 @@ class UpdateUserForm extends FormModel
             [
                 "email" => [
                     "type"        => "email",
+                    "value"       => $data["email"],
                 ],
 
                 "username" => [
                     "type"        => "text",
+                    "value"       => $data["username"],
                 ],
 
-                "password" => [
-                    "type"        => "password",
-                    "description" => "At least 6 characters",
+                "info" => [
+                    "type"        => "textarea",
+                    "placeholder" => "Add something about yourself!",
+                    "value"       => $data["info"],
                 ],
 
-                "password-again" => [
-                    "type"        => "password",
-                    "validation" => [
-                        "match" => "password"
-                    ],
+                "id" => [
+                    "type"        => "hidden",
+                    "value"       => $data["id"],
                 ],
 
-                "i-agree" => [
-                    "type"        => "checkbox",
-                    "description" => "I agree to this student-project saving my entered data",
-                ],
                 "submit" => [
                     "type" => "submit",
-                    "value" => "Create user",
+                    "value" => "Update",
                     "callback" => [$this, "callbackSubmit"]
                 ],
             ]
@@ -70,31 +74,18 @@ class UpdateUserForm extends FormModel
         // Get values from the submitted form
         $email         = $this->form->value("email");
         $username      = $this->form->value("username");
-        $password      = $this->form->value("password");
-        $passwordAgain = $this->form->value("password-again");
-        $iagree        = $this->form->value("i-agree");
-
-        if ($iagree === false) {
-            $this->form->rememberValues();
-            $this->form->addOutput("Agree to data agreement");
-            return false;
-        }
-
-        // Check password matches
-        if ($password !== $passwordAgain ) {
-            $this->form->rememberValues();
-            $this->form->addOutput("Password did not match.");
-            return false;
-        }
+        $info          = $this->form->value("info");
+        $id            = $this->form->value("id");
 
         $user = new Me();
         $user->setDb($this->di->get("dbqb"));
+        $user->getUserInfoById($id);
         $user->username = $username;
         $user->email = $email;
-        $user->setPassword($password);
+        $user->info = $info;
         $user->save();
 
-        $this->form->addOutput("User was created.");
+        $this->form->addOutput("Profile Updated");
         return true;
     }
 

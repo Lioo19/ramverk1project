@@ -8,7 +8,7 @@ use Psr\Container\ContainerInterface;
 /**
  * Example of FormModel implementation.
  */
-class CreateUserForm extends FormModel
+class CreateUserForm2 extends FormModel
 {
     /**
      * Constructor injects with DI container.

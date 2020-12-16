@@ -30,7 +30,7 @@ class Me extends ActiveRecordModel
 
 
     /**
-     * Get all user info, including gravatar
+     * Get all user info by username, including gravatar
      *
      * @param string $password the password to use.
      *
@@ -55,6 +55,29 @@ class Me extends ActiveRecordModel
             "reputation" => $this->reputation,
             "votes" => $this->votes,
             "grav_url" => $grav_url
+        );
+        return $info;
+    }
+
+    /**
+     * Get all user info by id
+     *
+     * @param string $password the password to use.
+     *
+     * @return void
+     */
+    public function getUserInfoById($id)
+    {
+        $this->find("id", $id);
+        $info = array(
+            "id"         => $this->id,
+            "username"   => $this->username,
+            "password"   => $this->password,
+            "email"      => $this->email,
+            "created"    => $this->created,
+            "info"       => $this->info,
+            "reputation" => $this->reputation,
+            "votes"      => $this->votes,
         );
         return $info;
     }
