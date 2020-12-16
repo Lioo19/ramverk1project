@@ -56,7 +56,7 @@ class User extends ActiveRecordModel
     }
 
     /**
-     * Set the password.
+     * GetUserInfo by username
      *
      * @param string $password the password to use.
      *
@@ -67,5 +67,43 @@ class User extends ActiveRecordModel
         $this->find("username", $username);
         $info = array($this->id, $this->username, $this->email, $this->created, $this->info, $this->reputation, $this->votes);
         return $info;
+    }
+
+
+    /**
+     * Get all users
+     * username, reputation, gravatar
+     *
+     * @param string $password the password to use.
+     *
+     * @return void
+     */
+    public function getAllUsers()
+    {
+        $all = $this->findAll();
+        $res = [];
+        $counter = 0;
+        // $default = "identicon";
+        // $default = "monsterid";
+        // $default = "wavatar";
+        $default = "robohash";
+
+        //Only pass username and reputation on
+        foreach ($all as $key => $value) {
+            foreach ($value as $key1 => $value1) {
+                if ($key1 === "email") {
+                    $grav_url = "https://www.gravatar.com/avatar/" .
+                            md5( strtolower( trim( $value1 ) ) ) . "?d=" .
+                            $default . "&s=" . 100;
+                    $res[$counter]["gravatar"] = $grav_url;
+                } elseif ($key1 === "username" || $key1 === "reputation" || $key1 === "info") {
+                    $res[$counter][$key1] = $value1;
+                }
+            }
+            $counter += 1;
+
+        }
+        // $info = array($this->id, $this->username, $this->email, $this->created, $this->info, $this->reputation, $this->votes);
+        return $res;
     }
 }

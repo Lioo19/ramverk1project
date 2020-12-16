@@ -123,7 +123,7 @@ class UserController implements ContainerInjectableInterface
 
 
     /**
-     * Method to extract all users from database - name and score
+     * Method to extract all users from database - name, gravatar and score
      *
      * @param datatype $variable Description
      *
@@ -134,11 +134,13 @@ class UserController implements ContainerInjectableInterface
     public function allAction() : object
     {
         $page = $this->di->get("page");
-        $form = new CreateUserForm($this->di);
-        $form->check();
+        $user = new User();
+        $user->setDb($this->di->get("dbqb"));
+
+        $all = $user->getAllUsers();
 
         $page->add("users/all", [
-            "content" => $form->getHTML(),
+            "content" => $all,
         ]);
 
         return $page->render([
