@@ -8,7 +8,7 @@ use Lioo19\Me\Me;
 /**
  * Example of FormModel implementation.
  */
-class CreateUserForm extends FormModel
+class UpdateUserForm extends FormModel
 {
     /**
      * Constructor injects with DI container.

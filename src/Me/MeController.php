@@ -5,7 +5,8 @@ namespace Lioo19\Me;
 use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
 use Lioo19\Me\HTMLForm\UserLoginForm;
-use Lioo19\Me\HTMLForm\CreateUserForm;
+use Lioo19\Me\HTMLForm\UpdateUserForm;
+use Lioo19\Me\Me;
 
 // use Anax\Route\Exception\ForbiddenException;
 // use Anax\Route\Exception\NotFoundException;
@@ -23,21 +24,28 @@ class MeController implements ContainerInjectableInterface
     /**
      * @var $data description
      */
-    //private $data;
+    private $data;
 
 
 
-    // /**
-    //  * The initialize method is optional and will always be called before the
-    //  * target method/action. This is a convienient method where you could
-    //  * setup internal properties that are commonly used by several methods.
-    //  *
-    //  * @return void
-    //  */
-    // public function initialize() : void
-    // {
-    //     ;
-    // }
+    /**
+     * The initialize method is optional and will always be called before the
+     * target method/action. This is a convienient method where you could
+     * setup internal properties that are commonly used by several methods.
+     *
+     * @return void
+     */
+    public function initialize() : void
+    {
+        $session = $this->di->get("session");
+
+        $username = $session->get("user") ?? null;
+
+        $info = new Me();
+        $info->setDb($this->di->get("dbqb"));
+
+        $this->data = $info->getUserInfo($username);
+    }
 
 
 
@@ -54,15 +62,20 @@ class MeController implements ContainerInjectableInterface
     {
         $page = $this->di->get("page");
 
-        $page->add("anax/v2/article/default", [
-            "content" => "An index page",
+        if (!$this->data["username"]) {
+            $page->add("me/noaccess");
+            return $page->render([
+                "title" => "No Access",
+            ]);
+        }
+        $page->add("me/me", [
+            "content" => $this->data,
         ]);
 
         return $page->render([
-            "title" => "A index page",
+            "title" => "Profile",
         ]);
     }
-
 
 
     /**
@@ -74,53 +87,18 @@ class MeController implements ContainerInjectableInterface
      *
      * @return object as a response object
      */
-    public function askAction() : object
+    public function updateAction() : object
     {
         $page = $this->di->get("page");
-        $session = $this->di->get("session");
-        $form = new UserLoginForm($this->di);
+        $form = new UpdateUserForm($this->di);
         $form->check();
 
-        // $login = $session->set("login", null);
-        // $login = $session->get("login", null);
-        var_dump($session->get("user"));
-        // $login = $session->get("login");
-        // var_dump($login);
-
-        // var_dump($login);
-
-        $page->add("anax/v2/article/default", [
+        $page->add("me/update", [
             "content" => $form->getHTML(),
         ]);
 
         return $page->render([
-            "title" => "A login page",
-        ]);
-    }
-
-
-
-    /**
-     * Description.
-     *
-     * @param datatype $variable Description
-     *
-     * @throws Exception
-     *
-     * @return object as a response object
-     */
-    public function tagsAction() : object
-    {
-        $page = $this->di->get("page");
-        $form = new CreateUserForm($this->di);
-        $form->check();
-
-        $page->add("anax/v2/article/default", [
-            "content" => $form->getHTML(),
-        ]);
-
-        return $page->render([
-            "title" => "A create user page",
+            "title" => "Update profile",
         ]);
     }
 }

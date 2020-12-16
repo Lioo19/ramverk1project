@@ -28,35 +28,9 @@ class Me extends ActiveRecordModel
     public $reputation;
     public $votes;
 
-    /**
-     * Set the password.
-     *
-     * @param string $password the password to use.
-     *
-     * @return void
-     */
-    public function setPassword($password)
-    {
-        $this->password = password_hash($password, PASSWORD_DEFAULT);
-    }
 
     /**
-     * Verify the acronym and the password, if successful the object contains
-     * all details from the database row.
-     *
-     * @param string $acronym  acronym to check.
-     * @param string $password the password to use.
-     *
-     * @return boolean true if acronym and password matches, else false.
-     */
-    public function verifyPassword($username, $password)
-    {
-        $this->find("username", $username);
-        return password_verify($password, $this->password);
-    }
-
-    /**
-     * Set the password.
+     * Get all user info, including gravatar
      *
      * @param string $password the password to use.
      *
@@ -65,8 +39,23 @@ class Me extends ActiveRecordModel
     public function getUserInfo($username)
     {
         $this->find("username", $username);
-        var_dump($this->created);
-        $info = array($this->id, $this->username, $this->email, $this->created, $this->info, $this->reputation, $this->votes);
+        // $default = "identicon";
+        // $default = "monsterid";
+        // $default = "wavatar";
+        $default = "robohash";
+        $grav_url = "https://www.gravatar.com/avatar/" .
+                md5( strtolower( trim( $this->email ) ) ) . "?d=" .
+                $default . "&s=" . 100;
+        $info = array(
+            "id" => $this->id,
+            "username" => $this->username,
+            "email" => $this->email,
+            "created" => $this->created,
+            "info" => $this->info,
+            "reputation" => $this->reputation,
+            "votes" => $this->votes,
+            "grav_url" => $grav_url
+        );
         return $info;
     }
 }
