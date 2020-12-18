@@ -1,23 +1,23 @@
 <?php
 
 /**
- * Frontpage for books
+ * Render content within an article - extended from anax/v2/article/default
  */
 
 namespace Anax\View;
 
-?>
-<h1>Böcker</h1>
+// Show incoming variables and view helper functions
+//echo showEnvironment(get_defined_vars(), get_defined_functions());
 
-<div style="height: 400px;">
-    <h4>Välkommen att dyka ner i böckernas värld!</h4>
-    <p>Om du är nyfiken på vilka böcker som går att
-        se i listan finns dessa här:
-        <br>
-    <p>
-    <p>Om du istället vill lägga till böcker till listan klickar du här:
-        <br>
-    </p>
-    <br>
-    <br>
-</div>
+// Prepare classes
+$classes[] = "article";
+if (isset($class)) {
+    $classes[] = $class;
+}
+
+
+?><article <?= classList($classes) ?>>
+<?= $content ?>
+<br>
+
+</article>

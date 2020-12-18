@@ -15,9 +15,10 @@ CREATE TABLE Posts (
     "created" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     "deleted" TIMESTAMP,
     "tags" TEXT,
-    "ownerid" INTEGER,
-    "ownerusername" TEXT,
-    "parentid" INTEGER,
-    "acceptedanswer" TEXT,
-    FOREIGN KEY ("ownerid") REFERENCES "User"("id")
+    "ownerid" INTEGER NOT NULL,
+    "ownerusername" TEXT NOT NULL,
+    "parentid" INTEGER DEFAULT NULL,
+    "acceptedanswer" TEXT DEFAULT NULL,
+    FOREIGN KEY ("ownerid") REFERENCES "User"("id"),
+    FOREIGN KEY ("ownerusername") REFERENCES "User"("username")
 );

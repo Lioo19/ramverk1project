@@ -11,12 +11,12 @@ namespace Anax\View;
 
 <div style="height: 400px;">
     <h4>To ask or answer questions, you need to be logged in</h4>
-    <p><a href="<?= url("user/login") ?>">Sign In</a></p>
+    <p><a href="<?= url("user/signin") ?>">Sign In</a></p>
     <p>
     <p>or
         <br>
         <br>
-        <a href="<?= url("user/create") ?>">Sign Up</a>
+        <a href="<?= url("user/signup") ?>">Sign Up</a>
         <br>
     </p>
     <br>

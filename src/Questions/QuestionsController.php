@@ -4,8 +4,7 @@ namespace Lioo19\Questions;
 
 use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
-use Lioo19\Questions\HTMLForm\UserLoginForm;
-use Lioo19\Questions\HTMLForm\CreateUserForm;
+use Lioo19\Questions\HTMLForm\CreateQuestionForm;
 
 // use Anax\Route\Exception\ForbiddenException;
 // use Anax\Route\Exception\NotFoundException;
@@ -42,7 +41,9 @@ class QuestionsController implements ContainerInjectableInterface
 
 
     /**
-     * Description.
+     * Shows an overview of available questions
+     * Works, get gravatar?
+     * Clickable? 
      *
      * @param datatype $variable Description
      *
@@ -53,20 +54,24 @@ class QuestionsController implements ContainerInjectableInterface
     public function indexActionGet(): object
     {
         $page = $this->di->get("page");
+        $question = new Question();
+        $question->setDb($this->di->get("dbqb"));
 
-        $page->add("anax/v2/article/default", [
-            "content" => "An index page",
+        $all = $question->getAllQ();
+
+        $page->add("questions/all", [
+            "content" => $all,
         ]);
 
         return $page->render([
-            "title" => "A index page",
+            "title" => "A create user page",
         ]);
     }
 
 
 
     /**
-     * Description.
+     * Creates a question-form if logged in
      *
      * @param datatype $variable Description
      *
@@ -84,8 +89,11 @@ class QuestionsController implements ContainerInjectableInterface
         //OCH LITE ANNAT TJAFS SÅKLART
         //OCH EN POST REQ FÖR askAction!
         if ($login) {
+            $form = new CreateQuestionForm($this->di);
+            $form->check();
+
             $page->add("questions/ask", [
-                "content" => "nope",
+                "content" => $form->getHTML(),
             ]);
 
             return $page->render([
