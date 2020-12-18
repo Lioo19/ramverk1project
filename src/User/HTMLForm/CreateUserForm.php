@@ -5,6 +5,7 @@ namespace Lioo19\User\HTMLForm;
 use Anax\HTMLForm\FormModel;
 use Psr\Container\ContainerInterface;
 use Lioo19\User\User;
+
 /**
  * Example of FormModel implementation.
  */
@@ -81,7 +82,7 @@ class CreateUserForm extends FormModel
         }
 
         // Check password matches
-        if ($password !== $passwordAgain ) {
+        if ($password !== $passwordAgain) {
             $this->form->rememberValues();
             $this->form->addOutput("Password did not match.");
             return false;
@@ -97,5 +98,4 @@ class CreateUserForm extends FormModel
         $this->form->addOutput("User was created.");
         return true;
     }
-
 }

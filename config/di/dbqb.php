@@ -1,7 +1,9 @@
 <?php
+
 /**
  * Configuration file for database query builder service.
  */
+
 return [
     // Services to add to the container.
     "services" => [

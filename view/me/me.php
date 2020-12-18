@@ -1,10 +1,11 @@
 <?php
 
-namespace Anax\View;
-
 /**
  * Frontpage for profilpage
  */
+
+namespace Anax\View;
+
 ?>
 <h1>All about you</h1>
 

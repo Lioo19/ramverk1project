@@ -1,10 +1,10 @@
 <?php
 
-namespace Anax\View;
+/*
+*Page redirecting you to login page
+*/
 
-/**
- * Frontpage for books
- */
+namespace Anax\View;
 
 ?>
 <h1>Please login to ask a new question</h1>

@@ -5,6 +5,7 @@ namespace Lioo19\Me\HTMLForm;
 use Anax\HTMLForm\FormModel;
 use Psr\Container\ContainerInterface;
 use Lioo19\Me\Me;
+
 /**
  * Example of FormModel implementation.
  */
@@ -21,9 +22,9 @@ class UpdateUserForm extends FormModel
         $session = $this->di->get("session");
 
         $username = $session->get("user") ?? null;
-        $me = new Me();
-        $me->setDb($this->di->get("dbqb"));
-        $data = $me->getUserInfo($username);
+        $meObj = new Me();
+        $meObj->setDb($this->di->get("dbqb"));
+        $data = $meObj->getUserInfo($username);
 
         $this->form->create(
             [
@@ -61,8 +62,6 @@ class UpdateUserForm extends FormModel
         );
     }
 
-
-
     /**
      * Callback for submit-button which should return true if it could
      * carry out its work and false if something failed.
@@ -88,5 +87,4 @@ class UpdateUserForm extends FormModel
         $this->form->addOutput("Profile Updated");
         return true;
     }
-
 }

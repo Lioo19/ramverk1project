@@ -1,4 +1,5 @@
 <?php
+
 namespace Lioo19\Tags;
 
 use Anax\DatabaseActiveRecord\ActiveRecordModel;

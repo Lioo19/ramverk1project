@@ -1,8 +1,10 @@
 <?php
+
 /**
  * Internal routes that deal with error situations when pages are not found,
  * forbidden or internal error happens.
  */
+
 return [
     "routes" => [
         [

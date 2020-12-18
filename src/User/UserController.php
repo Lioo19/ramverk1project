@@ -50,7 +50,7 @@ class UserController implements ContainerInjectableInterface
      *
      * @return object as a response object
      */
-    public function indexActionGet() : object
+    public function indexActionGet(): object
     {
         $page = $this->di->get("page");
 
@@ -74,7 +74,7 @@ class UserController implements ContainerInjectableInterface
      *
      * @return object as a response object
      */
-    public function signinAction() : object
+    public function signinAction(): object
     {
         $page = $this->di->get("page");
         $session = $this->di->get("session");
@@ -106,7 +106,7 @@ class UserController implements ContainerInjectableInterface
      *
      * @return object as a response object
      */
-    public function signupAction() : object
+    public function signupAction(): object
     {
         $page = $this->di->get("page");
         $form = new CreateUserForm($this->di);
@@ -131,7 +131,7 @@ class UserController implements ContainerInjectableInterface
      *
      * @return object as a response object
      */
-    public function allAction() : object
+    public function allAction(): object
     {
         $page = $this->di->get("page");
         $user = new User();
@@ -157,7 +157,7 @@ class UserController implements ContainerInjectableInterface
      *
      * @return object as a response object
      */
-    public function signoutAction() : object
+    public function signoutAction(): object
     {
         $page = $this->di->get("page");
         $session = $this->di->get("session");

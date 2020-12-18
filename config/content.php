@@ -1,7 +1,9 @@
 <?php
+
 /**
  * Config-file for file based page content.
  */
+
 return [
     // Use for styling the menu
     //"basePath" => ANAX_APP_PATH . "/content",

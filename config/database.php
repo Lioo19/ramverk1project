@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Config file for Database.
  *
@@ -13,6 +14,7 @@
  *  "dsn" => "sqlite:$path",
  *
  */
+
 return [
     "dsn"              => "sqlite:" . ANAX_INSTALL_PATH . "/data/db.sqlite",
     "username"         => null,

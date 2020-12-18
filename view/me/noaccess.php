@@ -1,10 +1,10 @@
 <?php
 
-namespace Anax\View;
-
 /**
  * Failpage me
  */
+
+namespace Anax\View;
 
 ?>
 <h1>Please login to view your profile</h1>

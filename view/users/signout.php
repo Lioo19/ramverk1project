@@ -1,10 +1,10 @@
 <?php
 
-namespace Anax\View;
-
 /**
  * Frontpage for books
  */
+
+namespace Anax\View;
 
 ?>
 <h1>Logged Out</h1>

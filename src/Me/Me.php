@@ -1,4 +1,5 @@
 <?php
+
 namespace Lioo19\Me;
 
 use Anax\DatabaseActiveRecord\ActiveRecordModel;
@@ -43,8 +44,8 @@ class Me extends ActiveRecordModel
         // $default = "monsterid";
         // $default = "wavatar";
         $default = "robohash";
-        $grav_url = "https://www.gravatar.com/avatar/" .
-                md5( strtolower( trim( $this->email ) ) ) . "?d=" .
+        $gravUrl = "https://www.gravatar.com/avatar/" .
+                md5(strtolower(trim($this->email))) . "?d=" .
                 $default . "&s=" . 100;
         $info = array(
             "id" => $this->id,
@@ -54,7 +55,7 @@ class Me extends ActiveRecordModel
             "info" => $this->info,
             "reputation" => $this->reputation,
             "votes" => $this->votes,
-            "grav_url" => $grav_url
+            "grav_url" => $gravUrl
         );
         return $info;
     }

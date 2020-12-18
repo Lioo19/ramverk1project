@@ -1,10 +1,11 @@
 <?php
 
-use Anax\Url\Url;
-
 /**
  * Config file for url.
  */
+
+use Anax\Url\Url;
+
 #
 if (!defined("ANAX_PRODUCTION")) {
     // For development environment

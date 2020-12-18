@@ -10,7 +10,6 @@ use PHPUnit\Framework\TestCase;
  */
 class SampleJsonControllerTest extends TestCase
 {
-    
     // Create the di container.
     protected $di;
     protected $controller;

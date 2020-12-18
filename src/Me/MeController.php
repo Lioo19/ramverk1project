@@ -35,7 +35,7 @@ class MeController implements ContainerInjectableInterface
      *
      * @return void
      */
-    public function initialize() : void
+    public function initialize(): void
     {
         $session = $this->di->get("session");
 
@@ -58,7 +58,7 @@ class MeController implements ContainerInjectableInterface
      *
      * @return object as a response object
      */
-    public function indexActionGet() : object
+    public function indexActionGet(): object
     {
         $page = $this->di->get("page");
 
@@ -87,7 +87,7 @@ class MeController implements ContainerInjectableInterface
      *
      * @return object as a response object
      */
-    public function updateAction() : object
+    public function updateAction(): object
     {
         $page = $this->di->get("page");
         $form = new UpdateUserForm($this->di);
@@ -112,7 +112,7 @@ class MeController implements ContainerInjectableInterface
      *
      * @return object as a response object
      */
-    public function bAction() : object
+    public function bAction(): object
     {
         $page = $this->di->get("page");
         $form = new CreateUserForm2($this->di);

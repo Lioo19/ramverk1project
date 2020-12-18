@@ -1,9 +1,11 @@
 <?php
+
 /**
  * Supply the basis for the navbar as an array.
  */
+
 $login = $_SESSION["login"] ?? null;
-if( $login === "yes") {
+if ($login === "yes") {
     return [
         // Use for styling the menu
         "wrapper" => null,

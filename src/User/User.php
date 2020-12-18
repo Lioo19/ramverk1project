@@ -1,4 +1,5 @@
 <?php
+
 namespace Lioo19\User;
 
 use Anax\DatabaseActiveRecord\ActiveRecordModel;
@@ -92,16 +93,15 @@ class User extends ActiveRecordModel
         foreach ($all as $key => $value) {
             foreach ($value as $key1 => $value1) {
                 if ($key1 === "email") {
-                    $grav_url = "https://www.gravatar.com/avatar/" .
-                            md5( strtolower( trim( $value1 ) ) ) . "?d=" .
+                    $gravUrl = "https://www.gravatar.com/avatar/" .
+                            md5(strtolower(trim($value1))) . "?d=" .
                             $default . "&s=" . 100;
-                    $res[$counter]["gravatar"] = $grav_url;
+                    $res[$counter]["gravatar"] = $gravUrl;
                 } elseif ($key1 === "username" || $key1 === "reputation" || $key1 === "info") {
                     $res[$counter][$key1] = $value1;
                 }
             }
             $counter += 1;
-
         }
         // $info = array($this->id, $this->username, $this->email, $this->created, $this->info, $this->reputation, $this->votes);
         return $res;

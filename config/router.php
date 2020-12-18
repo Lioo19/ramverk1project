@@ -1,10 +1,11 @@
 <?php
 
-use Anax\Route\Router;
-
 /**
  * Configuration file for routes.
  */
+
+use Anax\Route\Router;
+
 return [
     //"mode" => Router::DEVELOPMENT, // default, verbose execeptions
     //"mode" => Router::PRODUCTION,  // exceptions turn into 500

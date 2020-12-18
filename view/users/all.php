@@ -1,10 +1,10 @@
 <?php
 
-namespace Anax\View;
-
 /**
  * Render content within an article - extended from anax/v2/article/default
  */
+
+namespace Anax\View;
 
 // Show incoming variables and view helper functions
 //echo showEnvironment(get_defined_vars(), get_defined_functions());
@@ -23,26 +23,26 @@ if (isset($class)) {
     <?php
     foreach ($value as $key1 => $value1) {
         switch ($key1) {
-            case "username": ?>
-            <h4>User: <?= $value1?> </h4><?php
-            break;
-            case "reputation": ?>
-            <p><?= $value1 ?> </p><?php
-            break;
-            case "info": ?>
-            <p><?= $value1 ?> </p><?php
-            break;
-            case "gravatar": ?>
-            <img
-                class="gravatarAll"
-                src="<?= $value1; ?>"
-                alt="user-icon by gravatar"
+            case "username":
+                ?><h4>User: <?= $value1?> </h4><?php
+                break;
+            case "reputation":
+                ?><p><?= $value1 ?> </p><?php
+                break;
+            case "info":
+                ?><p><?= $value1 ?> </p><?php
+                break;
+            case "gravatar":
+                ?><img
+                    class="gravatarAll"
+                    src="<?= $value1; ?>"
+                    alt="user-icon by gravatar"
                 /><?php
-            break;
+                break;
         }
     }
     ?>
     </div>
-<?php
+    <?php
 } ?>
 </article>

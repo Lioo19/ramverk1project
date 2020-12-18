@@ -1,4 +1,5 @@
 <?php
+
 namespace Lioo19\Questions;
 
 use Anax\DatabaseActiveRecord\ActiveRecordModel;

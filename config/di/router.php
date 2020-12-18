@@ -1,7 +1,9 @@
 <?php
+
 /**
  * Configuration file to create router as $di service.
  */
+
 return [
     "services" => [
         "router" => [

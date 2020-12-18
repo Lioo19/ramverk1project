@@ -1,7 +1,9 @@
 <?php
+
 /**
  * Supply the basis for the navbar as an array.
  */
+
 return [
     // Use for styling the menu
     "class" => "my-navbar",
