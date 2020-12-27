@@ -10,7 +10,7 @@ use Lioo19\Me\Me;
 /**
  * Example of FormModel implementation.
  */
-class CreateQuestionForm extends FormModel
+class CreateAnswerForm extends FormModel
 {
     /**
      * Constructor injects with DI container.
@@ -21,20 +21,24 @@ class CreateQuestionForm extends FormModel
     {
         parent::__construct($di);
         $session = $this->di->get("session");
+        $request = $this->di->get("request");
+
+        $parentid = $request->getGet("id", null);
 
         $username = $session->get("user") ?? null;
         $meObj = new Me();
         $meObj->setDb($this->di->get("dbqb"));
-        $data = $meObj->getUserInfo($username);
+        $owner = $meObj->getUserInfo($username);
 
         $this->form->create(
             [
                 "id" => __CLASS__,
-                "legend" => "New Question"
+                "legend" => "New Answer"
             ],
             [
                 "title" => [
-                    "type"        => "text",
+                    "type"        => "hidden",
+                    "value"       => "response",
                     //"description" => "Here you can place a description.",
                     //"placeholder" => "Here is a placeholder",
                 ],
@@ -47,17 +51,20 @@ class CreateQuestionForm extends FormModel
 
                 "tags" => [
                     "type"        => "text",
-                    //"description" => "Here you can place a description.",
                     "placeholder" => "separate with comma",
                 ],
                 "id" => [
                     "type"        => "hidden",
-                    "value"       => $data["id"],
+                    "value"       => $owner["id"],
                 ],
 
                 "username" => [
                     "type"        => "hidden",
-                    "value"       => $data["username"],
+                    "value"       => $owner["username"],
+                ],
+                "parentid" => [
+                    "type"        => "text",
+                    "value"       => $parentid,
                 ],
 
                 "submit" => [
@@ -82,24 +89,26 @@ class CreateQuestionForm extends FormModel
     {
         $session = $this->di->get("session");
 
-        $title        = $this->form->value("title");
+        $title         = $this->form->value("title");
         $body          = $this->form->value("body");
         $tags          = $this->form->value("tags");
         $ownerid       = $this->form->value("id");
         $ownerusername = $this->form->value("username");
+        $parentid      = $this->form->value("parentid");
 
         $question = new Question();
         $question->setDb($this->di->get("dbqb"));
 
-        $question->title = $title;
-        $question->body = $body;
-        $question->tags = $tags;
-        $question->ownerid = $ownerid;
-        $question->ownerusername = $ownerusername;
+        $question->title          = $title;
+        $question->body           = $body;
+        $question->tags           = $tags;
+        $question->ownerid        = $ownerid;
+        $question->ownerusername  = $ownerusername;
+        $question->parentid       = $parentid;
+
         $question->save();
 
-        $this->form->addOutput("Question " .
-            $question->title . " was created");
+        $this->form->addOutput("Answer added");
         return true;
     }
 }

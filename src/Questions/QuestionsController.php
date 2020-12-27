@@ -43,7 +43,7 @@ class QuestionsController implements ContainerInjectableInterface
     /**
      * Shows an overview of available questions
      * Works, get gravatar?
-     * Clickable? 
+     * Clickable?
      *
      * @param datatype $variable Description
      *
@@ -68,6 +68,60 @@ class QuestionsController implements ContainerInjectableInterface
         ]);
     }
 
+    /**
+     * Post-route for individual Q-page
+     *
+     * @return object
+     */
+    public function indexActionPost(): object
+    {
+        var_dump("GÅR DEN IN HÄR?");
+        $request = $this->di->get("request");
+        $response = $this->di->get("response");
+
+        $id = $request->getGet("id", null);
+
+        if ($id) {
+            return $response->redirect("q/showq?id=$id");
+        } else {
+            return $response->redirect("q");
+        }
+    }
+
+    /**
+     * Show single Q
+     *
+     * @return object
+     */
+    public function showQAction(): object
+    {
+        $page = $this->di->get("page");
+        $request = $this->di->get("request");
+        $session = $this->di->get("session");
+
+        $question = new Question();
+        $question->setDb($this->di->get("dbqb"));
+
+        $id = $request->getGet("id", null);
+
+        //WORKS, but need handling when added data
+        //varför får jag fel om jag lägger dem i den andra ordningen?
+        $answers  = $question->getAnswersByParentId($id);
+
+        $question = $question->getSingleQById($id);
+
+        // var_dump($question);
+
+        $page->add("questions/single", [
+            "question" => $question,
+            "answers" => $answers,
+            "newAnswer" => "InsertFormHere"
+        ]);
+
+        return $page->render([
+            "title" => "Q",
+        ]);
+    }
 
 
     /**
@@ -85,9 +139,6 @@ class QuestionsController implements ContainerInjectableInterface
         $session = $this->di->get("session");
 
         $login = $session->get("login");
-        //HÄR BEHÖVS EN HÄMNING AV USERNAME
-        //OCH LITE ANNAT TJAFS SÅKLART
-        //OCH EN POST REQ FÖR askAction!
         if ($login) {
             $form = new CreateQuestionForm($this->di);
             $form->check();

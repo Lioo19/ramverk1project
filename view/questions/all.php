@@ -23,6 +23,8 @@ if (isset($class)) {
     <?php
     foreach ($value as $key1 => $value1) {
         switch ($key1) {
+            case "postid":
+                ?><a href="q/showq?id=<?= $value1 ?>"><?php
             case "ownerusername":
                 ?><h4>User: <?= $value1?> </h4><?php
                 break;

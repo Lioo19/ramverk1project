@@ -39,7 +39,7 @@ class Question extends ActiveRecordModel
      *
      * @param string $password the password to use.
      *
-     * @return void
+     * @return array
      */
     public function getAllQ()
     {
@@ -51,10 +51,13 @@ class Question extends ActiveRecordModel
         // $default = "wavatar";
         $default = "robohash";
 
-        //Only pass username and reputation on
+        //Only pass username, id and text on
         foreach ($all as $key => $value) {
             foreach ($value as $key1 => $value1) {
                 switch ($key1) {
+                    case 'id':
+                        $res[$counter]["postid"] = $value1;
+                        break;
                     case 'deleted':
                         if ($value1) {
                             $res[$counter]["body"] = "Question deleted";
@@ -69,7 +72,62 @@ class Question extends ActiveRecordModel
             }
             $counter += 1;
         }
-        // $info = array($this->id, $this->username, $this->email, $this->created, $this->info, $this->reputation, $this->votes);
+        return $res;
+    }
+
+    /**
+     * Get single Q by id
+     *
+     * @param string $id for q
+     *
+     * @return array | void
+     */
+    public function getSingleQById($id = "")
+    {
+        $this->find("id", $id);
+
+        $info = array(
+            "id"                => $this->id,
+            "title"             => $this->title,
+            "body"              => $this->body,
+            "created"           => $this->created,
+            "deleted"           => $this->deleted,
+            "tags"              => $this->tags,
+            "ownerusername"     => $this->ownerusername,
+            "parentid"          => $this->parentid,
+            "acceptedanswer"    => $this->acceptedanswer
+        );
+        return $info;
+    }
+
+    /**
+     * Get answers for single Q by Parent id
+     *
+     * @param string $id for q
+     *
+     * @return void
+     */
+    public function getAnswersByParentId($id = "")
+    {
+        $all = $this->findAllWhere("parentid = ?", $id);
+
+        var_dump($all);
+
+        $res = [];
+        $counter = 0;
+
+        //Should probably work, if all is passed on, remove switch-statement
+        foreach ($all as $key => $value) {
+            foreach ($value as $key1 => $value1) {
+                switch ($key1) {
+                    default:
+                        $res[$counter][$key1] = $value1;
+                        break;
+                }
+            }
+            $counter += 1;
+        }
+        var_dump($res);
         return $res;
     }
 }
