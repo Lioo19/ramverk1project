@@ -53,7 +53,7 @@ class Question extends ActiveRecordModel
 
         //Only pass username, id and text on
         foreach ($all as $key => $value) {
-            var_dump($value);
+            // var_dump($value);
             //Checks if parentid is null, to sort out answers
             if (!$value->parentid) {
                 foreach ($value as $key1 => $value1) {
@@ -115,7 +115,7 @@ class Question extends ActiveRecordModel
     {
         $all = $this->findAllWhere("parentid = ?", $id);
 
-        var_dump($all);
+        // var_dump($all);
 
         $res = [];
         $counter = 0;
@@ -131,7 +131,7 @@ class Question extends ActiveRecordModel
             }
             $counter += 1;
         }
-        var_dump($res);
+        // var_dump($res);
         return $res;
     }
 }

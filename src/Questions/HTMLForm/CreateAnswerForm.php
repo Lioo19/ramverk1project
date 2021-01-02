@@ -30,6 +30,19 @@ class CreateAnswerForm extends FormModel
         $meObj->setDb($this->di->get("dbqb"));
         $owner = $meObj->getUserInfo($username);
 
+        //to get qname and all answers and count them, to create new title
+        $qObj = new Question();
+        $qObj->setDb($this->di->get("dbqb"));
+        $answers = $qObj->getAnswersByParentId($parentid);
+        $question = $qObj->getSingleQById($parentid);
+
+        $counter = 0;
+        for ($i=0; $i < count($answers); $i++) {
+            $counter += 1;
+        }
+
+        $counter += 1;
+
         $this->form->create(
             [
                 "id" => __CLASS__,
@@ -38,9 +51,7 @@ class CreateAnswerForm extends FormModel
             [
                 "title" => [
                     "type"        => "hidden",
-                    "value"       => "response",
-                    //"description" => "Here you can place a description.",
-                    //"placeholder" => "Here is a placeholder",
+                    "value"       => $question["title"] . $counter,
                 ],
 
                 "body" => [
@@ -75,7 +86,6 @@ class CreateAnswerForm extends FormModel
 
 
     /**
-     * DENNA BEHÖVER LÖSA TAGS BÄTTRE!
      * Callback for submit-button which should return true if it could
      * carry out its work and false if something failed.
      *
