@@ -8,6 +8,7 @@ use Lioo19\Questions\HTMLForm\CreateQuestionForm;
 use Lioo19\Questions\HTMLForm\CreateAnswerForm;
 use Lioo19\Questions\HTMLForm\CreateCommentForm;
 use Lioo19\Comments\Comment;
+use Lioo19\Tags\PostTags;
 
 
 // use Anax\Route\Exception\ForbiddenException;
@@ -21,28 +22,10 @@ class QuestionsController implements ContainerInjectableInterface
 {
     use ContainerInjectableTrait;
 
-
-
     /**
      * @var $data description
      */
     //private $data;
-
-
-
-    // /**
-    //  * The initialize method is optional and will always be called before the
-    //  * target method/action. This is a convienient method where you could
-    //  * setup internal properties that are commonly used by several methods.
-    //  *
-    //  * @return void
-    //  */
-    // public function initialize() : void
-    // {
-    //     ;
-    // }
-
-
 
     /**
      * Shows an overview of available questions
@@ -108,14 +91,18 @@ class QuestionsController implements ContainerInjectableInterface
         $comment = new Comment();
         $comment->setDb($this->di->get("dbqb"));
 
+        $posttags = new PostTags();
+        $posttags->setDb($this->di->get("dbqb"));
+
         $id = $request->getGet("id", null);
 
-        //varför får jag fel om jag lägger dem i den andra ordningen?
         $answers  = $question->getAnswersByParentId($id);
         $question = $question->getSingleQById($id);
+        $posttagsForQ = $posttags->getTagIdsByPostId($id);
+        var_dump($id);
+        var_dump($posttagsForQ);
 
         $comments = array();
-        //Den här fungerar, men jag behöver ju hämta den för varje...
         foreach ($answers as $key => $value) {
             $temp = $comment->getCommentsByParentId($value["id"]);
             $comments[$value["id"]] = $temp;

@@ -42,9 +42,8 @@ class TagsController implements ContainerInjectableInterface
 
 
     /**
-     * Description.
-     *
-     * @param datatype $variable Description
+     * Shows an overview of all tags in use
+     * should be Clickable and lead to page displaying posts under each tag
      *
      * @throws Exception
      *
@@ -53,13 +52,17 @@ class TagsController implements ContainerInjectableInterface
     public function indexActionGet(): object
     {
         $page = $this->di->get("page");
+        $tags = new Tags();
+        $tags->setDb($this->di->get("dbqb"));
 
-        $page->add("anax/v2/article/default", [
-            "content" => "An index page",
+        $all = $tags->getAllTags();
+
+        $page->add("tags", [
+            "content" => $all,
         ]);
 
         return $page->render([
-            "title" => "A index page",
+            "title" => "Tags",
         ]);
     }
 

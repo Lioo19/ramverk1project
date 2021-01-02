@@ -12,7 +12,7 @@ class Tags extends ActiveRecordModel
     /**
      * @var string $tableName name of the database table.
      */
-    protected $tableName = "User";
+    protected $tableName = "Tags";
 
     /**
      * Columns in the table.
@@ -21,53 +21,60 @@ class Tags extends ActiveRecordModel
      * @var integer $id primary key auto incremented.
      */
     public $id;
-    public $username;
-    public $email;
-    public $password;
-    public $created;
-    public $info;
-    public $reputation;
-    public $votes;
+    public $tagname;
+    public $count;
 
     /**
-     * Set the password.
+     * Get all users
+     * username, reputation, gravatar
      *
      * @param string $password the password to use.
      *
-     * @return void
+     * @return array
      */
-    public function setPassword($password)
+    public function getAllTags()
     {
-        $this->password = password_hash($password, PASSWORD_DEFAULT);
+        $all = $this->findAll();
+        return $all;
     }
 
     /**
-     * Verify the acronym and the password, if successful the object contains
-     * all details from the database row.
+     * check if tag exists
      *
-     * @param string $acronym  acronym to check.
      * @param string $password the password to use.
      *
-     * @return boolean true if acronym and password matches, else false.
+     * @return array
      */
-    public function verifyPassword($username, $password)
+    public function checkTagsByName($tagname = "")
     {
-        $this->find("username", $username);
-        return password_verify($password, $this->password);
+        $this->find("tagname", $tagname);
+
+        $info = array(
+            "id"                => $this->id,
+            "tagname"           => $this->tagname,
+            "count"             => $this->count
+        );
+
+        return $info;
     }
 
     /**
-     * Set the password.
+     * create new tag
      *
      * @param string $password the password to use.
      *
-     * @return void
+     * @return array
      */
-    public function getUserInfo($username)
+    public function createTag($tagname = "", $count = "")
     {
-        $this->find("username", $username);
-        var_dump($this->created);
-        $info = array($this->id, $this->username, $this->email, $this->created, $this->info, $this->reputation, $this->votes);
+        $this->find("tagname", $tagname);
+
+        $info = array(
+            "id"                => $this->id,
+            "tagname"           => $this->tagname,
+            "count"             => $this->count
+        );
+
         return $info;
     }
 }

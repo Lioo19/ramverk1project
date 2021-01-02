@@ -105,6 +105,23 @@ class Question extends ActiveRecordModel
     }
 
     /**
+     * Get single Q-id by title
+     *
+     * @param string $title for q
+     *
+     * @return array | void
+     */
+    public function getSingleQIdByTitle($title = "")
+    {
+        $this->find("title", $title);
+
+        $info = array(
+            "id" => $this->id
+        );
+        return $info;
+    }
+
+    /**
      * Get answers for single Q by Parent id
      *
      * @param string $id for q

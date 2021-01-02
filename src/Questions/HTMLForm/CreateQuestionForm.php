@@ -6,6 +6,8 @@ use Anax\HTMLForm\FormModel;
 use Psr\Container\ContainerInterface;
 use Lioo19\Questions\Question;
 use Lioo19\Me\Me;
+use Lioo19\Tags\Tags;
+use Lioo19\Tags\PostTags;
 
 /**
  * Example of FormModel implementation.
@@ -35,19 +37,14 @@ class CreateQuestionForm extends FormModel
             [
                 "title" => [
                     "type"        => "text",
-                    //"description" => "Here you can place a description.",
-                    //"placeholder" => "Here is a placeholder",
                 ],
 
                 "body" => [
                     "type"        => "textarea",
-                    //"description" => "Here you can place a description.",
-                    //"placeholder" => "Here is a placeholder",
                 ],
 
                 "tags" => [
                     "type"        => "text",
-                    //"description" => "Here you can place a description.",
                     "placeholder" => "separate with comma",
                 ],
                 "id" => [
@@ -82,7 +79,7 @@ class CreateQuestionForm extends FormModel
     {
         $session = $this->di->get("session");
 
-        $title        = $this->form->value("title");
+        $title         = $this->form->value("title");
         $body          = $this->form->value("body");
         $tags          = $this->form->value("tags");
         $ownerid       = $this->form->value("id");
@@ -97,6 +94,41 @@ class CreateQuestionForm extends FormModel
         $question->ownerid        = $ownerid;
         $question->ownerusername  = $ownerusername;
         $question->save();
+
+        $postid = $question->getSingleQIdByTitle($title);
+        $tagsClass = new Tags();
+        $posttags = new PostTags();
+        $tagsClass->setDb($this->di->get("dbqb"));
+        $posttags->setDb($this->di->get("dbqb"));
+
+
+        if (!$tags) {
+            $tags = null;
+        } else {
+            $tagsArr = [];
+            $tagsArr = explode("#", $tags);
+            foreach ($tagsArr as $key => $tag) {
+                $tag = trim($tag, ",");
+                $tag = rtrim($tag, " ");
+                $doesTagExist = $tagsClass->checkTagsByName($tag);
+                var_dump($doesTagExist);
+
+                //Checks if tag exists and acts accordingly
+                if (!$doesTagExist) {
+                    $tagsClass->tagname = $tag;
+                    $tagsClass->save();
+                } else {
+                    $tagsClass->tagname = $tag;
+                    $tagsClass->id = $tagsClass->id + 1;
+                    $tagsClass->save();
+                }
+
+                //adds to posttag table
+                $posttags->postid = $postid;
+                $posttags->tagid = $doesTagExist["id"];
+                $posttags->save();
+            }
+        }
 
         $this->form->addOutput("Question " .
             $question->title . " was created");
