@@ -6,6 +6,9 @@ use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
 use Lioo19\Questions\HTMLForm\CreateQuestionForm;
 use Lioo19\Questions\HTMLForm\CreateAnswerForm;
+use Lioo19\Questions\HTMLForm\CreateCommentForm;
+use Lioo19\Comments\Comment;
+
 
 // use Anax\Route\Exception\ForbiddenException;
 // use Anax\Route\Exception\NotFoundException;
@@ -102,14 +105,23 @@ class QuestionsController implements ContainerInjectableInterface
         $question = new Question();
         $question->setDb($this->di->get("dbqb"));
 
+        $comment = new Comment();
+        $comment->setDb($this->di->get("dbqb"));
+
         $id = $request->getGet("id", null);
 
-        //WORKS, but need handling when added data
         //varför får jag fel om jag lägger dem i den andra ordningen?
         $answers  = $question->getAnswersByParentId($id);
         $question = $question->getSingleQById($id);
 
-        // var_dump($question);
+        $comments = array();
+        //Den här fungerar, men jag behöver ju hämta den för varje...
+        foreach ($answers as $key => $value) {
+            $temp = $comment->getCommentsByParentId($value["id"]);
+            $comments[$value["id"]] = $temp;
+        }
+        $comments[$id] = $comment->getCommentsByParentId($id);
+
         $login = $session->get("login");
         if ($login) {
             $form = new CreateAnswerForm($this->di);
@@ -118,7 +130,50 @@ class QuestionsController implements ContainerInjectableInterface
             $page->add("questions/singlewanswer", [
                 "newAnswer" => $form->getHTML(),
                 "question" => $question,
-                "answers" => $answers
+                "answers" => $answers,
+                "comments" => $comments
+            ]);
+
+            return $page->render([
+                "title" => "A login page",
+            ]);
+        }
+
+        $page->add("questions/singlewoutanswer", [
+            "question" => $question,
+            "answers" => $answers
+        ]);
+
+        return $page->render([
+            "title" => "Q",
+        ]);
+    }
+
+    /**
+     * Create a new comment for a specific post
+     *
+     * @return object
+     */
+    public function commentOnAction(): object
+    {
+        $page = $this->di->get("page");
+        $request = $this->di->get("request");
+        $session = $this->di->get("session");
+
+        $question = new Question();
+        $question->setDb($this->di->get("dbqb"));
+
+        $id = $request->getGet("id", null);
+        $question = $question->getSingleQById($id);
+
+        $login = $session->get("login");
+        if ($login) {
+            $form = new CreateCommentForm($this->di);
+            $form->check();
+
+            $page->add("questions/singleqoraforcomment", [
+                "newComment" => $form->getHTML(),
+                "question" => $question,
             ]);
 
             return $page->render([
@@ -171,32 +226,6 @@ class QuestionsController implements ContainerInjectableInterface
 
         return $page->render([
             "title" => "A login page",
-        ]);
-    }
-
-
-
-    /**
-     * Description.
-     *
-     * @param datatype $variable Description
-     *
-     * @throws Exception
-     *
-     * @return object as a response object
-     */
-    public function tagsAction(): object
-    {
-        $page = $this->di->get("page");
-        $form = new CreateUserForm($this->di);
-        $form->check();
-
-        $page->add("anax/v2/article/default", [
-            "content" => $form->getHTML(),
-        ]);
-
-        return $page->render([
-            "title" => "A create user page",
         ]);
     }
 }
