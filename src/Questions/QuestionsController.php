@@ -5,6 +5,7 @@ namespace Lioo19\Questions;
 use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
 use Lioo19\Questions\HTMLForm\CreateQuestionForm;
+use Lioo19\Questions\HTMLForm\CreateAnswerForm;
 
 // use Anax\Route\Exception\ForbiddenException;
 // use Anax\Route\Exception\NotFoundException;
@@ -75,7 +76,6 @@ class QuestionsController implements ContainerInjectableInterface
      */
     public function indexActionPost(): object
     {
-        var_dump("GÅR DEN IN HÄR?");
         $request = $this->di->get("request");
         $response = $this->di->get("response");
 
@@ -107,15 +107,28 @@ class QuestionsController implements ContainerInjectableInterface
         //WORKS, but need handling when added data
         //varför får jag fel om jag lägger dem i den andra ordningen?
         $answers  = $question->getAnswersByParentId($id);
-
         $question = $question->getSingleQById($id);
 
         // var_dump($question);
+        $login = $session->get("login");
+        if ($login) {
+            $form = new CreateAnswerForm($this->di);
+            $form->check();
 
-        $page->add("questions/single", [
+            $page->add("questions/singlewanswer", [
+                "newAnswer" => $form->getHTML(),
+                "question" => $question,
+                "answers" => $answers
+            ]);
+
+            return $page->render([
+                "title" => "A login page",
+            ]);
+        }
+
+        $page->add("questions/singlewoutanswer", [
             "question" => $question,
-            "answers" => $answers,
-            "newAnswer" => "InsertFormHere"
+            "answers" => $answers
         ]);
 
         return $page->render([

@@ -53,24 +53,28 @@ class Question extends ActiveRecordModel
 
         //Only pass username, id and text on
         foreach ($all as $key => $value) {
-            foreach ($value as $key1 => $value1) {
-                switch ($key1) {
-                    case 'id':
-                        $res[$counter]["postid"] = $value1;
-                        break;
-                    case 'deleted':
-                        if ($value1) {
-                            $res[$counter]["body"] = "Question deleted";
-                        }
-                        break;
-                    case 'title':
-                    case 'body':
-                    case 'ownerusername':
-                        $res[$counter][$key1] = $value1;
-                        break;
+            var_dump($value);
+            //Checks if parentid is null, to sort out answers
+            if (!$value->parentid) {
+                foreach ($value as $key1 => $value1) {
+                    switch ($key1) {
+                        case 'id':
+                            $res[$counter]["postid"] = $value1;
+                            break;
+                        case 'deleted':
+                            if ($value1) {
+                                $res[$counter]["body"] = "Question deleted";
+                            }
+                            break;
+                        case 'title':
+                        case 'body':
+                        case 'ownerusername':
+                            $res[$counter][$key1] = $value1;
+                            break;
+                    }
                 }
+                $counter += 1;
             }
-            $counter += 1;
         }
         return $res;
     }

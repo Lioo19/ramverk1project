@@ -49,10 +49,6 @@ class CreateAnswerForm extends FormModel
                     //"placeholder" => "Here is a placeholder",
                 ],
 
-                "tags" => [
-                    "type"        => "text",
-                    "placeholder" => "separate with comma",
-                ],
                 "id" => [
                     "type"        => "hidden",
                     "value"       => $owner["id"],
@@ -63,13 +59,13 @@ class CreateAnswerForm extends FormModel
                     "value"       => $owner["username"],
                 ],
                 "parentid" => [
-                    "type"        => "text",
+                    "type"        => "hidden",
                     "value"       => $parentid,
                 ],
 
                 "submit" => [
                     "type" => "submit",
-                    "value" => "Send Q",
+                    "value" => "Answer",
                     "callback" => [$this, "callbackSubmit"]
                 ],
             ],

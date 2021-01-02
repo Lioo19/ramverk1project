@@ -16,7 +16,7 @@ if (isset($class)) {
 }
 
 ?>
-<h1>All Users</h1>
+<h1>All Qs</h1>
 <article>
 <?php foreach ($content as $key => $value) { ?>
     <div style="margin: 5px; border: 1px solid black;">

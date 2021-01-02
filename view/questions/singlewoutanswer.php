@@ -51,18 +51,6 @@ namespace Anax\View;
         ?>
     </article>
     <?php
-}
+}?>
 
-// Prepare classes
-$classes[] = "article";
-if (isset($class)) {
-    $classes[] = $class;
-}
-
-
-?><article <?= classList($classes) ?>>
-<?= $newAnswer ?>
-<br>
-
-</article>
 </article>

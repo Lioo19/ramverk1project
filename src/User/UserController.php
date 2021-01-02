@@ -83,7 +83,7 @@ class UserController implements ContainerInjectableInterface
 
         // $login = $session->set("login", null);
         // $login = $session->get("login", null);
-        var_dump($session);
+        // var_dump($session);
         // var_dump($login);
 
         $page->add("users/signin", [

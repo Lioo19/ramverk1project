@@ -91,11 +91,11 @@ class CreateQuestionForm extends FormModel
         $question = new Question();
         $question->setDb($this->di->get("dbqb"));
 
-        $question->title = $title;
-        $question->body = $body;
-        $question->tags = $tags;
-        $question->ownerid = $ownerid;
-        $question->ownerusername = $ownerusername;
+        $question->title          = $title;
+        $question->body           = $body;
+        $question->tags           = $tags;
+        $question->ownerid        = $ownerid;
+        $question->ownerusername  = $ownerusername;
         $question->save();
 
         $this->form->addOutput("Question " .
