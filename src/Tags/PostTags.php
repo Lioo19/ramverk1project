@@ -25,32 +25,37 @@ class PostTags extends ActiveRecordModel
     public $tagid;
 
     /**
-     * Get answers for single Q by Parent id
+     * Get Tagids by Postids
      *
-     * @param string $id for q
      *
-     * @return void
+     * @param string $id for post
+     *
+     * @return object
      */
     public function getTagIdsByPostId($id = "")
     {
         $all = $this->findAllWhere("postid = ?", $id);
 
-        $res = [];
-        $counter = 0;
 
-        //Should probably work, if all is passed on, remove switch-statement
-        foreach ($all as $key => $value) {
-            foreach ($value as $key1 => $value1) {
-                switch ($key1) {
-                    default:
-                        $res[$counter][$key1] = $value1;
-                        break;
-                }
-            }
-            $counter += 1;
-        }
-        // var_dump($res);
-        return $res;
+        return $all;
     }
 
+    /**
+     * Get Postids by Tagsid
+     * return only Postids in array
+     *
+     * @param string $id
+     *
+     * @return object
+     */
+    public function getPostIdsByTagId($id = "")
+    {
+        $all = $this->findAllWhere("tagid = ?", $id);
+        $res = [];
+
+        foreach ($all as $key => $value) {
+            array_push($res, $value->postid);
+        }
+        return $res;
+    }
 }

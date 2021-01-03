@@ -22,12 +22,12 @@ return [
         ],
         [
             "text" => "Ask a Question",
-            "url" => "ask",
+            "url" => "q/ask",
             "title" => "Ask a Question",
         ],
         [
             "text" => "Tags",
-            "url" => "questions/tags",
+            "url" => "tags",
             "title" => "Filter Qs on tags",
         ],
         [

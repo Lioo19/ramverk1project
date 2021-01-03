@@ -6,9 +6,7 @@
 
 namespace Anax\View;
 
-// Show incoming variables and view helper functions
-//echo showEnvironment(get_defined_vars(), get_defined_functions());
-
+//FIX THIS  NEATER!
 ?>
 <article>
     <article class="singleq" style="border:1px solid green;margin-bottom: 10px; padding: 5px;">

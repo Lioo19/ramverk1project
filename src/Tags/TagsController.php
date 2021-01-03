@@ -6,6 +6,7 @@ use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
 use Lioo19\Tags\HTMLForm\UserLoginForm;
 use Lioo19\Tags\HTMLForm\CreateUserForm;
+use Lioo19\Questions\Question;
 
 // use Anax\Route\Exception\ForbiddenException;
 // use Anax\Route\Exception\NotFoundException;
@@ -17,29 +18,10 @@ use Lioo19\Tags\HTMLForm\CreateUserForm;
 class TagsController implements ContainerInjectableInterface
 {
     use ContainerInjectableTrait;
-
-
-
     /**
      * @var $data description
      */
     //private $data;
-
-
-
-    // /**
-    //  * The initialize method is optional and will always be called before the
-    //  * target method/action. This is a convienient method where you could
-    //  * setup internal properties that are commonly used by several methods.
-    //  *
-    //  * @return void
-    //  */
-    // public function initialize() : void
-    // {
-    //     ;
-    // }
-
-
 
     /**
      * Shows an overview of all tags in use
@@ -57,7 +39,7 @@ class TagsController implements ContainerInjectableInterface
 
         $all = $tags->getAllTags();
 
-        $page->add("tags", [
+        $page->add("tags/tags", [
             "content" => $all,
         ]);
 
@@ -66,68 +48,46 @@ class TagsController implements ContainerInjectableInterface
         ]);
     }
 
-
-
     /**
-     * Description.
-     *
-     * @param datatype $variable Description
+     * Individual page for each tag
+     * Should show all questions tagged with certain tag
+     * Should I add headline on individual Tag
      *
      * @throws Exception
      *
      * @return object as a response object
      */
-    public function askAction(): object
+    public function showSingleAction(): object
     {
         $page = $this->di->get("page");
         $session = $this->di->get("session");
+        $request = $this->di->get("request");
+        $response = $this->di->get("response");
 
-        $login = $session->get("login");
-        //HÄR BEHÖVS EN HÄMNING AV USERNAME
-        //OCH LITE ANNAT TJAFS SÅKLART
-        //OCH EN POST REQ FÖR askAction!
-        if ($login) {
-            $page->add("questions/ask", [
-                "content" => "nope",
-            ]);
+        $id = $request->getGet("id", null);
+        $tagname = $request->getGet("name", null);
 
-            return $page->render([
-                "title" => "A login page",
-            ]);
+        //har idt för taggen, hämta alla postid från posttag
+        $posttags = new PostTags();
+        $posttags->setDb($this->di->get("dbqb"));
+
+        $postids = $posttags->getPostIdsByTagId($id);
+        $questions = [];
+
+        foreach ($postids as $key => $postid) {
+            $question = new Question();
+            $question->setDb($this->di->get("dbqb"));
+
+            array_push($questions, $question->getSingleQById($postid));
         }
 
-        $page->add("questions/noaccess", [
-            "content" => "blepp",
+        $page->add("tags/singletag", [
+            "questions" => $questions,
+            "tagname"   => $tagname
         ]);
 
         return $page->render([
-            "title" => "A login page",
-        ]);
-    }
-
-
-
-    /**
-     * Description.
-     *
-     * @param datatype $variable Description
-     *
-     * @throws Exception
-     *
-     * @return object as a response object
-     */
-    public function tagsAction(): object
-    {
-        $page = $this->di->get("page");
-        $form = new CreateUserForm($this->di);
-        $form->check();
-
-        $page->add("anax/v2/article/default", [
-            "content" => $form->getHTML(),
-        ]);
-
-        return $page->render([
-            "title" => "A create user page",
+            "title" => "Questions with " . $tagname,
         ]);
     }
 }

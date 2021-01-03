@@ -6,21 +6,12 @@
 
 namespace Anax\View;
 
-// Show incoming variables and view helper functions
-//echo showEnvironment(get_defined_vars(), get_defined_functions());
-
-// Prepare classes
-$classes[] = "article";
-if (isset($class)) {
-    $classes[] = $class;
-}
-
 ?>
-<h1>All Qs</h1>
+<h1>Questions tagged with <?= $tagname?></h1>
 <article>
-<?php foreach ($content as $key => $value) { ?>
+<?php foreach ($questions as $key => $value) { ?>
     <div style="margin: 5px; border: 1px solid black;">
-        <a href="q/showq?id=<?= $value["postid"]?>">
+        <a href="<?= url("q/showq?id=" . $value["id"])?>">
             <h2><?= $value["title"]?></h2>
             <h5><?= $value["body"]?></h5>
             <p><i>Q asked by: <?= $value["ownerusername"]?></i></p>

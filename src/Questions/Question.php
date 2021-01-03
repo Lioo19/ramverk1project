@@ -129,23 +129,20 @@ class Question extends ActiveRecordModel
     {
         $all = $this->findAllWhere("parentid = ?", $id);
 
-        // var_dump($all);
+        return $all;
+    }
 
-        $res = [];
-        $counter = 0;
+    /**
+     * Get all questions connected to certain user
+     *
+     * @param string $ownerusername
+     *
+     * @return object
+     */
+    public function getQsByUsername($username = "")
+    {
+        $all = $this->findAllWhere("ownerusername = ?", $username);
 
-        //Should probably work, if all is passed on, remove switch-statement
-        foreach ($all as $key => $value) {
-            foreach ($value as $key1 => $value1) {
-                switch ($key1) {
-                    default:
-                        $res[$counter][$key1] = $value1;
-                        break;
-                }
-            }
-            $counter += 1;
-        }
-        // var_dump($res);
-        return $res;
+        return $all;
     }
 }

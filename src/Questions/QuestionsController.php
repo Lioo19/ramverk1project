@@ -101,12 +101,9 @@ class QuestionsController implements ContainerInjectableInterface
         $question       = $question->getSingleQById($id);
         $posttagsForQ   = $posttags->getTagIdsByPostId($id);
         $allTagNames    = [];
-        //OKEJ OVAN HÄMTAR BARA EN TAGG???; MEN HUR HÄMTAR JAG DEM PÅ BRA SÄTT
-        //BEHÖVER OCKSÅ ANROPA TAGGARNAS NAMN FRÅN TAGS
-        //OBS PRIO
-        
+
         foreach ($posttagsForQ as $key => $value) {
-            $temp = $tags->getNameById($value["tagid"]);
+            $temp = $tags->getNameById($value->tagid);
             array_push($allTagNames, $temp);
         }
 

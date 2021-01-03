@@ -6,6 +6,8 @@ use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
 use Lioo19\User\HTMLForm\UserLoginForm;
 use Lioo19\User\HTMLForm\CreateUserForm;
+use Lioo19\Me\Me;
+use Lioo19\Questions\Question;
 
 // use Anax\Route\Exception\ForbiddenException;
 // use Anax\Route\Exception\NotFoundException;
@@ -129,6 +131,38 @@ class UserController implements ContainerInjectableInterface
 
         return $page->render([
             "title" => "A create user page",
+        ]);
+    }
+
+    /**
+     * Method to extract all users from database - name, gravatar and score
+     *
+     * @param datatype $variable Description
+     *
+     * @throws Exception
+     *
+     * @return object as a response object
+     */
+    public function singleuserAction(): object
+    {
+        $page = $this->di->get("page");
+        $questions = new Question();
+        $questions->setDb($this->di->get("dbqb"));
+        $request = $this->di->get("request");
+
+        $username = $request->getGet("username", null);
+
+        $allQs = $questions->getQsByUsername($username);
+
+        //Use me-method for getting info by name
+
+        $page->add("users/singleuserwq", [
+            "user"    => $username,
+            "allQs" => $allQs
+        ]);
+
+        return $page->render([
+            "title" => "user",
         ]);
     }
 

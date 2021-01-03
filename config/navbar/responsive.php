@@ -32,7 +32,7 @@ if ($login === "yes") {
                         ],
                         [
                             "text" => "Tags",
-                            "url" => "q/tags",
+                            "url" => "tags",
                             "title" => "Filter Qs on tags",
                         ],
                     ],
