@@ -9,6 +9,7 @@ use Lioo19\Questions\HTMLForm\CreateAnswerForm;
 use Lioo19\Questions\HTMLForm\CreateCommentForm;
 use Lioo19\Comments\Comment;
 use Lioo19\Tags\PostTags;
+use Lioo19\Tags\Tags;
 
 
 // use Anax\Route\Exception\ForbiddenException;
@@ -85,22 +86,29 @@ class QuestionsController implements ContainerInjectableInterface
         $request = $this->di->get("request");
         $session = $this->di->get("session");
 
-        $question = new Question();
+        $question   = new Question();
+        $comment    = new Comment();
+        $posttags   = new PostTags();
+        $tags       = new Tags();
+
         $question->setDb($this->di->get("dbqb"));
-
-        $comment = new Comment();
         $comment->setDb($this->di->get("dbqb"));
-
-        $posttags = new PostTags();
         $posttags->setDb($this->di->get("dbqb"));
-
+        $tags->setDb($this->di->get("dbqb"));
         $id = $request->getGet("id", null);
 
-        $answers  = $question->getAnswersByParentId($id);
-        $question = $question->getSingleQById($id);
-        $posttagsForQ = $posttags->getTagIdsByPostId($id);
-        var_dump($id);
-        var_dump($posttagsForQ);
+        $answers        = $question->getAnswersByParentId($id);
+        $question       = $question->getSingleQById($id);
+        $posttagsForQ   = $posttags->getTagIdsByPostId($id);
+        $allTagNames    = [];
+        //OKEJ OVAN HÄMTAR BARA EN TAGG???; MEN HUR HÄMTAR JAG DEM PÅ BRA SÄTT
+        //BEHÖVER OCKSÅ ANROPA TAGGARNAS NAMN FRÅN TAGS
+        //OBS PRIO
+        
+        foreach ($posttagsForQ as $key => $value) {
+            $temp = $tags->getNameById($value["tagid"]);
+            array_push($allTagNames, $temp);
+        }
 
         $comments = array();
         foreach ($answers as $key => $value) {
@@ -116,9 +124,10 @@ class QuestionsController implements ContainerInjectableInterface
 
             $page->add("questions/singlewanswer", [
                 "newAnswer" => $form->getHTML(),
-                "question" => $question,
-                "answers" => $answers,
-                "comments" => $comments
+                "question"  => $question,
+                "answers"   => $answers,
+                "comments"  => $comments,
+                "tags"      => $allTagNames
             ]);
 
             return $page->render([

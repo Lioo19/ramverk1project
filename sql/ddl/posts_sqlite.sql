@@ -1,5 +1,6 @@
 --
 -- Creating a Posts table.
+-- sqlite3 data/db.sqlite < sql/ddl/posts_sqlite.sql
 -- THIRD
 
 
@@ -12,7 +13,7 @@ CREATE TABLE Posts (
     "id" INTEGER PRIMARY KEY NOT NULL,
     "title" TEXT UNIQUE NOT NULL,
     "body" TEXT NOT NULL,
-    "created" TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    "created" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     "deleted" TIMESTAMP,
     "tags" TEXT,
     "ownerid" INTEGER NOT NULL,

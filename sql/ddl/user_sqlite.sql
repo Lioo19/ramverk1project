@@ -1,5 +1,7 @@
 --
 -- Creating a User table.
+-- use command
+-- sqlite3 data/db.sqlite < sql/ddl/user_sqlite.sql
 -- FIRST
 
 

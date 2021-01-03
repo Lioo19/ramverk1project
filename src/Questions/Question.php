@@ -115,10 +115,7 @@ class Question extends ActiveRecordModel
     {
         $this->find("title", $title);
 
-        $info = array(
-            "id" => $this->id
-        );
-        return $info;
+        return $this->id;
     }
 
     /**

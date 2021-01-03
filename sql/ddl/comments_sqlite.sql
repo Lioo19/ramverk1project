@@ -1,5 +1,6 @@
 --
 -- Creating a Comments table.
+-- sqlite3 data/db.sqlite < sql/ddl/comments_sqlite.sql
 -- FOURTH
 
 

@@ -1,6 +1,8 @@
 --
 -- Creating a Votes table.
--- SECOND
+-- use command
+-- sqlite3 data/db.sqlite < sql/ddl/votes_sqlite.sql
+-- SIXTH
 
 
 

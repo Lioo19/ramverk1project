@@ -45,7 +45,7 @@ class CreateQuestionForm extends FormModel
 
                 "tags" => [
                     "type"        => "text",
-                    "placeholder" => "separate with comma",
+                    "placeholder" => "#tag1, #tag2",
                 ],
                 "id" => [
                     "type"        => "hidden",
@@ -96,42 +96,62 @@ class CreateQuestionForm extends FormModel
         $question->save();
 
         $postid = $question->getSingleQIdByTitle($title);
-        $tagsClass = new Tags();
-        $posttags = new PostTags();
-        $tagsClass->setDb($this->di->get("dbqb"));
-        $posttags->setDb($this->di->get("dbqb"));
 
-
-        if (!$tags) {
-            $tags = null;
-        } else {
-            $tagsArr = [];
-            $tagsArr = explode("#", $tags);
-            foreach ($tagsArr as $key => $tag) {
-                $tag = trim($tag, ",");
-                $tag = rtrim($tag, " ");
-                $doesTagExist = $tagsClass->checkTagsByName($tag);
-                var_dump($doesTagExist);
-
-                //Checks if tag exists and acts accordingly
-                if (!$doesTagExist) {
-                    $tagsClass->tagname = $tag;
-                    $tagsClass->save();
-                } else {
-                    $tagsClass->tagname = $tag;
-                    $tagsClass->id = $tagsClass->id + 1;
-                    $tagsClass->save();
-                }
-
-                //adds to posttag table
-                $posttags->postid = $postid;
-                $posttags->tagid = $doesTagExist["id"];
-                $posttags->save();
-            }
-        }
+        $this->createTags($tags, $postid);
 
         $this->form->addOutput("Question " .
             $question->title . " was created");
         return true;
+    }
+
+    /**
+     * Helper-function for separating and creating tags
+     *
+     *
+     */
+    public function createTags($tags, $postid)
+    {
+
+        if (!$tags) {
+            $tags = null;
+        } else {
+            $tagsArr = explode(" ", $tags);
+            foreach ($tagsArr as $key => $tag) {
+                $tagsClass = new Tags();
+                $posttags = new PostTags();
+                $tagsClass->setDb($this->di->get("dbqb"));
+                $posttags->setDb($this->di->get("dbqb"));
+
+                $tag = trim($tag, ", #");
+                $doesTagExist = $tagsClass->checkTagsByName($tag);
+
+                //Checks if tag exists and acts accordingly
+                if (!$tagsClass->tagname) {
+                    $tagsClass->tagname = $tag;
+                    $tagsClass->count = 1;
+                    $tagsClass->save();
+                    $tagid = $tagsClass->checkTagsByName($tags);
+                    $tagid = $tagid["id"];
+
+                    //adds to posttag table
+                    $posttags->postid = $postid;
+                    $posttags->tagid = $tagid;
+
+                    $posttags->save();
+                } else {
+                    $tagsClass->tagname = $tag;
+                    $tagsClass->count = $doesTagExist["count"] + 1;
+                    $tagsClass->save();
+                    $tagid = $tagsClass->checkTagsByName($tags);
+                    $tagid = $tagid["id"];
+
+                    //adds to posttag table
+                    $posttags->postid = $postid;
+                    $posttags->tagid = $tagid;
+
+                    $posttags->save();
+                }
+            }
+        }
     }
 }

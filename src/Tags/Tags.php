@@ -25,7 +25,7 @@ class Tags extends ActiveRecordModel
     public $count;
 
     /**
-     * Get all users
+     * Get all tags
      * username, reputation, gravatar
      *
      * @param string $password the password to use.
@@ -56,6 +56,34 @@ class Tags extends ActiveRecordModel
         );
 
         return $info;
+    }
+
+    /**
+     * Get tagname by id
+     *
+     * @param string $id
+     *
+     * @return array
+     */
+    public function getNameById($id = "")
+    {
+        $this->find("id", $id);
+
+        return $this->tagname;
+    }
+
+    /**
+     * get count by searching for name
+     *
+     * @param string $password the password to use.
+     *
+     * @return array
+     */
+    public function getCountByName($tagname = "")
+    {
+        $this->find("tagname", $tagname);
+
+        return $this->count;
     }
 
     /**

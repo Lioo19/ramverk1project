@@ -15,7 +15,6 @@ namespace Anax\View;
     <?php foreach ($question as $key => $value) { ?>
         <article>
             <?php
-
             switch ($key) {
                 case 'id':
                     ?><a href="<?= url("q/commenton?id=" . $value) ?>">Comment</a><?php
@@ -58,7 +57,18 @@ namespace Anax\View;
                 }
             }
         }
+        ?>
+        <p>Tags:<?php
+        foreach ($tags as $key => $value) { ?>
+            <div class="tagsq">
+                <p>
+                    <a href="<?= url("tags/showsingle?id=" . $value) ?>"><?= $value ?></a>
+                </p>
+            </div>
+        <?php
+        }
     ?>
+    </p>
     </article>
     <article class="singleq">
         <h3>Answers</h3>
