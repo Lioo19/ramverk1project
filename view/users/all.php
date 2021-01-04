@@ -5,7 +5,6 @@
  */
 
 namespace Anax\View;
-var_dump($content)
 
 ?>
 <h1>All Users</h1>

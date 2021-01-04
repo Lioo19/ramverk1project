@@ -33,51 +33,6 @@ class Question extends ActiveRecordModel
 
 
 
-    /**
-     * Get all users
-     * username, reputation, gravatar
-     *
-     * @param string $password the password to use.
-     *
-     * @return array
-     */
-    public function getAllQ()
-    {
-        $all = $this->findAll();
-        $res = [];
-        $counter = 0;
-        // $default = "identicon";
-        // $default = "monsterid";
-        // $default = "wavatar";
-        $default = "robohash";
-
-        //Only pass username, id and text on
-        foreach ($all as $key => $value) {
-            // var_dump($value);
-            //Checks if parentid is null, to sort out answers
-            if (!$value->parentid) {
-                foreach ($value as $key1 => $value1) {
-                    switch ($key1) {
-                        case 'id':
-                            $res[$counter]["postid"] = $value1;
-                            break;
-                        case 'deleted':
-                            if ($value1) {
-                                $res[$counter]["body"] = "Question deleted";
-                            }
-                            break;
-                        case 'title':
-                        case 'body':
-                        case 'ownerusername':
-                            $res[$counter][$key1] = $value1;
-                            break;
-                    }
-                }
-                $counter += 1;
-            }
-        }
-        return $res;
-    }
 
     /**
      * Get single Q by id
@@ -142,6 +97,37 @@ class Question extends ActiveRecordModel
     public function getQsByUsername($username = "")
     {
         $all = $this->findAllWhere("ownerusername = ?", $username);
+
+        return $all;
+    }
+
+    /**
+     * Get all questions, no answers
+     *
+     * @return object
+     */
+    public function getAllQ()
+    {
+        $all = $this->findAll();
+
+        //delete all with a parentid (answers)
+        foreach ($all as $key => $value) {
+            if ($value->parentid) {
+                unset($all[$key]);
+            }
+        }
+
+        return $all;
+    }
+
+    /**
+     * Get all questions, no answers
+     *
+     * @return object
+     */
+    public function getAll()
+    {
+        $all = $this->findAll();
 
         return $all;
     }

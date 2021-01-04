@@ -70,6 +70,32 @@ class User extends ActiveRecordModel
         return $info;
     }
 
+    /**
+     * GetUserInfo by username
+     *
+     *
+     * @param string $password the password to use.
+     *
+     * @return array associative
+     */
+    public function getUserInfoById($id)
+    {
+        $this->find("id", $id);
+        $default = "robohash";
+        $info = array();
+
+        $info["id"] = $this->id;
+        $info["username"] = $this->username;
+        $info["created"] = $this->created;
+        $info["info"] = $this->info;
+        $info["reputation"] = $this->reputation;
+        $info["votes"] = $this->votes;
+        $info["gravatar"] = "https://www.gravatar.com/avatar/" .
+                            md5(strtolower(trim($this->email))) . "?d=" .
+                            $default . "&s=" . 100;
+        return $info;
+    }
+
 
     /**
      * Get all users
