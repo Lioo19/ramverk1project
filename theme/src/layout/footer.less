@@ -1,14 +1,15 @@
 /**
  * A footer style for dbwebb.se.
  */
-@bgColorFooter: @bgColorHtml;
+@bgColorFooter: lighten(@bgColorBody, 12%);
 @colorFooterWrapper: #ddd;
-@colorFooter: #aaa;
-@borderFooter: #777;
-@borderColor: #666;
+@colorFooter: lighten(@bgColorBody, 90%);
+@borderFooter: lighten(@bgColorBody, 70%);
+@borderColor:lighten(@bgColorBody, 90%);;
 
 .outer-wrap-footer {
-    background-color: @bgColorFooter;
+    background: rgb(0,6,31);
+    background: linear-gradient(180deg, rgba(0,6,31,1) 0%, rgba(0,18,92,1) 49%, rgba(27,149,173,1) 99%);
     padding-top: @magicNumber;
     padding-bottom: @magicNumber * 2;
 }
@@ -18,7 +19,7 @@
     border-bottom: 1px solid @borderColor;
     padding-bottom: @magicNumber;
     margin-bottom: @magicNumber * 2;
-    
+
     ul {
         list-style: none;
         margin: 0;
@@ -58,7 +59,7 @@
 
     li {
         display: inline-block;
-        
+
         &::after {
             content: " • ";
         }

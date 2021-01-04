@@ -10,12 +10,12 @@ namespace Anax\View;
 <article>
     <?php
         if (count($allQs) === 0) {
-            ?><p>This user har not posted any Qs or As yet</p><?php
+            ?><p>This user has not posted any Qs or As yet</p><?php
         } else {
             ?><h3>Qs and As</h3><?php
         }
         foreach ($allQs as $key => $value) { ?>
-        <div style="margin: 5px; border: 1px solid black;">
+        <div class="singleUserQ">
             <a href=<?= url("q/showq?id=" . $value->id)?>>
                 <?php if ($value->parentid) {
                     ?><h2 class="tiny"> Answer</h2><?php
@@ -30,15 +30,15 @@ namespace Anax\View;
         <?php
     }
     if (count($allCs) === 0) {
-        ?><p>This user har not posted any Comments</p><?php
+        ?><p>This user has not posted any Comments</p><?php
     } else {
         ?><h3>Comments</h3><?php
     }
     foreach ($allCs as $key => $value) {?>
-    <div style="margin: 5px; border: 1px solid black;">
-        <a href=<?= url("q/showq?id=" . $value->postid)?>>
-            <p><?= $value->body?></p>
-    </div>
+        <div class="singleUserc">
+            <a href=<?= url("q/showq?id=" . $value->postid)?>>
+                <p><?= $value->body?></p>
+        </div>
     <?php
     } ?>
 </article>

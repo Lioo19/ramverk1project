@@ -9,7 +9,7 @@ namespace Anax\View;
 <h1>All Qs</h1>
 <article>
 <?php foreach ($content as $key => $value) { ?>
-    <div style="margin: 5px; border: 1px solid black;">
+    <div class="qBox">
         <a href="<?= url("q/showq?id=" . $value->id)?>">
             <h2><?= $value->title?></h2>
             <h5><?= $value->body?></h5>

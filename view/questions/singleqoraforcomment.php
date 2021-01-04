@@ -11,7 +11,7 @@ namespace Anax\View;
 
 ?>
 <article>
-    <article class="singleq" style="border:1px solid green;margin-bottom: 10px; padding: 5px;">
+    <article class="singleq">
     <?php foreach ($question as $key => $value) { ?>
         <article>
             <?php
@@ -42,13 +42,9 @@ namespace Anax\View;
 
 
     ?>
-    <article <?= classList($classes) ?> style="margin: 12px;">
+    <article <?= classList($classes) ?>>
         <?= $newComment ?>
         <br>
 
     </article>
 </article>
-
-<?php
-// var_dump($question);
-// var_dump($answers); ?>

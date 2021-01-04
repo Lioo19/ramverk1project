@@ -5141,14 +5141,14 @@ Original highlight.js style (c) Ivan Sagalaev <maniac@softwaremaniacs.org>
   margin: 0;
   padding: 0;
   margin-top: 1em;
-  border-left: 1px solid #666;
-  border-bottom: 1px solid #666;
+  border-left: 1px solid #ffffff;
+  border-bottom: 1px solid #ffffff;
 }
 .image-overlay li {
   display: inline-block;
   margin: 0;
   padding: 0;
-  border-right: 1px solid #666;
+  border-right: 1px solid #ffffff;
 }
 .image-overlay li a {
   display: inline-block;
@@ -7002,13 +7002,14 @@ a.rm-button.rm-clicked .rm-button-face-2 {
  * A footer style for dbwebb.se.
  */
 .outer-wrap-footer {
-  background-color: #424242;
+  background: #00061f;
+  background: linear-gradient(180deg, #00061f 0%, #00125c 49%, #1b95ad 99%);
   padding-top: 24px;
   padding-bottom: 48px;
 }
 .footer-column-wrapper {
   color: #ddd;
-  border-bottom: 1px solid #666;
+  border-bottom: 1px solid #ffffff;
   padding-bottom: 24px;
   margin-bottom: 48px;
 }
@@ -7026,14 +7027,14 @@ a.rm-button.rm-clicked .rm-button-face-2 {
 }
 .footer-column-1,
 .footer-column-2 {
-  border-right: 1px solid #666;
+  border-right: 1px solid #ffffff;
 }
 .footer-column-2,
 .footer-column-3 {
   padding-left: 1em;
 }
 .site-footer {
-  color: #aaa;
+  color: #ffffff;
   text-align: center;
   padding-bottom: 24px;
 }

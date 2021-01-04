@@ -14,8 +14,8 @@ namespace Anax\View;
     <div class="startQs">
         <h3>Latest Qs</h3>
         <?php foreach ($threeQs as $key => $value) {?>
-            <div style="margin: 5px; border: 1px solid black;">
-                <a href="q/showq?id=<?= $value->id?>">
+            <div class="qBox">
+                <a href="<?= url("q/showq?id=" .  $value->id)?>">
                     <h2><?= $value->title?></h2>
                     <p><i>Q asked by: <?= $value->ownerusername?></i></p>
             </div>
@@ -36,7 +36,7 @@ namespace Anax\View;
     <div class="startUsers">
         <h3>Top Users</h3>
         <?php foreach ($threeUsers as $key => $value) { ?>
-            <div style="margin: 5px; background-color: beige;">
+            <div>
             <a
                 href=<?= url("user/singleuser?username=" . $value["username"])?>>
                 <p>

@@ -5141,14 +5141,14 @@ Original highlight.js style (c) Ivan Sagalaev <maniac@softwaremaniacs.org>
   margin: 0;
   padding: 0;
   margin-top: 1em;
-  border-left: 1px solid #666;
-  border-bottom: 1px solid #666;
+  border-left: 1px solid #ebefff;
+  border-bottom: 1px solid #ebefff;
 }
 .image-overlay li {
   display: inline-block;
   margin: 0;
   padding: 0;
-  border-right: 1px solid #666;
+  border-right: 1px solid #ebefff;
 }
 .image-overlay li a {
   display: inline-block;
@@ -6774,13 +6774,14 @@ a.rm-button.rm-clicked .rm-button-face-2 {
  * A footer style for dbwebb.se.
  */
 .outer-wrap-footer {
-  background-color: #eee;
+  background: #00061f;
+  background: linear-gradient(180deg, #00061f 0%, #00125c 49%, #1b95ad 99%);
   padding-top: 24px;
   padding-bottom: 48px;
 }
 .footer-column-wrapper {
   color: #ddd;
-  border-bottom: 1px solid #666;
+  border-bottom: 1px solid #ebefff;
   padding-bottom: 24px;
   margin-bottom: 48px;
 }
@@ -6798,14 +6799,14 @@ a.rm-button.rm-clicked .rm-button-face-2 {
 }
 .footer-column-1,
 .footer-column-2 {
-  border-right: 1px solid #666;
+  border-right: 1px solid #ebefff;
 }
 .footer-column-2,
 .footer-column-3 {
   padding-left: 1em;
 }
 .site-footer {
-  color: #aaa;
+  color: #ebefff;
   text-align: center;
   padding-bottom: 24px;
 }
@@ -6852,6 +6853,106 @@ a.rm-button.rm-clicked .rm-button-face-2 {
   .fa-4x {
     font-size: 2em;
   }
+}
+/**
+ * A header style for dbwebb.se.
+ */
+.outer-wrap-header {
+  height: 48px;
+  margin-bottom: 12px;
+}
+.outer-wrap-header img {
+  outline: 0;
+}
+.inner-wrap-header {
+  max-width: none;
+}
+.inner-wrap-header .row {
+  max-width: 100%;
+}
+.region-header-col-1 {
+  display: inline;
+  float: left;
+  width: 23.95833333%;
+  margin-left: 0.52083333%;
+  margin-right: 0.52083333%;
+}
+.region-header-col-2 {
+  display: inline;
+  float: left;
+  width: 53.125%;
+  margin-left: 0.52083333%;
+  margin-right: 0.52083333%;
+  margin-top: 0.4em;
+}
+.region-header-col-3 {
+  display: inline;
+  float: left;
+  width: 19.79166667%;
+  margin-left: 0.52083333%;
+  margin-right: 0.52083333%;
+}
+@media screen and (max-width: 1300px) {
+  .region-header-col-2 {
+    display: inline;
+    float: left;
+    width: 69.79166667%;
+    margin-left: 0.52083333%;
+    margin-right: 0.52083333%;
+  }
+  .region-header-col-3 {
+    display: inline;
+    float: left;
+    width: 7.29166667%;
+    margin-left: 0.52083333%;
+    margin-right: 0.52083333%;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .region-header-col-1 {
+    display: inline;
+    float: left;
+    width: 19.79166667%;
+    margin-left: 0.52083333%;
+    margin-right: 0.52083333%;
+  }
+  .region-header-col-2 {
+    display: inline;
+    float: left;
+    width: 65.625%;
+    margin-left: 0.52083333%;
+    margin-right: 0.52083333%;
+  }
+}
+@media screen and (max-width: 800px) {
+  .region-header-col-1 {
+    display: inline;
+    float: left;
+    width: 65.625%;
+    margin-left: 0.52083333%;
+    margin-right: 0.52083333%;
+  }
+  .region-header-col-2 {
+    display: none;
+  }
+  .region-header-col-3 {
+    display: inline;
+    float: left;
+    width: 32.29166667%;
+    margin-left: 0.52083333%;
+    margin-right: 0.52083333%;
+  }
+}
+input.JSONbutton {
+  width: 20%;
+  height: 2rem;
+  text-align: center;
+}
+input.JSONbutton.right {
+  color: #007500;
+}
+input.JSONbutton.wrong {
+  color: #a00000;
 }
 .site-logo {
   display: none;

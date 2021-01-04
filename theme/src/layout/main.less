@@ -6,9 +6,9 @@
 /** ==============================================================
  * Base
  */
-@colorAccentHeader1:  #3B440D;
-@colorAccentHeader2:  #9FB129;
-@colorAccentHeader3:  #d5e283;
+@colorAccentHeader1:  #E63E17;
+@colorAccentHeader2:  #E67A17;
+@colorAccentHeader3:  #FEA519;
 
 
 .linkAccent() {
@@ -27,26 +27,27 @@
 
 
 
-/** ==============================================================
- * Header 
- */
-@import "layout/dbwebb-se_header.less";
-
-
-
 /** --------------------------------------------------------------
 * Logo and logo text (PERHAPS MOVE TO OWN MODULE/LAYOUT FILE)
 */
+
+.site-logo {
+    display: none;
+}
+
 .site-logo-text {
     font-size: 42px;
     line-height: 1;
     text-shadow: 2px -2px 2px #ccc;
-    padding-left: 8px;
+    //padding-left: 8px;
 
     a {
         color: #333;
         text-decoration: none;
         transition: all 0.2s linear;
+        font-size: 42px;
+        line-height: 1;
+        text-shadow: 2px -2px 2px #ccc;
 
         &:hover {
             color: @colorAccentHeader1;
@@ -57,23 +58,42 @@
 
 .site-logo-text-icon {
     img {
-        vertical-align: bottom;
+        // vertical-align: bottom;
+        display: none;
     }
 }
 
-@media screen and (min-width: 1360px) {
-      .site-logo-text-icon img {
-          display: none;
-      }
+.logo-1 {
+    position: absolute;
+    top: 30px;
+    left: 10px;
 }
 
 // MOVE TO SPECIFIC
-@media screen and (max-width: 1360px) {
+@media screen and (max-width: 1750px) {
+    .site-logo img {
+        width: 200px;
+    }
+}
+
+@media screen and (max-width: 1550px) {
+    .site-logo img {
+        width: 150px;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    .site-logo img {
+        width: 100px;
+    }
+}
+
+@media screen and (max-width: 1350px) {
     .site-logo-text-icon img {
-        display: inline;
+        display: none;
     }
 
-    .logo-1 {
+    .site-logo {
         display: none;
     }
 }

@@ -9,7 +9,7 @@ namespace Anax\View;
 //FIX THIS  NEATER!
 ?>
 <article>
-    <article class="singleq" style="border:1px solid green;margin-bottom: 10px; padding: 5px;">
+    <article class="singleq">
     <?php foreach ($question as $key => $value) { ?>
         <article>
             <?php
@@ -58,7 +58,7 @@ namespace Anax\View;
         ?>
         <p>Tags:<?php
         foreach ($tags as $key => $value) { ?>
-            <div class="tagsq">
+            <div class="qTags">
                 <p>
                     <a href="<?= url("tags/showsingle?id=" . $value) ?>"><?= $value ?></a>
                 </p>
@@ -71,8 +71,7 @@ namespace Anax\View;
     <article class="singleq">
         <h3>Answers</h3>
     <?php foreach ($answers as $key => $value) { ?>
-        <article style="border: 1px solid black; margin: 12px; padding: 5px;">
-            <div style="background-color: beige; margin: 10px; padding: 5px;">
+            <div>
                 <?php
                 foreach ($value as $key1 => $value1) {
                     switch ($key1) {
@@ -115,7 +114,6 @@ namespace Anax\View;
                 }
                 ?>
             </div>
-        </article>
         <?php
     }
 
@@ -127,14 +125,9 @@ namespace Anax\View;
 
 
     ?>
-    <article <?= classList($classes) ?> style="margin: 12px;">
+    <article <?= classList($classes) ?>>
         <?= $newAnswer ?>
         <br>
 
     </article>
 </article>
-
-<?php
-// var_dump($question);
-// var_dump($comments);
-// var_dump($answers); ?>

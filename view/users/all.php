@@ -10,7 +10,7 @@ namespace Anax\View;
 <h1>All Users</h1>
 <article>
 <?php foreach ($content as $key => $value) { ?>
-    <div style="margin: 5px; background-color: beige;">
+    <div class="allUsersBox">
     <a
         href=<?= url("user/singleuser?username=" . $value["username"])?>>
         <p>
