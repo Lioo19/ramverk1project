@@ -9,6 +9,11 @@ namespace Anax\View;
 <h1><?= $user?> </h1>
 <article>
     <?php
+        if (count($allQs) === 0) {
+            ?><p>This user har not posted any Qs or As yet</p><?php
+        } else {
+            ?><h3>Qs and As</h3><?php
+        }
         foreach ($allQs as $key => $value) { ?>
         <div style="margin: 5px; border: 1px solid black;">
             <a href=<?= url("q/showq?id=" . $value->id)?>>
@@ -23,14 +28,17 @@ namespace Anax\View;
             </a>
         </div>
         <?php
-    } ?>
-    <h3>Comments</h3>
+    }
+    if (count($allCs) === 0) {
+        ?><p>This user har not posted any Comments</p><?php
+    } else {
+        ?><h3>Comments</h3><?php
+    }
+    foreach ($allCs as $key => $value) {?>
+    <div style="margin: 5px; border: 1px solid black;">
+        <a href=<?= url("q/showq?id=" . $value->postid)?>>
+            <p><?= $value->body?></p>
+    </div>
     <?php
-        foreach ($allCs as $key => $value) {?>
-        <div style="margin: 5px; border: 1px solid black;">
-            <a href=<?= url("q/showq?id=" . $value->postid)?>>
-                <p><?= $value->body?></p>
-        </div>
-        <?php
     } ?>
 </article>
