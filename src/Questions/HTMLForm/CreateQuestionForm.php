@@ -6,6 +6,7 @@ use Anax\HTMLForm\FormModel;
 use Psr\Container\ContainerInterface;
 use Lioo19\Questions\Question;
 use Lioo19\Me\Me;
+use Lioo19\MyTextFilter\MyTextFilter;
 use Lioo19\Tags\Tags;
 use Lioo19\Tags\PostTags;
 
@@ -41,6 +42,7 @@ class CreateQuestionForm extends FormModel
 
                 "body" => [
                     "type"        => "textarea",
+                    "placeholder" => "Use markdown to style your Q"
                 ],
 
                 "tags" => [
@@ -78,9 +80,10 @@ class CreateQuestionForm extends FormModel
     public function callbackSubmit()
     {
         $session = $this->di->get("session");
+        $filter = new MyTextFilter();
 
         $title         = $this->form->value("title");
-        $body          = $this->form->value("body");
+        $body          = $filter->parse($this->form->value("body"), ["markdown"]);
         $tags          = $this->form->value("tags");
         $ownerid       = $this->form->value("id");
         $ownerusername = $this->form->value("username");
@@ -111,7 +114,6 @@ class CreateQuestionForm extends FormModel
      */
     public function createTags($tags, $postid)
     {
-
         if (!$tags) {
             $tags = null;
         } else {

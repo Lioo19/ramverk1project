@@ -109,8 +109,8 @@ class QuestionsController implements ContainerInjectableInterface
 
         $comments = array();
         foreach ($answers as $key => $value) {
-            $temp = $comment->getCommentsByParentId($value["id"]);
-            $comments[$value["id"]] = $temp;
+            $temp = $comment->getCommentsByParentId($value->id);
+            $comments[$value->id] = $temp;
         }
         $comments[$id] = $comment->getCommentsByParentId($id);
 

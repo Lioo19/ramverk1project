@@ -68,12 +68,13 @@ class MeController implements ContainerInjectableInterface
                 "title" => "No Access",
             ]);
         }
+
         $page->add("me/me", [
             "content" => $this->data,
         ]);
 
         return $page->render([
-            "title" => "Profile",
+            "title" => $this->data["username"],
         ]);
     }
 

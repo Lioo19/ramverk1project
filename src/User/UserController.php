@@ -8,6 +8,7 @@ use Lioo19\User\HTMLForm\UserLoginForm;
 use Lioo19\User\HTMLForm\CreateUserForm;
 use Lioo19\Me\Me;
 use Lioo19\Questions\Question;
+use Lioo19\Comments\Comment;
 
 // use Anax\Route\Exception\ForbiddenException;
 // use Anax\Route\Exception\NotFoundException;
@@ -147,18 +148,22 @@ class UserController implements ContainerInjectableInterface
     {
         $page = $this->di->get("page");
         $questions = new Question();
+        $comments = new Comment();
         $questions->setDb($this->di->get("dbqb"));
+        $comments->setDb($this->di->get("dbqb"));
         $request = $this->di->get("request");
 
         $username = $request->getGet("username", null);
 
+        $allCs = $comments->getCommentsByUsername($username);
         $allQs = $questions->getQsByUsername($username);
 
         //Use me-method for getting info by name
 
         $page->add("users/singleuserwq", [
-            "user"    => $username,
-            "allQs" => $allQs
+            "user"  => $username,
+            "allQs" => $allQs,
+            "allCs" => $allCs
         ]);
 
         return $page->render([

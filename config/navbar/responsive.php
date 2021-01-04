@@ -44,6 +44,11 @@ if ($login === "yes") {
                 "title" => "About this site",
             ],
             [
+                "text" => "Users",
+                "url" => "user/all",
+                "title" => "All users",
+            ],
+            [
                 "text" => "Profile",
                 "url" => "me",
                 "title" => "Profile",
@@ -96,6 +101,11 @@ if ($login === "yes") {
                 "text" => "About",
                 "url" => "about",
                 "title" => "About this site",
+            ],
+            [
+                "text" => "Users",
+                "url" => "user/all",
+                "title" => "All users",
             ],
             [
                 "text" => "Sign in",

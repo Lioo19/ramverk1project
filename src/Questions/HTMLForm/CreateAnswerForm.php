@@ -4,8 +4,9 @@ namespace Lioo19\Questions\HTMLForm;
 
 use Anax\HTMLForm\FormModel;
 use Psr\Container\ContainerInterface;
-use Lioo19\Questions\Question;
 use Lioo19\Me\Me;
+use Lioo19\MyTextFilter\MyTextFilter;
+use Lioo19\Questions\Question;
 
 /**
  * Example of FormModel implementation.
@@ -56,8 +57,7 @@ class CreateAnswerForm extends FormModel
 
                 "body" => [
                     "type"        => "textarea",
-                    //"description" => "Here you can place a description.",
-                    //"placeholder" => "Here is a placeholder",
+                    "placeholder" => "use markdown to style your answer"
                 ],
 
                 "id" => [
@@ -94,9 +94,10 @@ class CreateAnswerForm extends FormModel
     public function callbackSubmit()
     {
         $session = $this->di->get("session");
+        $filter = new MyTextFilter();
 
         $title         = $this->form->value("title");
-        $body          = $this->form->value("body");
+        $body          = $filter->parse($this->form->value("body"), ["markdown"]);
         $tags          = $this->form->value("tags");
         $ownerid       = $this->form->value("id");
         $ownerusername = $this->form->value("username");

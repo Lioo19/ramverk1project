@@ -122,23 +122,20 @@ class Comment extends ActiveRecordModel
     {
         $all = $this->findAllWhere("postid = ?", $id);
 
-        // var_dump($all);
+        return $all;
+    }
 
-        $res = [];
-        $counter = 0;
+    /**
+     * Get all comments made by user
+     *
+     * @param string $username
+     *
+     * @return void
+     */
+    public function getCommentsByUsername($username = "")
+    {
+        $all = $this->findAllWhere("username = ?", $username);
 
-        //Should probably work, if all is passed on, remove switch-statement
-        foreach ($all as $key => $value) {
-            foreach ($value as $key1 => $value1) {
-                switch ($key1) {
-                    default:
-                        $res[$counter][$key1] = $value1;
-                        break;
-                }
-            }
-            $counter += 1;
-        }
-        // var_dump($res);
-        return $res;
+        return $all;
     }
 }

@@ -6,6 +6,7 @@ use Anax\HTMLForm\FormModel;
 use Psr\Container\ContainerInterface;
 use Lioo19\Questions\Question;
 use Lioo19\Me\Me;
+use Lioo19\MyTextFilter\MyTextFilter;
 use Lioo19\Comments\Comment;
 
 /**
@@ -52,8 +53,7 @@ class CreateCommentForm extends FormModel
             [
                 "body" => [
                     "type"        => "textarea",
-                    //"description" => "Here you can place a description.",
-                    //"placeholder" => "Here is a placeholder",
+                    "placeholder" => "use markdown to style your comment"
                 ],
 
                 "username" => [
@@ -85,8 +85,9 @@ class CreateCommentForm extends FormModel
     public function callbackSubmit()
     {
         $session = $this->di->get("session");
+        $filter = new MyTextFilter();
 
-        $body          = $this->form->value("body");
+        $body          = $filter->parse($this->form->value("body"), ["markdown"]);
         $username      = $this->form->value("username");
         $postid        = $this->form->value("postid");
 
