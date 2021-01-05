@@ -5,37 +5,61 @@
  */
 
 namespace Anax\View;
-
-//FIX THIS  NEATER!
 ?>
 <article>
     <article class="singleq">
-    <?php foreach ($question as $key => $value) { ?>
-        <article>
+        <div>
+            <h1><?= $question["title"]?></h1>
+            <p><?= $question["body"] ?></p>
+            <p>Q asked by <i><?= $question["ownerusername"] ?></i></p>
+            <a href="<?= url("q/commenton?id=" . $question["id"]) ?>">Comment</a>
+            <p>Tags:    </p>
+            <div class="qTags">
+                <?php
+            foreach ($tags as $key => $value) { ?>
+                    <p>
+                        <a href="<?= url("tags/showsingle?id=" . $value) ?>"><?= $value ?></a>
+                    </p>
             <?php
-            switch ($key) {
-                case 'id':
-                    ?><a href="<?= url("q/commenton?id=" . $value) ?>">Comment</a><?php
-                    break;
-                case 'title':
-                    ?><h1><?= $value ?></h1><?php
-                    break;
-                case 'body':
-                    ?><p><?= $value ?></p><?php
-                    break;
-                case 'ownerusername':
-                    ?><p>Q asked by <i><?= $value ?></i></p><?php
-                    break;
             }
             ?>
-        </article>
-        <?php
+            </div>
+        </div>
+    </article>
+    <?php
+    if ($comments[$question["id"]]) {
+        foreach ($comments[$question["id"]] as $key => $value) {
+            ?><div class="comment"><?php
+            foreach ($value as $key1 => $value1) {
+                switch ($key1) {
+                    case 'body':
+                    // case 'score':
+                    ?><p><?= $value1 ?></p><?php
+                    break;
+                    case 'username':
+                    ?><p>comment by: <i><?= $value1 ?></i></p><?php
+                    break;
+                }
+            }?>
+        </div><?php
         }
-        foreach ($question as $key1 => $value1) {
-            switch ($key1) {
-                case 'id':
-                if ($comments[$value1]) {
-                    foreach ($comments[$value1] as $key => $value) {
+    }
+    ?>
+    </article>
+    <article class="singleqanswers">
+        <h3>Answers</h3>
+    <?php foreach ($answers as $key => $value) { ?>
+            <div>
+                <p><?= $value->body ?></p>
+                <i>From: <?= $value->ownerusername ?></i>
+                <?php
+                if ($value->acceptedanswer) {
+                    ?><p>This is an accepted answer</p><?php
+                } ?>
+                <a href="<?= url("q/commenton?id=" . $value->id) ?>">Comment</a>
+                <?php
+                if ($comments[$value->id]) {
+                    foreach ($comments[$value->id] as $key => $value) {
                         foreach ($value as $key1 => $value1) {
                             ?>
                             <div class="comment"> <?php
@@ -50,65 +74,6 @@ namespace Anax\View;
                             }
                             ?>
                             </div> <?php
-                        }
-                    }
-                }
-            }
-        }
-        ?>
-        <p>Tags:<?php
-        foreach ($tags as $key => $value) { ?>
-            <div class="qTags">
-                <p>
-                    <a href="<?= url("tags/showsingle?id=" . $value) ?>"><?= $value ?></a>
-                </p>
-            </div>
-        <?php
-        }
-    ?>
-    </p>
-    </article>
-    <article class="singleq">
-        <h3>Answers</h3>
-    <?php foreach ($answers as $key => $value) { ?>
-            <div>
-                <?php
-                foreach ($value as $key1 => $value1) {
-                    switch ($key1) {
-                        case 'body':
-                            ?><p><?= $value1 ?></p><?php
-                            break;
-                        case 'ownerusername':
-                            ?><i>From: <?= $value1 ?></i><?php
-                            break;
-                        case 'acceptedanswer':
-                            if ($value1) {
-                                ?><p>This is an accepted answer</p><?php
-                            }
-                            break;
-                    }
-                }
-                foreach ($value as $key1 => $value1) {
-                    switch ($key1) {
-                        case 'id':
-                        if ($comments[$value1]) {
-                            foreach ($comments[$value1] as $key => $value) {
-                                foreach ($value as $key1 => $value1) {
-                                    ?>
-                                    <div class="comment"> <?php
-                                    switch ($key1) {
-                                        case 'body':
-                                        // case 'score':
-                                        ?><p><?= $value1 ?></p><?php
-                                        break;
-                                        case 'username':
-                                        ?><p>comment by: <i><?= $value1 ?></i></p><?php
-                                        break;
-                                    }
-                                    ?>
-                                    </div> <?php
-                                }
-                            }
                         }
                     }
                 }

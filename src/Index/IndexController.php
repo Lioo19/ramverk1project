@@ -30,12 +30,12 @@ class IndexController implements ContainerInjectableInterface
     public function indexAction(): object
     {
         $page = $this->di->get("page");
-        $threeQs = $this->getLatestQ();
+        $fourQs = $this->getLatestQ();
         $threeTags = $this->getPopularTags();
         $threeUsers = $this->getActiveUsers();
 
         $page->add("startpage/startpage", [
-            "threeQs"    => $threeQs,
+            "fourQs"    => $fourQs,
             "threeTags"  => $threeTags,
             "threeUsers" => $threeUsers
         ]);
@@ -61,7 +61,7 @@ class IndexController implements ContainerInjectableInterface
         //Gets the latest addition of questions by reversing
         $allQs = array_reverse($allQs);
         //slices array to only three entries
-        $threeQs = array_slice($allQs, 0, 3);
+        $threeQs = array_slice($allQs, 0, 4);
 
         return $threeQs;
     }

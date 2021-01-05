@@ -6781,7 +6781,6 @@ a.rm-button.rm-clicked .rm-button-face-2 {
 }
 .footer-column-wrapper {
   color: #ddd;
-  border-bottom: 1px solid #ebefff;
   padding-bottom: 24px;
   margin-bottom: 48px;
 }
@@ -6838,9 +6837,6 @@ a.rm-button.rm-clicked .rm-button-face-2 {
     width: 98.95833333%;
     margin-left: 0.52083333%;
     margin-right: 0.52083333%;
-  }
-  .footer-column-x h4 {
-    border-bottom: 1px solid #999;
   }
   .footer-column-1,
   .footer-column-2 {
@@ -6954,6 +6950,117 @@ input.JSONbutton.right {
 input.JSONbutton.wrong {
   color: #a00000;
 }
+h1,
+h2,
+h3,
+h4,
+h5 {
+  border-bottom: none;
+  text-decoration: none;
+}
+a,
+a:visited {
+  text-decoration: none;
+  border-bottom: none;
+}
+.startQs {
+  grid-area: q;
+}
+.startTags {
+  grid-area: tags;
+  background-color: beige;
+  text-align: center;
+  margin-top: 40px;
+}
+.startTags h3,
+.startTags p {
+  color: black;
+}
+.startTags a {
+  font-size: 150%;
+  padding: 5%;
+}
+.startUsers {
+  grid-area: user;
+}
+.userBox {
+  background-color: beige;
+  text-align: center;
+}
+.startpage {
+  display: grid;
+  grid-template-columns: 12.5% 25% 25% 25% 12.5%;
+  grid-template-rows: 42.5% 15% 42.5%;
+  grid-template-areas: ". q q q ." "tags tags tags tags tags" ". . user . .";
+  row-gap: 3%;
+  margin-bottom: 25%;
+}
+.qBox {
+  background-color: beige;
+  max-height: 200px;
+  min-height: 125px;
+}
+.qBox h2,
+.qBox h5,
+.qBox p {
+  padding-left: 10px;
+}
+/**
+* CSS for single question
+*
+*/
+.singleq div,
+.singleqanswers div {
+  background-color: beige;
+  margin: 10px;
+  color: black;
+  padding: 1px 0px 1px 10px;
+}
+.comment {
+  background-color: white;
+  color: black;
+  margin: 10px 50px;
+  padding: 1px 0px 1px 10px;
+}
+.singleqanswers div {
+  padding: 1px 0px 10px 10px;
+}
+.tagsh1 {
+  text-align: center;
+}
+.tagbox {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  font-size: 125%;
+  font-weight: 600;
+}
+.tagbox div {
+  padding: 2%;
+}
+.tagsq {
+  min-height: 150px;
+}
+.allUsers {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+.userBox {
+  width: 250px;
+  height: 250px;
+  margin-bottom: 4%;
+}
+/**
+* Single user page
+*
+*/
+.singleUserQ {
+  background-color: beige;
+  margin: 10px;
+  color: black;
+  padding: 1px 0px 1px 10px;
+}
 .site-logo {
   display: none;
 }
@@ -6996,8 +7103,15 @@ code {
   border-radius: 5px;
   padding: 1px;
 }
-.books {
-  min-height: 100%;
+.region-main {
+  min-height: 600px;
+  margin-left: 0px;
+}
+h1 {
+  margin-top: 20px !important;
+}
+p {
+  margin-bottom: 5px;
 }
 /**
  * My settings.

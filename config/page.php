@@ -14,9 +14,9 @@ return [
         "region" => "layout",
         "template" => "anax/v2/layout/dbwebb_se",
         "data" => [
-            "baseTitle" => " | ramverk1",
+            "baseTitle" => " | GameQ",
             "bodyClass" => null,
-            "favicon" => "favicon.ico",
+            "favicon" => "game_pad.ico",
             "htmlClass" => null,
             "lang" => "sv",
             "stylesheets" => [
@@ -45,7 +45,7 @@ return [
             "template" => "anax/v2/header/site_logo_text",
             "data" => [
                 "homeLink"      => "",
-                "siteLogoText"  => "ramverk1",
+                "siteLogoText"  => "GameQ",
                 "siteLogoTextIcon" => "image/theme/leaf_40x40.png",
                 "siteLogoTextIconAlt" => "Löv-bild",
             ],

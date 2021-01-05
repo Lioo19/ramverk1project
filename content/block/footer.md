@@ -1,1 +1,1 @@
-Copyright 2020 och Linnéa Olofsson
+© Linnéa Olofsson 2020

@@ -1,4 +1,4 @@
-#### Blekinge Institute of Technology
+#### BTH
 
 Curious about our school and what it can offer you?
 Surf onto [Blekinge Institute of Technology](https://www.bth.se/eng/).

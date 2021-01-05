@@ -7,17 +7,15 @@
 namespace Anax\View;
 
 ?>
-<h1>WELCOME</h1>
-
 <article class="startpage">
-    <h2>The place for asking about boardgames</h2>
     <div class="startQs">
         <h3>Latest Qs</h3>
-        <?php foreach ($threeQs as $key => $value) {?>
+        <?php foreach ($fourQs as $key => $value) { ?>
             <div class="qBox">
                 <a href="<?= url("q/showq?id=" .  $value->id)?>">
                     <h2><?= $value->title?></h2>
                     <p><i>Q asked by: <?= $value->ownerusername?></i></p>
+                </a>
             </div>
             <?php
         } ?>
@@ -36,7 +34,7 @@ namespace Anax\View;
     <div class="startUsers">
         <h3>Top Users</h3>
         <?php foreach ($threeUsers as $key => $value) { ?>
-            <div>
+            <div class="userBox">
             <a
                 href=<?= url("user/singleuser?username=" . $value["username"])?>>
                 <p>
@@ -49,6 +47,7 @@ namespace Anax\View;
                 <p><?= $value["reputation"]?> points</p>
                 <p><?= $value["info"]?></p>
             </a>
+        </div>
             <?php
         } ?>
     </div>

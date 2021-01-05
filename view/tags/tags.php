@@ -7,12 +7,22 @@
 namespace Anax\View;
 
 ?>
-<h1>Tags</h1>
-<article>
+<h1 class="tagsh1">Tags</h1>
+<article class="tagbox">
 <?php foreach ($content as $key => $value) { ?>
-    <div class="tagbox">
+    <div class="singletag">
     <?php
-    if ($value->count > 3) {
+    if ($key > 40) {
+        break;
+    } elseif ($value->count > 5) {
+        ?>
+        <a
+            style="font-size: 180%;"
+            href="<?= url("tags/showsingle?id=" . $value->id . "&name=" . $value->tagname) ?>"
+            >
+            <?= $value->tagname?>
+        </a><?php
+    } elseif ($value->count > 3) {
         ?>
         <a
             style="font-size: 150%;"
