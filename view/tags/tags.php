@@ -12,6 +12,7 @@ namespace Anax\View;
 <?php foreach ($content as $key => $value) { ?>
     <div class="singletag">
     <?php
+
     if ($key > 40) {
         break;
     } elseif ($value->count > 5) {

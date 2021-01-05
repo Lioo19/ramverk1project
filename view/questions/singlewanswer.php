@@ -5,6 +5,7 @@
  */
 
 namespace Anax\View;
+
 ?>
 <article>
     <article class="singleq">
@@ -16,9 +17,9 @@ namespace Anax\View;
             <p>Tags:    </p>
             <div class="qTags">
                 <?php
-            foreach ($tags as $key => $value) { ?>
+            foreach ($tags as $key => $value) {?>
                     <p>
-                        <a href="<?= url("tags/showsingle?id=" . $value) ?>"><?= $value ?></a>
+                        <a href="<?= url("tags/showsingle?id=" . $value[1] . "&name=" . $value[0]) ?>"><?= $value[0] ?></a>
                     </p>
             <?php
             }

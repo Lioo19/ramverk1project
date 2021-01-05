@@ -100,11 +100,11 @@ class QuestionsController implements ContainerInjectableInterface
         $answers        = $question->getAnswersByParentId($id);
         $question       = $question->getSingleQById($id);
         $posttagsForQ   = $posttags->getTagIdsByPostId($id);
-        $allTagNames    = [];
+        $allTags    = [];
 
         foreach ($posttagsForQ as $key => $value) {
             $temp = $tags->getNameById($value->tagid);
-            array_push($allTagNames, $temp);
+            array_push($allTags, [$temp, $value->tagid]);
         }
 
         $comments = array();
@@ -124,7 +124,7 @@ class QuestionsController implements ContainerInjectableInterface
                 "question"  => $question,
                 "answers"   => $answers,
                 "comments"  => $comments,
-                "tags"      => $allTagNames
+                "tags"      => $allTags
             ]);
 
             return $page->render([

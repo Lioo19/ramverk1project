@@ -36,7 +36,6 @@ class PostTags extends ActiveRecordModel
     {
         $all = $this->findAllWhere("postid = ?", $id);
 
-
         return $all;
     }
 
