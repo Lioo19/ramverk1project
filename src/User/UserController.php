@@ -67,11 +67,6 @@ class UserController implements ContainerInjectableInterface
         $form = new UserLoginForm($this->di);
         $form->check();
 
-        // $login = $session->set("login", null);
-        // $login = $session->get("login", null);
-        // var_dump($session);
-        // var_dump($login);
-
         $page->add("users/signin", [
             "content" => $form->getHTML(),
         ]);

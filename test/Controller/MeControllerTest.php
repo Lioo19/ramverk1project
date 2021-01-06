@@ -29,7 +29,7 @@ class MeControllerTest extends TestCase
 
 
         // Create and initiate the controller
-        $this->controller = new MeController();
+        $this->controller = new MeControllerMock();
 
         $this->controller->setDi($di);
     }
