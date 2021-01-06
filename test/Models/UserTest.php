@@ -26,7 +26,7 @@ class UserTest extends TestCase
         $di->loadServices(ANAX_INSTALL_PATH . "/test/config_/di");
 
         // Create and initiate the controller
-        $this->class = new User();
+        $this->class = new UserMock();
         $this->class->setDb($di->get("dbqb"));
     }
 

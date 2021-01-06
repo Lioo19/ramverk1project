@@ -81,7 +81,7 @@ class CreateAnswerForm extends FormModel
                     "value" => "Answer",
                     "callback" => [$this, "callbackSubmit"]
                 ],
-            ],
+            ]
         );
     }
 
