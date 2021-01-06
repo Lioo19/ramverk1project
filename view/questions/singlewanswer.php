@@ -8,12 +8,12 @@ namespace Anax\View;
 
 ?>
 <article>
-    <article class="singleq">
-        <div>
+    <article>
+        <div class="singleq">
             <h1><?= $question["title"]?></h1>
             <p><?= $question["body"] ?></p>
             <p>Q asked by <i><?= $question["ownerusername"] ?></i></p>
-            <a href="<?= url("q/commenton?id=" . $question["id"]) ?>">Comment</a>
+            <a class="commentlink" href="<?= url("q/commenton?id=" . $question["id"]) ?>">Comment</a>
             <p>Tags:    </p>
             <div class="qTags">
                 <?php
@@ -26,7 +26,6 @@ namespace Anax\View;
             ?>
             </div>
         </div>
-    </article>
     <?php
     if ($comments[$question["id"]]) {
         foreach ($comments[$question["id"]] as $key => $value) {
@@ -47,10 +46,10 @@ namespace Anax\View;
     }
     ?>
     </article>
-    <article class="singleqanswers">
+    <article>
         <h3>Answers</h3>
     <?php foreach ($answers as $key => $value) { ?>
-            <div>
+            <div class="singleqanswers">
                 <p><?= $value->body ?></p>
                 <i>From: <?= $value->ownerusername ?></i>
                 <?php
@@ -58,12 +57,12 @@ namespace Anax\View;
                     ?><p>This is an accepted answer</p><?php
                 } ?>
                 <a href="<?= url("q/commenton?id=" . $value->id) ?>">Comment</a>
+                </div>
                 <?php
                 if ($comments[$value->id]) {
                     foreach ($comments[$value->id] as $key => $value) {
+                        ?><div class="comment"><?php
                         foreach ($value as $key1 => $value1) {
-                            ?>
-                            <div class="comment"> <?php
                             switch ($key1) {
                                 case 'body':
                                 // case 'score':
@@ -73,13 +72,11 @@ namespace Anax\View;
                                 ?><p>comment by: <i><?= $value1 ?></i></p><?php
                                 break;
                             }
-                            ?>
-                            </div> <?php
-                        }
+                        }?>
+                    </div><?php
                     }
                 }
                 ?>
-            </div>
         <?php
     }
 

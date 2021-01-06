@@ -7,7 +7,7 @@
 return [
     "routes" => [
         [
-            "info" => "Index",
+            "info" => "Index controller.",
             "mount" => "",
             "handler" => "\Lioo19\Index\IndexController",
         ],

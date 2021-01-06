@@ -7009,12 +7009,12 @@ a:visited {
 * CSS for single question
 *
 */
-.singleq div,
-.singleqanswers div {
+.singleq,
+.singleqanswers {
   background-color: beige;
   margin: 10px;
   color: black;
-  padding: 1px 0px 1px 10px;
+  padding: 1px 0px 1px 10%;
 }
 .comment {
   background-color: white;
@@ -7024,6 +7024,16 @@ a:visited {
 }
 .singleqanswers div {
   padding: 1px 0px 10px 10px;
+}
+.qTags {
+  display: flex;
+}
+.qTags p {
+  margin-right: 5%;
+}
+.commentlink {
+  float: right;
+  margin: 10px;
 }
 .tagsh1 {
   text-align: center;
@@ -7060,6 +7070,7 @@ a:visited {
   margin: 10px;
   color: black;
   padding: 1px 0px 1px 10px;
+  width: 80%;
 }
 .site-logo {
   display: none;
