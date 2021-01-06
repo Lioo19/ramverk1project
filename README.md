@@ -19,7 +19,7 @@ If you're curious about the code, you've come to the right place! Basically all 
 3. To use an SQLite database, you need to run following commands in the root of the project:
 ```
 chmod 777 data
-sqlite3 data/db.sqlite #And then a random command before exitin(crtl-d)
+sqlite3 data/db.sqlite #And then a random command before exiting with ctrl-d
 chmod 666 data/db.sqlite
 ```
 Then fill the database with the files from `sql/ddl` in the following order:
