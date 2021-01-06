@@ -25,7 +25,7 @@ class PostTagsTest extends TestCase
         $di->loadServices(ANAX_INSTALL_PATH . "/test/config_/di");
 
         // Create and initiate the controller
-        $this->class = new PostTags();
+        $this->class = new PostTagsMock();
         $this->class->setDb($di->get("dbqb"));
     }
 

@@ -25,7 +25,7 @@ class MeTest extends TestCase
         $di->loadServices(ANAX_INSTALL_PATH . "/test/config_/di");
 
         // Create and initiate the controller
-        $this->class = new Me();
+        $this->class = new MeMock();
         $this->class->setDb($di->get("dbqb"));
     }
 

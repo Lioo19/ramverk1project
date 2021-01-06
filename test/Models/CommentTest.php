@@ -25,7 +25,7 @@ class CommentTest extends TestCase
         $di->loadServices(ANAX_INSTALL_PATH . "/test/config_/di");
 
         // Create and initiate the controller
-        $this->class = new Comment();
+        $this->class = new CommentMock();
         $this->class->setDb($di->get("dbqb"));
     }
 
