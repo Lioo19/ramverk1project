@@ -5,6 +5,7 @@
  */
 
 namespace Anax\View;
+
 ?>
 <h1>All Qs</h1>
 <article>

@@ -38,7 +38,9 @@ class CreateAnswerForm extends FormModel
         $question = $qObj->getSingleQById($parentid);
 
         $counter = 0;
-        for ($i=0; $i < count($answers); $i++) {
+        $countedAns = count($answers);
+
+        for ($i = 0; $i < $countedAns; $i++) {
             $counter += 1;
         }
 
@@ -93,7 +95,6 @@ class CreateAnswerForm extends FormModel
      */
     public function callbackSubmit()
     {
-        $session = $this->di->get("session");
         $filter = new MyTextFilter();
 
         $title         = $this->form->value("title");

@@ -121,7 +121,7 @@ class Question extends ActiveRecordModel
     }
 
     /**
-     * Get all questions, no answers
+     * Get all questions
      *
      * @return object
      */

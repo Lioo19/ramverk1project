@@ -36,10 +36,12 @@ class CreateCommentForm extends FormModel
         $qObj = new Question();
         $qObj->setDb($this->di->get("dbqb"));
         $answers = $qObj->getAnswersByParentId($parentid);
-        $question = $qObj->getSingleQById($parentid);
+        // $question = $qObj->getSingleQById($parentid);
 
         $counter = 0;
-        for ($i=0; $i < count($answers); $i++) {
+        $countedAns = count($answers);
+
+        for ($i = 0; $i < $countedAns; $i++) {
             $counter += 1;
         }
 
@@ -84,7 +86,6 @@ class CreateCommentForm extends FormModel
      */
     public function callbackSubmit()
     {
-        $session = $this->di->get("session");
         $filter = new MyTextFilter();
 
         $body          = $filter->parse($this->form->value("body"), ["markdown"]);

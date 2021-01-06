@@ -29,7 +29,7 @@ namespace Anax\View;
                 <?= $value->tagname ?>
             </a>
         <?php
-        } ?>
+    } ?>
     </div>
     <div class="startUsers">
         <h3>Top Users</h3>

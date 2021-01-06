@@ -28,14 +28,10 @@ class UserLoginForm extends FormModel
             [
                 "username" => [
                     "type"        => "text",
-                    //"description" => "Here you can place a description.",
-                    //"placeholder" => "Here is a placeholder",
                 ],
 
                 "password" => [
                     "type"        => "password",
-                    //"description" => "Here you can place a description.",
-                    //"placeholder" => "Here is a placeholder",
                 ],
 
                 "submit" => [
@@ -78,30 +74,6 @@ class UserLoginForm extends FormModel
         $session->set("user", $user->username);
 
         $this->form->addOutput("User " . $user->username . " logged in.");
-        return true;
-    }
-
-    /**
-     * Callback for submit-button which should return true if it could
-     * carry out its work and false if something failed.
-     *
-     * @return boolean true if okey, false if something went wrong.
-     */
-    public function callbackButton()
-    {
-        // Get values from the submitted form
-        $username      = $this->form->value("username");
-        $password      = $this->form->value("password");
-
-
-        // $user is null if user is not found
-        if (!$user || !password_verify($password, $user->password)) {
-            $this->form->rememberValues();
-            $this->form->addOutput("BLEPP");
-            return false;
-        }
-
-        $this->form->addOutput("TEST");
         return true;
     }
 }

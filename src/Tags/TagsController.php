@@ -18,6 +18,7 @@ use Lioo19\Questions\Question;
 class TagsController implements ContainerInjectableInterface
 {
     use ContainerInjectableTrait;
+
     /**
      * @var $data description
      */
@@ -31,7 +32,7 @@ class TagsController implements ContainerInjectableInterface
      *
      * @return object as a response object
      */
-    public function indexActionGet(): object
+    public function indexAction(): object
     {
         $page = $this->di->get("page");
         $tags = new Tags();
@@ -60,10 +61,7 @@ class TagsController implements ContainerInjectableInterface
     public function showSingleAction(): object
     {
         $page = $this->di->get("page");
-        $session = $this->di->get("session");
         $request = $this->di->get("request");
-        $response = $this->di->get("response");
-
         $id = $request->getGet("id", null);
         $tagname = $request->getGet("name", null);
 

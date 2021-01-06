@@ -79,7 +79,6 @@ class CreateQuestionForm extends FormModel
      */
     public function callbackSubmit()
     {
-        $session = $this->di->get("session");
         $filter = new MyTextFilter();
 
         $title         = $this->form->value("title");

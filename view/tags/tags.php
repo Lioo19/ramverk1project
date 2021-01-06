@@ -31,7 +31,7 @@ namespace Anax\View;
             >
             <?= $value->tagname?>
         </a><?php
-    } elseif($value->count > 1) {
+    } elseif ($value->count > 1) {
         ?>
         <a
             style="font-size: 125%;"

@@ -27,7 +27,6 @@ class MeController implements ContainerInjectableInterface
     private $data;
 
 
-
     /**
      * The initialize method is optional and will always be called before the
      * target method/action. This is a convienient method where you could
@@ -58,7 +57,7 @@ class MeController implements ContainerInjectableInterface
      *
      * @return object as a response object
      */
-    public function indexActionGet(): object
+    public function indexAction(): object
     {
         $page = $this->di->get("page");
 
@@ -92,31 +91,6 @@ class MeController implements ContainerInjectableInterface
     {
         $page = $this->di->get("page");
         $form = new UpdateUserForm($this->di);
-        $form->check();
-
-        $page->add("me/update", [
-            "content" => $form->getHTML(),
-            "data" => $this->data
-        ]);
-
-        return $page->render([
-            "title" => "Update profile",
-        ]);
-    }
-
-    /**
-     * Description.
-     *
-     * @param datatype $variable Description
-     *
-     * @throws Exception
-     *
-     * @return object as a response object
-     */
-    public function bAction(): object
-    {
-        $page = $this->di->get("page");
-        $form = new CreateUserForm2($this->di);
         $form->check();
 
         $page->add("me/update", [

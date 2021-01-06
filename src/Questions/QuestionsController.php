@@ -11,7 +11,6 @@ use Lioo19\Comments\Comment;
 use Lioo19\Tags\PostTags;
 use Lioo19\Tags\Tags;
 
-
 // use Anax\Route\Exception\ForbiddenException;
 // use Anax\Route\Exception\NotFoundException;
 // use Anax\Route\Exception\InternalErrorException;
@@ -39,7 +38,7 @@ class QuestionsController implements ContainerInjectableInterface
      *
      * @return object as a response object
      */
-    public function indexActionGet(): object
+    public function indexAction(): object
     {
         $page = $this->di->get("page");
         $question = new Question();
@@ -175,8 +174,7 @@ class QuestionsController implements ContainerInjectableInterface
         }
 
         $page->add("questions/singlewoutanswer", [
-            "question" => $question,
-            "answers" => $answers
+            "question" => $question
         ]);
 
         return $page->render([

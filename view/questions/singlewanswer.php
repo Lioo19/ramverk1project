@@ -17,30 +17,30 @@ namespace Anax\View;
             <p>Tags:    </p>
             <div class="qTags">
                 <?php
-            foreach ($tags as $key => $value) {?>
+                foreach ($tags as $key => $value) {?>
                     <p>
                         <a href="<?= url("tags/showsingle?id=" . $value[1] . "&name=" . $value[0]) ?>"><?= $value[0] ?></a>
                     </p>
-            <?php
-            }
-            ?>
+                    <?php
+                }
+                ?>
             </div>
         </div>
     <?php
     if ($comments[$question["id"]]) {
         foreach ($comments[$question["id"]] as $key => $value) {
             ?><div class="comment"><?php
-            foreach ($value as $key1 => $value1) {
-                switch ($key1) {
-                    case 'body':
-                    // case 'score':
-                    ?><p><?= $value1 ?></p><?php
-                    break;
-                    case 'username':
-                    ?><p>comment by: <i><?= $value1 ?></i></p><?php
-                    break;
-                }
-            }?>
+foreach ($value as $key1 => $value1) {
+    switch ($key1) {
+        case 'body':
+        // case 'score':
+            ?><p><?= $value1 ?></p><?php
+            break;
+        case 'username':
+            ?><p>comment by: <i><?= $value1 ?></i></p><?php
+            break;
+    }
+}?>
         </div><?php
         }
     }
@@ -62,17 +62,17 @@ namespace Anax\View;
                 if ($comments[$value->id]) {
                     foreach ($comments[$value->id] as $key => $value) {
                         ?><div class="comment"><?php
-                        foreach ($value as $key1 => $value1) {
-                            switch ($key1) {
-                                case 'body':
-                                // case 'score':
-                                ?><p><?= $value1 ?></p><?php
-                                break;
-                                case 'username':
-                                ?><p>comment by: <i><?= $value1 ?></i></p><?php
-                                break;
-                            }
-                        }?>
+foreach ($value as $key1 => $value1) {
+    switch ($key1) {
+        case 'body':
+        // case 'score':
+            ?><p><?= $value1 ?></p><?php
+            break;
+        case 'username':
+            ?><p>comment by: <i><?= $value1 ?></i></p><?php
+            break;
+    }
+}?>
                     </div><?php
                     }
                 }

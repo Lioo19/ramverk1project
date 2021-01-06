@@ -2,7 +2,7 @@
 
 namespace Lioo19\MyTextFilter;
 
-use \Michelf\Markdown;
+use Michelf\Markdown;
 
 /**
  * Filter and format text content.
@@ -82,27 +82,6 @@ class MyTextFilter
     }
 
 
-
-    /**
-     * Make clickable links from URLs in text.
-     *
-     * @param string $text The text that should be formatted.
-     *
-     * @return string with formatted anchors.
-     */
-    public function makeClickable($text)
-    {
-        return preg_replace_callback(
-            '#\b(?<![href|src]=[\'"])https?://[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/))#',
-            function ($matches) {
-                return "<a href=\"{$matches[0]}\">{$matches[0]}</a>";
-            },
-            $text
-        );
-    }
-
-
-
     /**
      * Format text according to Markdown syntax.
      *
@@ -113,44 +92,5 @@ class MyTextFilter
     public function markdown($text)
     {
         return Markdown::defaultTransform($text);
-    }
-
-
-
-    /**
-     * For convenience access to nl2br formatting of text.
-     * Creates <br>-tags for each \n in the text
-     *
-     * @param string $text The text that should be formatted.
-     *
-     * @return string the formatted text.
-     */
-    public function nl2br($text)
-    {
-        return nl2br($text);
-    }
-
-    /**
-     * Strips the text of tags completely
-     *
-     * @param string $text The text that should be formatted.
-     *
-     * @return string the formatted text.
-     */
-    public function strip($text)
-    {
-        return strip_tags($text);
-    }
-
-    /**
-     * Makes htmlentities on incoming text
-     *
-     * @param string $text The text that should be formatted.
-     *
-     * @return string the checked text
-     */
-    public function esc($text)
-    {
-        return htmlentities($text);
     }
 }

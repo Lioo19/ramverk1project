@@ -47,7 +47,8 @@ class CreateUserForm extends FormModel
 
                 "i-agree" => [
                     "type"        => "checkbox",
-                    "description" => "I agree to this student-project saving my entered data",
+                    "description" => "I agree to this student-
+                                    project saving my entered data",
                 ],
                 "submit" => [
                     "type" => "submit",

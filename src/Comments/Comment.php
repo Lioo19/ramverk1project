@@ -29,25 +29,6 @@ class Comment extends ActiveRecordModel
     public $username;
     public $userid;
 
-
-    // WHAT FUNCTIONS ARE NECESSARY?
-    // Could addComment be done in an htmlform?
-    //addComment - per postid - bör kunna fungera för både q och a
-    //getComments - per postid - bör kunna fungera för både q och a
-
-    //is a construct neccessary or helpful?
-    // public function __construct($id, $postid, $score, $body, $username)
-    // {
-    //     $this->id = $id;
-    //     $this->postid = $postid;
-    //     $this->score = $score;
-    //     $this->body = $body;
-    //     $this->username = $username;
-    //     $this->userid = $userid;
-    //     $this->created = $created;
-    //     $this->deleted = $deleted;
-    // }
-
     /**
      * Get all users
      * username, reputation, gravatar
@@ -59,56 +40,7 @@ class Comment extends ActiveRecordModel
     public function getAllQ()
     {
         $all = $this->findAll();
-        $res = [];
-        $counter = 0;
-
-        //Only pass username, id and text on
-        foreach ($all as $key => $value) {
-            var_dump($value);
-            //Checks if parentid is null, to sort out answers
-            if (!$value->parentid) {
-                foreach ($value as $key1 => $value1) {
-                    switch ($key1) {
-                        case 'id':
-                            $res[$counter]["postid"] = $value1;
-                            break;
-                        case 'deleted':
-                            if ($value1) {
-                                $res[$counter]["body"] = "Question deleted";
-                            }
-                            break;
-                        case 'body':
-                        case 'ownerusername':
-                            $res[$counter][$key1] = $value1;
-                            break;
-                    }
-                }
-                $counter += 1;
-            }
-        }
-        return $res;
-    }
-
-    /**
-     * Get single Q by id
-     *
-     * @param string $id for q
-     *
-     * @return array | void
-     */
-    public function getSingleQById($id = "")
-    {
-        $this->find("id", $id);
-
-        $info = array(
-            "id"                => $this->id,
-            "body"              => $this->body,
-            "created"           => $this->created,
-            "deleted"           => $this->deleted,
-            "username"          => $this->username,
-            "postid"            => $this->postid
-        );
-        return $info;
+        return $all;
     }
 
     /**
@@ -116,7 +48,7 @@ class Comment extends ActiveRecordModel
      *
      * @param string $id for q
      *
-     * @return void
+     * @return array
      */
     public function getCommentsByParentId($id = "")
     {

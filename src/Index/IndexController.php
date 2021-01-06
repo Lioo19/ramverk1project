@@ -8,7 +8,6 @@ use Lioo19\Questions\Question;
 use Lioo19\User\User;
 use Lioo19\Tags\Tags;
 
-
 // use Anax\Route\Exception\ForbiddenException;
 // use Anax\Route\Exception\NotFoundException;
 // use Anax\Route\Exception\InternalErrorException;
@@ -41,7 +40,7 @@ class IndexController implements ContainerInjectableInterface
         ]);
 
         return $page->render([
-            "title" => "Welcome!",
+            "title" => "",
         ]);
     }
 
@@ -78,14 +77,14 @@ class IndexController implements ContainerInjectableInterface
         $tags = new Tags();
         $tags->setDb($this->di->get("dbqb"));
 
-        $count = array();
+        $counter = array();
         $allTags = $tags->getAllTags();
         //Picks out Count-value from list of tags
         foreach ($allTags as $key => $row) {
-            $count[$key] = $row->count;
+            $counter[$key] = $row->count;
         }
         //Sorts array according to count
-        array_multisort($count, SORT_DESC, $allTags);
+        array_multisort($counter, SORT_DESC, $allTags);
 
         //slices array to only three entries
         $threeTags = array_slice($allTags, 0, 3);
@@ -121,9 +120,10 @@ class IndexController implements ContainerInjectableInterface
         }
 
         $threeUsers = array();
+        $counted = count($allIdsSorted);
 
-        if (count($allIdsSorted) < 3) {
-            for ($i=0; $i < count($allIdsSorted); $i++) {
+        if ($counted < 3) {
+            for ($i = 0; $i < ($counted); $i++) {
                 $user = new User();
                 $user->setDb($this->di->get("dbqb"));
 
@@ -131,12 +131,11 @@ class IndexController implements ContainerInjectableInterface
                 array_push($threeUsers, $temp);
             }
         } else {
-            for ($i=0; $i < 3; $i++) {
+            for ($i = 0; $i < 3; $i++) {
                 $user = new User();
                 $user->setDb($this->di->get("dbqb"));
 
                 $temp = $user->getUserInfoById($allIdsSorted[$i]);
-                var_dump($allIdsSorted[$i]);
 
                 array_push($threeUsers, $temp);
             }

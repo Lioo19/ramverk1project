@@ -29,19 +29,19 @@ namespace Anax\View;
             ?>
         </article>
         <?php
-        }
+    }
     ?>
     </article>
         <?php
 
     // Prepare classes
-    $classes[] = "article";
-    if (isset($class)) {
-        $classes[] = $class;
-    }
+        $classes[] = "article";
+        if (isset($class)) {
+            $classes[] = $class;
+        }
 
 
-    ?>
+        ?>
     <article <?= classList($classes) ?>>
         <?= $newComment ?>
         <br>

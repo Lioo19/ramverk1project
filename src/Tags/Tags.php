@@ -93,7 +93,7 @@ class Tags extends ActiveRecordModel
      *
      * @return array
      */
-    public function createTag($tagname = "", $count = "")
+    public function createTag($tagname = "")
     {
         $this->find("tagname", $tagname);
 
