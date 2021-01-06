@@ -64,7 +64,7 @@ class CreateQuestionForm extends FormModel
                     "value" => "Send Q",
                     "callback" => [$this, "callbackSubmit"]
                 ],
-            ],
+            ]
         );
     }
 

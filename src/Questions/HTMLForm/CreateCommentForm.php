@@ -72,7 +72,7 @@ class CreateCommentForm extends FormModel
                     "value" => "Comment",
                     "callback" => [$this, "callbackSubmit"]
                 ],
-            ],
+            ]
         );
     }
 
