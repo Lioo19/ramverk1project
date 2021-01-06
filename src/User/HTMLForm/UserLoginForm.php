@@ -39,7 +39,7 @@ class UserLoginForm extends FormModel
                     "value" => "Login",
                     "callback" => [$this, "callbackSubmit"]
                 ],
-            ],
+            ]
         );
     }
 
