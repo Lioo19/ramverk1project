@@ -4,11 +4,14 @@
 @import "@desinax/responsive-menu/less/responsive-menu.less";
 @import "@desinax/responsive-menu/less/media-queries.less";
 
+@bgColorHeader: #ffaa00;
+@colorHeader: @bgColorBody;
 @maxButtonFontSize: 2em;
 @navbarFontFamily: @fontFamilyTimesNewRoman;
 
-// @TODO This shoud not be needed to specify like this?
 .rm-max .rm-mobile .rm-submenu-button {
+    color: @colorHeader;
+    background-color: @bgColorHeader;
     padding: 1em;
 }
 
@@ -101,17 +104,23 @@
         top: 3px;
         font-size: 1.5em;
         //line-height: 0;
+        color: @colorHeader !important;
+    }
+
+    .rm-submenu-button {
+        background-color: @bgColorHeader;
+        color: @colorHeader;
     }
 
     .rm-mobile {
-        background-color: #444;
+        background-color: @bgColorHeader;
         text-align: left;
 
         a {
-            color: #fff;
+            color: @colorHeader;
 
             &:hover {
-                background-color: #555;
+                background-color: lighten(@bgColorHeader, 15%);
             }
         }
     }

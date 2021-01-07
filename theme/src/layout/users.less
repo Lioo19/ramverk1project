@@ -1,3 +1,6 @@
+@bgColorHeader: #ffaa00;
+
+
 .allUsers {
     display: flex;
     flex-flow: row wrap;
@@ -5,9 +8,13 @@
 }
 
 .userBox {
-    width: 250px;
-    height: 250px;
+    width: 300px;
+    height: 300px;
     margin-bottom: 4%;
+    background-color: @bgColorBody;
+    border: 2px dotted @bgColorHeader;
+    border-radius: 50%;
+    text-align: center;
 }
 
 /**
@@ -15,7 +22,7 @@
 *
 */
 .singleUserQ {
-    background-color: beige;
+    background-color: @bgColorBody;
     margin: 10px;
     color: black;
     padding: 1px 0px 1px 10px;

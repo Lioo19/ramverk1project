@@ -20,7 +20,5 @@ if (isset($class)) {
 
 ?><article <?= classList($classes) ?>>
 <?= $content ?>
-<p>Already a member? <br>
-<a href="<?= url("user/signin") ?>">Sign In</a></p>
 <br>
 </article>

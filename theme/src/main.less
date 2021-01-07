@@ -110,27 +110,6 @@ img.responsive {
 
 
 
-/**
- * Links and navigation
- * @TODO check and clean up
- */
-
-// Cleanup theses
-@anchorColor:         #33b;
-@anchorColor2:        #448;
-@anchorColorHover:    #33f;
-@anchorColorActive:   #838;
-@anchorColorVisited:  #838;
-
-@anchorColorAnonymous:      @colorBody;
-@anchorColorAnonymousHover: #00c;
-
-@anchorTabBgColor:          lighten(@anchorColorHover, 35%);
-@anchorTabBgColorHover:     lighten(@anchorColorHover, 30%);
-@anchorTabBgColorActive:    lighten(@anchorColorHover, 35%);
-@anchorTabBgColorSelected:  @bgColorBody;
-
-
 @import "@desinax/link/less/anchor-header.less";
 @import "@desinax/link/less/breadcrumb.less";
 //@import "@desinax/link/less/links-extra-dbwebb.less";
@@ -156,7 +135,7 @@ img.responsive {
 }
 
 .fab.fa-icon:hover {
-    color: green;
+    color: @bgColorBody;
 }
 
 
@@ -189,7 +168,6 @@ img.responsive {
 @import "layout/regions.less";
 @import "layout/footer.less";
 @import "layout/header.less";
-@import "layout/buttons.less";
 @import "layout/typography.less";
 @import "layout/startpage.less";
 @import "layout/qs.less";
@@ -207,8 +185,9 @@ img.responsive {
     padding-left: 0.2em;
     font-size: 3em;
 
+    //GAMEQ logga
     a {
-        color: lighten(#1b95ad, 5%);
+        color: @grayAcc;
         text-decoration: none;
         margin-left: .2em;
     }
@@ -225,17 +204,18 @@ img.responsive {
     line-height: 0;
 }
 
-.rm-menu-button {
+#rm-menu-button {
     font-size: 1.5em;
 }
 
+//DropDownen
 .rm-desktop li ul {
-    background-color: @bgColorBody;
+    background: @bgColorHeader;
 }
 
 .wrap-sidebar .block h4 {
-    background: rgb(0,6,31);
-    background: linear-gradient(180deg, rgba(0,6,31,1) 0%, rgba(0,18,92,1) 49%, rgba(27,149,173,1) 99%);
+    background-color: lighten(@grayAcc, 10%);
+    color: @bgColorBody;
     padding: 0.2em;
     border-bottom: none;
 }
@@ -263,21 +243,46 @@ p {
 }
 
 /**
+ * Links and navigation
+ * @TODO check and clean up
+ */
+
+ @bgColorHeader: #ffaa00;
+
+// Cleanup theses
+@anchorColor:         #33b; //reg link
+@anchorColor2:        #448;
+@anchorColorHover:    #33f; //hoover for link
+@anchorColorActive:   #838; //Active and visited
+@anchorColorVisited:  #838; //Active and visited
+
+@anchorColorAnonymous:      @colorBody; //reg link
+@anchorColorAnonymousHover: #00c; //hoover for link
+
+@anchorTabBgColor:          lighten(@anchorColorHover, 35%);
+@anchorTabBgColorHover:     lighten(@anchorColorHover, 30%);
+@anchorTabBgColorActive:    lighten(@anchorColorHover, 35%);
+@anchorTabBgColorSelected:  @bgColorBody;
+
+/**
  * My settings.
  */
-@bgColorHtml: #eee;
-@bgColorBody: #00061f;
-@colorBody:   #eee;
+@bgColorHtml: #000; //??
+@bgColorBody: #fffefc; //Background
+@colorBody:   #000; //textcol
+@grayAcc:   #212121; //gray accent
+
+
+@colorH1BorderBottom: #54003a;
+@colorH2BorderBottom: #54003a;
+@colorH3BorderBottom: #54003a;
+@colorH4BorderBottom: #54003a;
 
 
 @fontFamilyHeadings: @fontFamilyCambria;
 @fontFamilyBody:     @fontFamilyVerdana;
 @fontFamilyCode:     @fontFamilyCourier;
 
-@colorH1BorderBottom: #666; // Add to h4 also
-@colorH2BorderBottom: #ccc;
-@colorH3BorderBottom: #eee;
-@colorH4BorderBottom: #eee;
 
 @magicNumber:  24px;
 @fontSizeBody: 16px;

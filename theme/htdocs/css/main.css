@@ -5141,14 +5141,14 @@ Original highlight.js style (c) Ivan Sagalaev <maniac@softwaremaniacs.org>
   margin: 0;
   padding: 0;
   margin-top: 1em;
-  border-left: 1px solid #ebefff;
-  border-bottom: 1px solid #ebefff;
+  border-left: 1px solid #000;
+  border-bottom: 1px solid #000;
 }
 .image-overlay li {
   display: inline-block;
   margin: 0;
   padding: 0;
-  border-right: 1px solid #ebefff;
+  border-right: 1px solid #000;
 }
 .image-overlay li a {
   display: inline-block;
@@ -5447,10 +5447,6 @@ figure.codepen {
 img.responsive {
   max-width: 100%;
 }
-/**
- * Links and navigation
- * @TODO check and clean up
- */
 /** --------------------------------------------------------------
  * Anchor for headers with id
  */
@@ -5638,7 +5634,7 @@ a:hover {
   text-decoration: none;
 }
 .fab.fa-icon:hover {
-  color: green;
+  color: #fffefc;
 }
 /**
  * Use internal modules
@@ -5701,7 +5697,7 @@ a:hover {
 .blog-list h1 {
   font-size: 1.875em;
   line-height: 1.6;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #54003a;
 }
 .blog-list h1 a {
   color: inherit;
@@ -5712,7 +5708,7 @@ a:hover {
   text-decoration: underline;
 }
 .blog-post h1 {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #54003a;
 }
 .blog-list-item {
   margin-bottom: 48px;
@@ -5815,13 +5811,13 @@ fieldset {
 }
 html {
   overflow-y: scroll;
-  background-color: #eee;
+  background-color: #000;
 }
 body {
   margin: 0;
   padding: 0;
-  color: #eee;
-  background-color: #00061f;
+  color: #000;
+  background-color: #fffefc;
   font: 16px/1.5 Verdana, Geneva, sans-serif;
 }
 h1,
@@ -5846,7 +5842,7 @@ h1 {
   font-size: 2.375em;
   line-height: 1.26315789;
   font-weight: normal;
-  border-bottom: 1px solid #666;
+  border-bottom: 1px solid #54003a;
   margin-bottom: 23px;
 }
 h1 ~ h1,
@@ -5865,7 +5861,7 @@ h2 {
   line-height: 1.6;
   font-weight: normal;
   margin-bottom: 23px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #54003a;
 }
 h2 + h3 {
   margin-top: 24px;
@@ -5875,7 +5871,7 @@ h3 {
   line-height: 1.71428571;
   font-weight: normal;
   margin-bottom: 23px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #54003a;
 }
 h3 + h4 {
   margin-top: 24px;
@@ -5885,7 +5881,7 @@ h4 {
   line-height: 1;
   font-weight: normal;
   margin-bottom: 23px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #54003a;
 }
 h4 + h5 {
   margin-top: 24px;
@@ -6437,6 +6433,8 @@ a.rm-button.rm-clicked .rm-button-face-2 {
   }
 }
 .rm-max .rm-mobile .rm-submenu-button {
+  color: #fffefc;
+  background-color: #ffaa00;
   padding: 1em;
 }
 .rm-max.rm-navbar {
@@ -6497,16 +6495,21 @@ a.rm-button.rm-clicked .rm-button-face-2 {
   position: relative;
   top: 3px;
   font-size: 1.5em;
+  color: #fffefc !important;
+}
+.rm-navbar-max .rm-submenu-button {
+  background-color: #ffaa00;
+  color: #fffefc;
 }
 .rm-navbar-max .rm-mobile {
-  background-color: #444;
+  background-color: #ffaa00;
   text-align: left;
 }
 .rm-navbar-max .rm-mobile a {
-  color: #fff;
+  color: #fffefc;
 }
 .rm-navbar-max .rm-mobile a:hover {
-  background-color: #555;
+  background-color: #ffc34d;
 }
 .region-navbar {
   display: inline;
@@ -6774,13 +6777,13 @@ a.rm-button.rm-clicked .rm-button-face-2 {
  * A footer style for dbwebb.se.
  */
 .outer-wrap-footer {
-  background: #00061f;
-  background: linear-gradient(180deg, #00061f 0%, #00125c 49%, #1b95ad 99%);
+  background: #fffefc;
+  background: linear-gradient(180deg, #fffefc 3%, #fac647 55%, #ffaa00 100%);
   padding-top: 24px;
   padding-bottom: 48px;
 }
 .footer-column-wrapper {
-  color: #ddd;
+  color: #000;
   padding-bottom: 24px;
   margin-bottom: 48px;
 }
@@ -6790,7 +6793,9 @@ a.rm-button.rm-clicked .rm-button-face-2 {
   padding: 0;
 }
 .footer-column-wrapper a {
-  color: inherit;
+  color: #111;
+  text-decoration: underline;
+  line-height: 1.5;
 }
 .footer-column-x {
   padding-bottom: 24px;
@@ -6798,14 +6803,14 @@ a.rm-button.rm-clicked .rm-button-face-2 {
 }
 .footer-column-1,
 .footer-column-2 {
-  border-right: 1px solid #ebefff;
+  border-right: 1px solid #000;
 }
 .footer-column-2,
 .footer-column-3 {
   padding-left: 1em;
 }
 .site-footer {
-  color: #ebefff;
+  color: #000;
   text-align: center;
   padding-bottom: 24px;
 }
@@ -6854,8 +6859,13 @@ a.rm-button.rm-clicked .rm-button-face-2 {
  * A header style for dbwebb.se.
  */
 .outer-wrap-header {
-  height: 48px;
+  background-color: #ffaa00;
+  color: #fffefc;
+  height: 72px;
   margin-bottom: 12px;
+}
+.outer-wrap-header a {
+  font-size: 110%;
 }
 .outer-wrap-header img {
   outline: 0;
@@ -6939,17 +6949,6 @@ a.rm-button.rm-clicked .rm-button-face-2 {
     margin-right: 0.52083333%;
   }
 }
-input.JSONbutton {
-  width: 20%;
-  height: 2rem;
-  text-align: center;
-}
-input.JSONbutton.right {
-  color: #007500;
-}
-input.JSONbutton.wrong {
-  color: #a00000;
-}
 h1,
 h2,
 h3,
@@ -6968,59 +6967,91 @@ a:visited {
 }
 .startTags {
   grid-area: tags;
-  background-color: beige;
+  background-color: #ffaa00;
   text-align: center;
-  margin-top: 40px;
+  margin-top: 2%;
+  height: 100%;
+  padding-top: 5%;
+  box-shadow: 0 0 10px 1px #aaa;
+  transition: box-shadow 0.15s ease;
 }
-.startTags h3,
-.startTags p {
-  color: black;
+.startTags h3 {
+  margin-top: 0;
+  font-size: 250%;
+  color: #212121;
 }
 .startTags a {
-  font-size: 150%;
-  padding: 5%;
+  color: #fffefc;
+  font-size: 200%;
+  padding: 2%;
+  text-shadow: 1px 1px 10px #545454;
 }
 .startUsers {
   grid-area: user;
-}
-.userBox {
-  background-color: beige;
+  justify-self: center;
   text-align: center;
+  margin: 10% 0 20% 0;
 }
 .startpage {
   display: grid;
   grid-template-columns: 12.5% 25% 25% 25% 12.5%;
-  grid-template-rows: 42.5% 15% 42.5%;
-  grid-template-areas: ". q q q ." "tags tags tags tags tags" ". . user . .";
-  row-gap: 3%;
+  grid-template-rows: 40% 15% 45%;
+  grid-template-areas: ". q q q ." "tags tags tags tags tags" ". user user user .";
+  row-gap: 0 3%;
   margin-bottom: 25%;
 }
 .qBox {
-  background-color: beige;
-  max-height: 200px;
+  background-color: #fffefc;
+  color: #212121;
+  padding: 5px;
+  margin: 1% 0 6% 0;
   min-height: 125px;
+  text-decoration: none;
+  box-shadow: 0 0 15px 1px #aaa;
+  transition: box-shadow 0.15s ease;
+  border-radius: 10px;
+  border: 1px solid #ffaa00;
+  padding-left: 10px;
 }
 .qBox h2,
 .qBox h5,
 .qBox p {
-  padding-left: 10px;
+  color: #212121;
 }
 /**
 * CSS for single question
 *
 */
-.singleq,
+.singleq {
+  background-color: #fffefc;
+  color: #212121;
+  margin: 1% 0 3% 0;
+  min-height: 125px;
+  text-decoration: none;
+  box-shadow: 0 0 5px 1px #aaa;
+  transition: box-shadow 0.15s ease;
+  border-radius: 10px;
+  border: 1px solid #ffaa00;
+  padding: 1px 0px 1px 10%;
+}
 .singleqanswers {
-  background-color: beige;
-  margin: 10px;
-  color: black;
+  background-color: #fffefc;
+  color: #212121;
+  margin: 4% 6% 2% 6%;
+  min-height: 125px;
+  text-decoration: none;
+  box-shadow: 0 0 5px 1px #aaa;
+  transition: box-shadow 0.15s ease;
+  border-radius: 10px;
+  border: 1px solid #212121;
   padding: 1px 0px 1px 10%;
 }
 .comment {
-  background-color: white;
+  border: 2px solid #ffdd99;
   color: black;
-  margin: 10px 50px;
-  padding: 1px 0px 1px 10px;
+  margin: 0 6% 4% 12%;
+  padding: 1px 0px 1px 10%;
+  border-radius: 10px;
 }
 .singleqanswers div {
   padding: 1px 0px 10px 10px;
@@ -7029,7 +7060,7 @@ a:visited {
   display: flex;
 }
 .qTags p {
-  margin-right: 5%;
+  margin: 0 5% 0 0;
 }
 .commentlink {
   float: right;
@@ -7057,16 +7088,20 @@ a:visited {
   justify-content: space-around;
 }
 .userBox {
-  width: 250px;
-  height: 250px;
+  width: 300px;
+  height: 300px;
   margin-bottom: 4%;
+  background-color: #fffefc;
+  border: 2px dotted #ffaa00;
+  border-radius: 50%;
+  text-align: center;
 }
 /**
 * Single user page
 *
 */
 .singleUserQ {
-  background-color: beige;
+  background-color: #fffefc;
   margin: 10px;
   color: black;
   padding: 1px 0px 1px 10px;
@@ -7081,7 +7116,7 @@ a:visited {
   font-size: 3em;
 }
 .site-logo-text a {
-  color: #1ea8c3;
+  color: #212121;
   text-decoration: none;
   margin-left: 0.2em;
 }
@@ -7094,15 +7129,15 @@ a:visited {
   font-size: 1.5em;
   line-height: 0;
 }
-.rm-menu-button {
+#rm-menu-button {
   font-size: 1.5em;
 }
 .rm-desktop li ul {
-  background-color: #00061f;
+  background: #ffaa00;
 }
 .wrap-sidebar .block h4 {
-  background: #00061f;
-  background: linear-gradient(180deg, #00061f 0%, #00125c 49%, #1b95ad 99%);
+  background-color: #3b3b3b;
+  color: #fffefc;
   padding: 0.2em;
   border-bottom: none;
 }
@@ -7116,7 +7151,6 @@ code {
 }
 .region-main {
   min-height: 600px;
-  margin-left: 0px;
 }
 h1 {
   margin-top: 20px !important;
@@ -7124,6 +7158,10 @@ h1 {
 p {
   margin-bottom: 5px;
 }
+/**
+ * Links and navigation
+ * @TODO check and clean up
+ */
 /**
  * My settings.
  */

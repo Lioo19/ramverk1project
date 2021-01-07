@@ -56,7 +56,7 @@ foreach ($value as $key1 => $value1) {
                 if ($value->acceptedanswer) {
                     ?><p>This is an accepted answer</p><?php
                 } ?>
-                <a href="<?= url("q/commenton?id=" . $value->id) ?>">Comment</a>
+                <a  class="commentlink" href="<?= url("q/commenton?id=" . $value->id) ?>">Comment</a>
                 </div>
                 <?php
                 if ($comments[$value->id]) {

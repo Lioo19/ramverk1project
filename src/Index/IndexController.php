@@ -108,6 +108,7 @@ class IndexController implements ContainerInjectableInterface
         $question->setDb($this->di->get("dbqb"));
 
         $all = $question->getAll();
+
         $ownerids = array();
         foreach ($all as $key => $value) {
             array_push($ownerids, $value->ownerid);

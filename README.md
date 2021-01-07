@@ -1,7 +1,6 @@
 # Final project for Ramverk1
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Lioo19/ramverk1project/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Lioo19/ramverk1project/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/Lioo19/ramverk1project/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Lioo19/ramverk1project/?branch=master)
-[![Build Status](https://scrutinizer-ci.com/g/Lioo19/ramverk1project/badges/build.png?b=master)](https://scrutinizer-ci.com/g/Lioo19/ramverk1project/build-status/master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Lioo19/ramverk1project/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/Lioo19/ramverk1project/?branch=main)
+[![Build Status](https://scrutinizer-ci.com/g/Lioo19/ramverk1project/badges/build.png?b=main)](https://scrutinizer-ci.com/g/Lioo19/ramverk1project/build-status/main)
 [![CircleCI](https://circleci.com/gh/circleci/circleci-docs.svg?style=svg)](https://circleci.com/gh/Lioo19/ramverk1project)
 
 

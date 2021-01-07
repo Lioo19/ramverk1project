@@ -1,13 +1,19 @@
 /**
  * A header style for dbwebb.se.
  */
-@bgColorHeader: #323232;
-@colorHeader: #ffffff;
-@bgColorHeaderBorder: #666;
+ 
+@bgColorHeader: #ffaa00;
+@colorHeader: @bgColorBody;
 
 .outer-wrap-header {
-    height: @magicNumber * 2;
+    background-color: @bgColorHeader;
+    color: @bgColorBody;
+    height: @magicNumber * 3;
     margin-bottom: @magicNumber / 2;
+
+    a {
+        font-size: 110%;
+    }
 
     img {
         outline: 0;

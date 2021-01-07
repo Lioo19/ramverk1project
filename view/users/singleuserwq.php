@@ -16,7 +16,7 @@ namespace Anax\View;
         ?><h3>Qs and As</h3><?php
     }
     foreach ($allQs as $key => $value) { ?>
-    <div class="singleUserQ">
+    <div class="qBox">
         <a href=<?= url("q/showq?id=" . $value->id)?>>
             <?php if ($value->parentid) {
                 ?><h4 class="tiny"> Answer</h4><?php
@@ -35,9 +35,10 @@ namespace Anax\View;
         ?><h3>Comments</h3><?php
     }
     foreach ($allCs as $key => $value) {?>
-        <div class="singleUserQ">
+        <div class="comment">
             <a href=<?= url("q/showq?id=" . $value->postid)?>>
                 <p><?= $value->body?></p>
+            </a>
         </div>
         <?php
     } ?>

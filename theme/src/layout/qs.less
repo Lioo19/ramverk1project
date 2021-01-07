@@ -1,35 +1,62 @@
+@bgColorHeader: #ffaa00;
+
 .qBox {
-    background-color: beige;
+    background-color: @bgColorBody;
+    color: @grayAcc;
+    padding: 5px;
+    margin: 1% 0 6% 0;
+    min-height: 125px;
+    text-decoration: none;
+    box-shadow: 0 0 15px 1px #aaa;
+    transition: box-shadow .15s ease;
+    border-radius: 10px;
+    border: 1px solid @bgColorHeader;
+    padding-left: 10px;
 
     h2,
     h5,
     p {
-        padding-left: 10px;
+        color: @grayAcc;
     }
-
-    max-height: 200px;
-    min-height: 125px;
 }
-
 
 /**
 * CSS for single question
 *
 */
-.singleq,
-.singleqanswers {
-    background-color: beige;
-    margin: 10px;
-    color: black;
+.singleq {
+    background-color: @bgColorBody;
+    color: @grayAcc;
+    margin: 1% 0 3% 0;
+    min-height: 125px;
+    text-decoration: none;
+    box-shadow: 0 0 5px 1px #aaa;
+    transition: box-shadow .15s ease;
+    border-radius: 10px;
+    border: 1px solid @bgColorHeader;
+    padding: 1px 0px 1px 10%;
+}
+
+.singleqanswers {
+    background-color: @bgColorBody;
+    color: @grayAcc;
+    margin: 4% 6% 2% 6%;
+    min-height: 125px;
+    text-decoration: none;
+    box-shadow: 0 0 5px 1px #aaa;
+    transition: box-shadow .15s ease;
+    border-radius: 10px;
+    border: 1px solid @grayAcc;
     padding: 1px 0px 1px 10%;
 }
 
 
 .comment {
-    background-color: white;
+    border: 2px solid lighten(@bgColorHeader, 30%);
     color: black;
-    margin: 10px 50px;
-    padding: 1px 0px 1px 10px;
+    margin: 0 6% 4% 12%;
+    padding: 1px 0px 1px 10%;
+    border-radius: 10px;
 }
 
 .singleqanswers {
@@ -42,7 +69,7 @@
     display: flex;
 
     p {
-        margin-right: 5%;
+        margin: 0 5% 0 0;
     }
 }
 
