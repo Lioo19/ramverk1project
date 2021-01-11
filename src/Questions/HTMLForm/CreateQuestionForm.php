@@ -6,9 +6,9 @@ use Anax\HTMLForm\FormModel;
 use Psr\Container\ContainerInterface;
 use Lioo19\Questions\Question;
 use Lioo19\Me\Me;
-use Lioo19\MyTextFilter\MyTextFilter;
 use Lioo19\Tags\Tags;
 use Lioo19\Tags\PostTags;
+use Lioo19\MyTextFilter\MyTextFilter;
 
 /**
  * Example of FormModel implementation.
@@ -95,6 +95,7 @@ class CreateQuestionForm extends FormModel
         $question->tags           = $tags;
         $question->ownerid        = $ownerid;
         $question->ownerusername  = $ownerusername;
+        $question->created        = date('Y-m-d H:i:s');
 
         try {
             $question->save();

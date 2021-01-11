@@ -122,7 +122,8 @@ class QuestionsController implements ContainerInjectableInterface
                 "question"  => $question,
                 "answers"   => $answers,
                 "comments"  => $comments,
-                "tags"      => $allTags
+                "tags"      => $allTags,
+                "loggedin"  => $session->get("user")
             ]);
 
             return $page->render([
@@ -216,5 +217,49 @@ class QuestionsController implements ContainerInjectableInterface
         return $page->render([
             "title" => "No Access to this page",
         ]);
+    }
+
+    /**
+     * Route for accepting an answer as an accepted answer
+     *
+     * @return object
+     */
+    public function acceptAnswerAction(): object
+    {
+        $request = $this->di->get("request");
+        $response = $this->di->get("response");
+
+        $answer = new Question();
+        $answer->setDb($this->di->get("dbqb"));
+
+        $id = $request->getGet("id", null);
+        //setting params for answer
+        $allinfo = $answer->getSingleQById($id);
+        $parentid = $allinfo["parentid"];
+        $answer = $answer->updateAcceptedById($id, "true");
+        //Redirect back to Q
+        return $response->redirect("q/showq?id=$parentid");
+    }
+
+    /**
+     * Route for accepting an answer as an accepted answer
+     *
+     * @return object
+     */
+    public function unacceptAnswerAction(): object
+    {
+        $request = $this->di->get("request");
+        $response = $this->di->get("response");
+
+        $answer = new Question();
+        $answer->setDb($this->di->get("dbqb"));
+
+        $id = $request->getGet("id", null);
+        //setting params for answer
+        $allinfo = $answer->getSingleQById($id);
+        $parentid = $allinfo["parentid"];
+        $answer = $answer->updateAcceptedById($id, "false");
+        //Redirect back to Q
+        return $response->redirect("q/showq?id=$parentid");
     }
 }

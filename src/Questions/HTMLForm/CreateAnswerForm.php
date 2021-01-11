@@ -114,6 +114,10 @@ class CreateAnswerForm extends FormModel
         $question->ownerusername  = $ownerusername;
         $question->parentid       = $parentid;
 
+        //Active record seems to have issues with default
+        $question->created          = date('Y-m-d H:i:s');
+        $question->acceptedanswer   = "false";
+
         $question->save();
 
         $meObj = new Me();

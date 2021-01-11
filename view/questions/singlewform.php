@@ -53,19 +53,28 @@ foreach ($value as $key1 => $value1) {
                 <p><?= $value->body ?></p>
                 <i>From: <?= $value->ownerusername ?></i>
                 <?php
-                if ($value->acceptedanswer) {
-                    ?><p>This is an accepted answer</p><?php
-                } ?>
+                //Länk för att kunna kommentera
+                ?>
                 <a  class="commentlink" href="<?= url("q/commenton?id=" . $value->id) ?>">Comment</a>
-                </div>
                 <?php
+                //Link for marking as accepted answer, if the person logged in is the same as questionasker
+                //link leading to answer-id OBS OBS
+                if ($value->acceptedanswer === "true") {
+                    ?><p class="tiny">This is an accepted answer </p>
+                    <a href="<?= url("q/unacceptanswer?id=" . $value->id) ?>">unaccept</a><?
+                } elseif ($loggedin === $question["ownerusername"]) {
+                    ?><a class="commentlink" href="<?= url("q/acceptanswer?id=" . $value->id) ?>">mark as accepted answer</a>
+                    <?php
+                }?>
+            </div>
+            <?php
                 if ($comments[$value->id]) {
                     foreach ($comments[$value->id] as $key => $value) {
                         ?><div class="comment"><?php
+// This writes the comments for each answer
 foreach ($value as $key1 => $value1) {
     switch ($key1) {
         case 'body':
-        // case 'score':
             ?><p><?= $value1 ?></p><?php
             break;
         case 'username':

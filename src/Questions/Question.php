@@ -131,4 +131,20 @@ class Question extends ActiveRecordModel
 
         return $all;
     }
+
+    /**
+     * Update accepted answer by Id
+     *
+     *
+     * @return void
+     */
+    public function updateAcceptedById($id, $value)
+    {
+        //find, sets all variables to current ones
+        $this->find("id", $id);
+        //updates reputations value with the value we've given
+        $this->acceptedanswer = $value;
+        //makes the actual update
+        $this->update();
+    }
 }
