@@ -6478,12 +6478,13 @@ a.rm-button.rm-clicked .rm-button-face-2 {
     padding: 0 20px;
   }
 }
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1100px) {
   .rm-navbar-top .rm-desktop a {
     padding: 0 10px;
+    font-size: 100%;
   }
 }
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1100px) {
   .rm-navbar-top .rm-desktop .icon {
     display: none;
   }

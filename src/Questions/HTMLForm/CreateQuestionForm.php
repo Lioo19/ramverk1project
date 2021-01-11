@@ -95,15 +95,19 @@ class CreateQuestionForm extends FormModel
         $question->tags           = $tags;
         $question->ownerid        = $ownerid;
         $question->ownerusername  = $ownerusername;
-        $question->save();
+        try {
+            $question->save();
+            $postid = $question->getSingleQIdByTitle($title);
 
-        $postid = $question->getSingleQIdByTitle($title);
+            $this->createTags($tags, $postid);
 
-        $this->createTags($tags, $postid);
-
-        $this->form->addOutput("Question " .
-            $question->title . " was created");
-        return true;
+            $this->form->addOutput("Question " .
+                $question->title . " was created");
+            return true;
+        } catch (\Exception $e) {
+            $this->form->addOutput("Q already exists");
+            return false;
+        }
     }
 
     /**

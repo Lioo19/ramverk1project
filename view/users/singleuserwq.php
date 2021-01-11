@@ -5,6 +5,9 @@
  */
 
 namespace Anax\View;
+var_dump($allQs);
+echo "<br><br><br><br>";
+var_dump($allCs);
 
 ?>
 <h1><?= $user?> </h1>

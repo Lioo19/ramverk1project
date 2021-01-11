@@ -51,7 +51,7 @@ class QuestionsController implements ContainerInjectableInterface
         ]);
 
         return $page->render([
-            "title" => "A create user page",
+            "title" => "Questions",
         ]);
     }
 
@@ -99,7 +99,7 @@ class QuestionsController implements ContainerInjectableInterface
         $answers        = $question->getAnswersByParentId($id);
         $question       = $question->getSingleQById($id);
         $posttagsForQ   = $posttags->getTagIdsByPostId($id);
-        $allTags    = [];
+        $allTags        = [];
 
         foreach ($posttagsForQ as $key => $value) {
             $temp = $tags->getNameById($value->tagid);
@@ -118,7 +118,8 @@ class QuestionsController implements ContainerInjectableInterface
             $form = new CreateAnswerForm($this->di);
             $form->check();
 
-            $page->add("questions/singlewanswer", [
+            // Renders page with answering-form
+            $page->add("questions/singlewform", [
                 "newAnswer" => $form->getHTML(),
                 "question"  => $question,
                 "answers"   => $answers,
@@ -127,17 +128,20 @@ class QuestionsController implements ContainerInjectableInterface
             ]);
 
             return $page->render([
-                "title" => "A login page",
+                "title" => "View Q",
             ]);
         }
 
-        $page->add("questions/singlewoutanswer", [
-            "question" => $question,
-            "answers" => $answers
+        // Renders page with answering-form
+        $page->add("questions/singlewoutform", [
+            "question"  => $question,
+            "answers"   => $answers,
+            "comments"  => $comments,
+            "tags"      => $allTags
         ]);
 
         return $page->render([
-            "title" => "Q",
+            "title" => "View Q",
         ]);
     }
 
@@ -151,6 +155,7 @@ class QuestionsController implements ContainerInjectableInterface
         $page = $this->di->get("page");
         $request = $this->di->get("request");
         $session = $this->di->get("session");
+        $response = $this->di->get("response");
 
         $question = new Question();
         $question->setDb($this->di->get("dbqb"));
@@ -169,17 +174,12 @@ class QuestionsController implements ContainerInjectableInterface
             ]);
 
             return $page->render([
-                "title" => "A login page",
+                "title" => "New comment",
             ]);
         }
+        //If not logged in, return to Q
+        return $response->redirect("q/showq?id=$id");
 
-        $page->add("questions/singlewoutanswer", [
-            "question" => $question
-        ]);
-
-        return $page->render([
-            "title" => "Q",
-        ]);
     }
 
 
@@ -207,16 +207,16 @@ class QuestionsController implements ContainerInjectableInterface
             ]);
 
             return $page->render([
-                "title" => "A login page",
+                "title" => "Ask",
             ]);
         }
 
         $page->add("questions/noaccess", [
-            "content" => "blepp",
+            "content" => "none",
         ]);
 
         return $page->render([
-            "title" => "A login page",
+            "title" => "No Access to this page",
         ]);
     }
 }
