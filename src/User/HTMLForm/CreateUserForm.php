@@ -91,12 +91,17 @@ class CreateUserForm extends FormModel
 
         $user = new User();
         $user->setDb($this->di->get("dbqb"));
-        $user->username = $username;
-        $user->email = $email;
+        $user->username     = $username;
+        $user->email        = $email;
+
+        //Active record seems to have issues with default
+        $user->reputation   = 0;
+        $user->created      = date('Y-m-d H:i:s');
+        
         $user->setPassword($password);
         $user->save();
 
-        $this->form->addOutput("User was created.");
+        $this->form->addOutput("User " . $username . " was created.");
         return true;
     }
 }

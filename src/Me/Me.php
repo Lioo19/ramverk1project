@@ -48,14 +48,14 @@ class Me extends ActiveRecordModel
                 md5(strtolower(trim($this->email))) . "?d=" .
                 $default . "&s=" . 100;
         $info = array(
-            "id" => $this->id,
-            "username" => $this->username,
-            "email" => $this->email,
-            "created" => $this->created,
-            "info" => $this->info,
-            "reputation" => $this->reputation,
-            "votes" => $this->votes,
-            "grav_url" => $gravUrl
+            "id"            => $this->id,
+            "username"      => $this->username,
+            "email"         => $this->email,
+            "created"       => $this->created,
+            "info"          => $this->info,
+            "reputation"    => $this->reputation,
+            "votes"         => $this->votes,
+            "grav_url"      => $gravUrl
         );
         return $info;
     }
@@ -81,5 +81,24 @@ class Me extends ActiveRecordModel
             "votes"      => $this->votes,
         );
         return $info;
+    }
+
+
+    /**
+     * Update reputation by Username
+     *
+     * @param string $password the password to use.
+     *
+     * @return void
+     */
+    public function updateReputationByUsername($username, $repvalue)
+    {
+        //find sets all variables to current ones
+        $this->find("username", $username);
+        //updates reputations value with the value we've given
+        $this->reputation = $this->reputation + $repvalue;
+        var_dump($this->reputation);
+        //makes the actual update
+        $this->update();
     }
 }

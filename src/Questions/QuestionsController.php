@@ -29,8 +29,6 @@ class QuestionsController implements ContainerInjectableInterface
 
     /**
      * Shows an overview of available questions
-     * Works, get gravatar?
-     * Clickable?
      *
      * @param datatype $variable Description
      *

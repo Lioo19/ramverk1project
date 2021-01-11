@@ -4,10 +4,10 @@ namespace Lioo19\Questions\HTMLForm;
 
 use Anax\HTMLForm\FormModel;
 use Psr\Container\ContainerInterface;
-use Lioo19\Questions\Question;
 use Lioo19\Me\Me;
-use Lioo19\MyTextFilter\MyTextFilter;
 use Lioo19\Comments\Comment;
+use Lioo19\Questions\Question;
+use Lioo19\MyTextFilter\MyTextFilter;
 
 /**
  * Example of FormModel implementation.
@@ -100,6 +100,10 @@ class CreateCommentForm extends FormModel
         $comment->postid         = $postid;
 
         $comment->save();
+
+        $meObj = new Me();
+        $meObj->setDb($this->di->get("dbqb"));
+        $meObj->updateReputationByUsername($username, 1);
 
         $this->form->addOutput("Comment added");
         return true;
