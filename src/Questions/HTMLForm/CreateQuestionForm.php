@@ -95,8 +95,15 @@ class CreateQuestionForm extends FormModel
         $question->tags           = $tags;
         $question->ownerid        = $ownerid;
         $question->ownerusername  = $ownerusername;
+
         try {
             $question->save();
+
+            $meObj = new Me();
+            $meObj->setDb($this->di->get("dbqb"));
+            //questions give five points to rep
+            $meObj->updateReputationByUsername($ownerusername, 5);
+
             $postid = $question->getSingleQIdByTitle($title);
 
             $this->createTags($tags, $postid);

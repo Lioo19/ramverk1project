@@ -5,8 +5,8 @@ namespace Lioo19\Questions\HTMLForm;
 use Anax\HTMLForm\FormModel;
 use Psr\Container\ContainerInterface;
 use Lioo19\Me\Me;
-use Lioo19\MyTextFilter\MyTextFilter;
 use Lioo19\Questions\Question;
+use Lioo19\MyTextFilter\MyTextFilter;
 
 /**
  * Example of FormModel implementation.
@@ -115,6 +115,11 @@ class CreateAnswerForm extends FormModel
         $question->parentid       = $parentid;
 
         $question->save();
+
+        $meObj = new Me();
+        $meObj->setDb($this->di->get("dbqb"));
+        //answers give two points to rep
+        $meObj->updateReputationByUsername($ownerusername, 2);
 
         $this->form->addOutput("Answer added");
         return true;

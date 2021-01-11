@@ -103,6 +103,7 @@ class CreateCommentForm extends FormModel
 
         $meObj = new Me();
         $meObj->setDb($this->di->get("dbqb"));
+        //comments give one point to rep
         $meObj->updateReputationByUsername($username, 1);
 
         $this->form->addOutput("Comment added");
