@@ -7,11 +7,12 @@ use Psr\Container\ContainerInterface;
 use Lioo19\Questions\Question;
 use Lioo19\Me\Me;
 use Lioo19\Tags\Tags;
+use Lioo19\Votes\Votes;
 use Lioo19\Tags\PostTags;
 use Lioo19\MyTextFilter\MyTextFilter;
 
 /**
- * Example of FormModel implementation.
+* formModel for creating a Question
  */
 class CreateQuestionForm extends FormModel
 {
@@ -79,16 +80,15 @@ class CreateQuestionForm extends FormModel
      */
     public function callbackSubmit()
     {
-        $filter = new MyTextFilter();
+        $filter     = new MyTextFilter();
+        $question   = new Question();
+        $question->setDb($this->di->get("dbqb"));
 
         $title         = $this->form->value("title");
         $body          = $filter->parse($this->form->value("body"), ["markdown"]);
         $tags          = $this->form->value("tags");
         $ownerid       = $this->form->value("id");
         $ownerusername = $this->form->value("username");
-
-        $question = new Question();
-        $question->setDb($this->di->get("dbqb"));
 
         $question->title          = $title;
         $question->body           = $body;
@@ -101,12 +101,15 @@ class CreateQuestionForm extends FormModel
             $question->save();
 
             $meObj = new Me();
+            $votes = new Votes();
             $meObj->setDb($this->di->get("dbqb"));
+            $votes->setDb($this->di->get("dbqb"));
             //questions give five points to rep
             $meObj->updateReputationByUsername($ownerusername, 5);
 
             $postid = $question->getSingleQIdByTitle($title);
 
+            $votes->createVote($postid, $ownerusername, "post");
             $this->createTags($tags, $postid);
 
             $this->form->addOutput("Question " .
