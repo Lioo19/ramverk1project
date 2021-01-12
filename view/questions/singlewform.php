@@ -10,11 +10,11 @@ namespace Anax\View;
 <article>
     <article>
         <div class="singleq">
-            <a class="votelink" href="<?= url("q/updatevote?id=" . $question["id"] . "&value=1&type=post") ?>">upvote</a>
-            <a class="votelink" href="<?= url("q/updatevote?id=" . $question["id"] . "&value=-1&type=post") ?>">downvote</a>
+            <a class="votelink" href="<?= url("q/updatevote?id=" . $question["id"] . "&value=1&type=q") ?>">upvote</a>
+            <a class="votelink" href="<?= url("q/updatevote?id=" . $question["id"] . "&value=-1&type=q") ?>">downvote</a>
             <h1><?= $question["title"]?></h1>
             <p><?= $question["body"] ?></p>
-            <p>Points: <?= $votes ?></p>
+            <p>Points: <?= $votes["q"] ?></p>
             <p>Q asked by <i><?= $question["ownerusername"] ?></i></p>
             <a class="commentlink" href="<?= url("q/commenton?id=" . $question["id"]) ?>">Comment</a>
             <p>Tags:    </p>
@@ -36,11 +36,18 @@ namespace Anax\View;
 foreach ($value as $key1 => $value1) {
     switch ($key1) {
         case 'body':
-        // case 'score':
             ?><p><?= $value1 ?></p><?php
             break;
         case 'username':
             ?><p>comment by: <i><?= $value1 ?></i></p><?php
+            break;
+        case 'id':
+            ?>
+            <a class="votelink" href="<?= url("q/updatevote?id=" . $value1 . "&value=1&type=qcomment") ?>">upvote</a>
+            <a class="votelink" href="<?= url("q/updatevote?id=" . $value1 . "&value=-1&type=qcomment") ?>">downvote</a><?php
+            break;
+        case 'votes':
+        ?><p>Points: <?= $value1 ?></p><?php
             break;
     }
 }?>
@@ -53,10 +60,13 @@ foreach ($value as $key1 => $value1) {
         <h3>Answers</h3>
     <?php foreach ($answers as $key => $value) { ?>
             <div class="singleqanswers">
+                <a class="votelink" href="<?= url("q/updatevote?id=" . $value->id . "&value=1&type=answer") ?>">upvote</a>
+                <a class="votelink" href="<?= url("q/updatevote?id=" . $value->id . "&value=-1&type=answer") ?>">downvote</a>
                 <p><?= $value->body ?></p>
                 <i>From: <?= $value->ownerusername ?></i>
+                <p>Points: <?= $value->votes ?></p>
                 <?php
-                //Länk för att kunna kommentera
+                //Link for commenting on answer
                 ?>
                 <a  class="commentlink" href="<?= url("q/commenton?id=" . $value->id) ?>">Comment</a>
                 <?php
@@ -73,6 +83,7 @@ foreach ($value as $key1 => $value1) {
             <?php
                 if ($comments[$value->id]) {
                     foreach ($comments[$value->id] as $key => $value) {
+                        // var_dump($value);
                         ?><div class="comment"><?php
 // This writes the comments for each answer
 foreach ($value as $key1 => $value1) {
@@ -82,6 +93,14 @@ foreach ($value as $key1 => $value1) {
             break;
         case 'username':
             ?><p>comment by: <i><?= $value1 ?></i></p><?php
+            break;
+        case 'id':
+            ?>
+            <a class="votelink" href="<?= url("q/updatevote?id=" . $value1 . "&value=1&type=anscomment") ?>">upvote</a>
+            <a class="votelink" href="<?= url("q/updatevote?id=" . $value1 . "&value=-1&type=anscomment") ?>">downvote</a><?php
+            break;
+        case 'votes':
+            ?><p>Points: <?= $value1 ?></p><?php
             break;
     }
 }?>

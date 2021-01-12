@@ -130,7 +130,7 @@ class CreateAnswerForm extends FormModel
         $votes->setDb($this->di->get("dbqb"));
         $postid = $question->getSingleQIdByTitle($title);
 
-        $votes->createVote($postid, $ownerusername, "post");
+        $votes->createVote($postid, $ownerid, "post");
 
         $this->form->addOutput("Answer added");
         return true;

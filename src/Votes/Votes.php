@@ -88,7 +88,6 @@ class Votes extends ActiveRecordModel
     public function getCountByPostorCommentId($id = "", $type)
     {
         $all = $this->findAllWhere($type . "id = ?", $id);
-        var_dump($all[0]->count);
         return $all[0]->count;
     }
 

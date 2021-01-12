@@ -106,14 +106,14 @@ class CreateCommentForm extends FormModel
         $meObj->setDb($this->di->get("dbqb"));
         //comments give one point to rep
         $meObj->updateReputationByUsername($username, 1);
-
-        $postid = $question->getSingleQIdByTitle($title); //is this really neccessary? 
+        $userid = $meObj->getUserInfo($username);
+        $userid = $userid["id"];
 
         //Create entry for voting
         $votes = new Votes();
         $votes->setDb($this->di->get("dbqb"));
 
-        $votes->createVote($postid, $username, "comment");
+        $votes->createVote($postid, $userid, "comment");
 
         $this->form->addOutput("Comment added");
         return true;

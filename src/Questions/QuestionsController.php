@@ -100,7 +100,7 @@ class QuestionsController implements ContainerInjectableInterface
         $answers        = $question->getAnswersByParentId($id);
         $question       = $question->getSingleQById($id);
         $posttagsForQ   = $posttags->getTagIdsByPostId($id);
-        $voteCount      = $votes->getCountByPostorCommentId($id, "post");
+        $voteCount["q"] = $votes->getCountByPostorCommentId($id, "post");
         $allTags        = [];
 
         foreach ($posttagsForQ as $key => $value) {
@@ -114,6 +114,25 @@ class QuestionsController implements ContainerInjectableInterface
             $comments[$value->id] = $temp;
         }
         $comments[$id] = $comment->getCommentsByParentId($id);
+
+        //loop to add votes to answers
+        foreach ($answers as $key => $value) {
+            $votesA = new Votes();
+            $votesA->setDb($this->di->get("dbqb"));
+            $countForA = $votesA->getCountByPostorCommentId($value->id, "post");
+            $answers[$key]->votes = $countForA;
+        }
+
+        //loop to add votes to comments for Q
+        foreach ($comments as $key => $value) {
+            $counted = count($value);
+            if ($counted > 0) {
+                $votesC = new Votes();
+                $votesC->setDb($this->di->get("dbqb"));
+                $countForC = $votesC->getCountByPostorCommentId($value[0]->id, "comment");
+                $comments[$key][0]->votes = $countForC;
+            }
+        }
 
         $login = $session->get("login");
         if ($login) {
@@ -286,22 +305,38 @@ class QuestionsController implements ContainerInjectableInterface
         $type   = $request->getGet("type", null);
 
         //updating the vote with the new value (works for any value)
-        $vote = $vote->updateVote($id, $type, $value);
 
-        if ($type === "comment") {
+        if ($type === "qcomment") {
+            $vote = $vote->updateVote($id, "comment", $value);
             $comment = new Comment();
             $comment->setDb($this->di->get("dbqb"));
             $allinfo = $comment->getSingleCById($id);
             $postid = $allinfo["postid"];
             return $response->redirect("q/showq?id=$postid");
+        } elseif ($type === "anscomment") {
+            $vote = $vote->updateVote($id, "comment", $value);
+            $comment = new Comment();
+            $answer = new Question();
+            $answer->setDb($this->di->get("dbqb"));
+            $comment->setDb($this->di->get("dbqb"));
+
+            $allinfo = $comment->getSingleCById($id);
+            //this is now the commentID, we need parentid for correct reroute
+            $postid = $allinfo["postid"];
+            //get parentid from Post-table
+            $allinfo = $answer->getSingleQById($postid);
+            $parentid = $allinfo["parentid"];
+            return $response->redirect("q/showq?id=$parentid");
         } elseif ($type === "answer") {
+            $vote = $vote->updateVote($id, "post", $value);
             $answer = new Question();
             $answer->setDb($this->di->get("dbqb"));
             $allinfo = $answer->getSingleQById($id);
             $parentid = $allinfo["parentid"];
             return $response->redirect("q/showq?id=$parentid");
         }
+        $vote = $vote->updateVote($id, "post", $value);
         //Redirect back to Q
-        // return $response->redirect("q/showq?id=$id");
+        return $response->redirect("q/showq?id=$id");
     }
 }
