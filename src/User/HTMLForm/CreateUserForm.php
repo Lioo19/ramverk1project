@@ -97,7 +97,6 @@ class CreateUserForm extends FormModel
         //Active record seems to have issues with default
         $user->reputation   = 0;
         $user->created      = date('Y-m-d H:i:s');
-        
         $user->setPassword($password);
         $user->save();
 

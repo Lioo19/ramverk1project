@@ -10,13 +10,15 @@ namespace Anax\View;
 <article>
     <article>
         <div class="singleq">
-            <a class="votelink" href="<?= url("q/updatevote?id=" . $question["id"] . "&value=1&type=q") ?>">upvote</a>
-            <a class="votelink" href="<?= url("q/updatevote?id=" . $question["id"] . "&value=-1&type=q") ?>">downvote</a>
+            <div class="votelink">
+                <a href="<?= url("q/updatevote?id=" . $question["id"] . "&value=1&type=q") ?>">upvote</a>
+                <a href="<?= url("q/updatevote?id=" . $question["id"] . "&value=-1&type=q") ?>">downvote</a>
+            </div>
             <h1><?= $question["title"]?></h1>
             <p><?= $question["body"] ?></p>
-            <p>Points: <?= $votes["q"] ?></p>
             <p>Q asked by <i><?= $question["ownerusername"] ?></i></p>
-            <a class="commentlink" href="<?= url("q/commenton?id=" . $question["id"]) ?>">Comment</a>
+            <p>Points: <?= $votesForQ ?>
+            <a class="commentlink" href="<?= url("q/commenton?id=" . $question["id"]) ?>">Comment</a></p>
             <p>Tags:    </p>
             <div class="qTags">
                 <?php
@@ -43,11 +45,13 @@ foreach ($value as $key1 => $value1) {
             break;
         case 'id':
             ?>
-            <a class="votelink" href="<?= url("q/updatevote?id=" . $value1 . "&value=1&type=qcomment") ?>">upvote</a>
-            <a class="votelink" href="<?= url("q/updatevote?id=" . $value1 . "&value=-1&type=qcomment") ?>">downvote</a><?php
+            <div class="votelink">
+                <a href="<?= url("q/updatevote?id=" . $value1 . "&value=1&type=qcomment") ?>">upvote</a>
+                <a href="<?= url("q/updatevote?id=" . $value1 . "&value=-1&type=qcomment") ?>">downvote</a>
+            </div><?php
             break;
         case 'votes':
-        ?><p>Points: <?= $value1 ?></p><?php
+            ?><p>Points: <?= $value1 ?></p><?php
             break;
     }
 }?>
@@ -60,15 +64,14 @@ foreach ($value as $key1 => $value1) {
         <h3>Answers</h3>
     <?php foreach ($answers as $key => $value) { ?>
             <div class="singleqanswers">
-                <a class="votelink" href="<?= url("q/updatevote?id=" . $value->id . "&value=1&type=answer") ?>">upvote</a>
-                <a class="votelink" href="<?= url("q/updatevote?id=" . $value->id . "&value=-1&type=answer") ?>">downvote</a>
+                <div class="votelink">
+                    <a href="<?= url("q/updatevote?id=" . $value->id . "&value=1&type=answer") ?>">upvote</a>
+                    <a href="<?= url("q/updatevote?id=" . $value->id . "&value=-1&type=answer") ?>">downvote</a>
+                </div>
                 <p><?= $value->body ?></p>
                 <i>From: <?= $value->ownerusername ?></i>
-                <p>Points: <?= $value->votes ?></p>
-                <?php
-                //Link for commenting on answer
-                ?>
-                <a  class="commentlink" href="<?= url("q/commenton?id=" . $value->id) ?>">Comment</a>
+                <p>Points: <?= $value->votes ?>
+                <a  class="commentlink" href="<?= url("q/commenton?id=" . $value->id) ?>">Comment</a></p>
                 <?php
                 //Link for marking as accepted answer, if the person logged in is the same as questionasker
                 //link leading to answer-id OBS OBS
@@ -81,10 +84,9 @@ foreach ($value as $key1 => $value1) {
                 }?>
             </div>
             <?php
-                if ($comments[$value->id]) {
-                    foreach ($comments[$value->id] as $key => $value) {
-                        // var_dump($value);
-                        ?><div class="comment"><?php
+            if ($comments[$value->id]) {
+                foreach ($comments[$value->id] as $key => $value) {
+                    ?><div class="comment"><?php
 // This writes the comments for each answer
 foreach ($value as $key1 => $value1) {
     switch ($key1) {
@@ -105,9 +107,9 @@ foreach ($value as $key1 => $value1) {
     }
 }?>
                     </div><?php
-                    }
                 }
-                ?>
+            }
+            ?>
         <?php
     }
 

@@ -34,7 +34,7 @@
     transition: box-shadow .15s ease;
     border-radius: 10px;
     border: 1px solid @bgColorHeader;
-    padding: 1px 0px 1px 10%;
+    padding: 2% 0px 1px 10%;
 }
 
 .singleqanswers {
@@ -47,7 +47,7 @@
     transition: box-shadow .15s ease;
     border-radius: 10px;
     border: 1px solid @grayAcc;
-    padding: 1px 0px 1px 10%;
+    padding: 2% 0px 1px 10%;
 }
 
 
@@ -55,13 +55,19 @@
     border: 2px solid lighten(@bgColorHeader, 30%);
     color: black;
     margin: 0 6% 4% 12%;
-    padding: 1px 0px 1px 10%;
+    padding: 2% 0px 1px 10%;
     border-radius: 10px;
+
+    a {
+        p {
+            color: black;
+        }
+    }
 }
 
 .singleqanswers {
     div {
-        padding: 1px 0px 10px 10px;
+        padding: 2% 0px 10px 10px;
     }
 }
 
@@ -75,5 +81,19 @@
 
 .commentlink {
     float: right;
-    margin: 10px;
+    margin: 0 10px;
+}
+
+.votelink {
+    a {
+        color: @bgColorBody !important;
+        padding: 0.8%;
+        margin: 1% 2% 1% 0;
+        background-color: darken(@bgColorHeader, 10%);
+        border-radius: 3px;
+    }
+
+    a:visited {
+        color: @bgColorBody !important;
+    }
 }

@@ -19,9 +19,9 @@ namespace Anax\View;
     <div class="qBox">
         <a href=<?= url("q/showq?id=" . $value->id)?>>
             <?php if ($value->parentid) {
-                ?><h4 class="tiny"> Answer</h4><?php
+                ?><h4 class="tinyh4"> Answer</h4><?php
             } else {
-                ?><h4 class="tiny"> Question: <?= $value->title?></h4>
+                ?><h4 class="tinyh4"> Question: <?= $value->title?></h4>
                 <?php
             }?>
             <p><?= $value->body?></p>

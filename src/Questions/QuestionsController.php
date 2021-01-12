@@ -100,7 +100,7 @@ class QuestionsController implements ContainerInjectableInterface
         $answers        = $question->getAnswersByParentId($id);
         $question       = $question->getSingleQById($id);
         $posttagsForQ   = $posttags->getTagIdsByPostId($id);
-        $voteCount["q"] = $votes->getCountByPostorCommentId($id, "post");
+        $voteCount      = $votes->getCountByPostorCommentId($id, "post");
         $allTags        = [];
 
         foreach ($posttagsForQ as $key => $value) {
@@ -123,7 +123,7 @@ class QuestionsController implements ContainerInjectableInterface
             $answers[$key]->votes = $countForA;
         }
 
-        //loop to add votes to comments for Q
+        //loop to add votes to comments
         foreach ($comments as $key => $value) {
             $counted = count($value);
             if ($counted > 0) {
@@ -146,7 +146,7 @@ class QuestionsController implements ContainerInjectableInterface
                 "answers"   => $answers,
                 "comments"  => $comments,
                 "tags"      => $allTags,
-                "votes"     => $voteCount,
+                "votesForQ" => $voteCount,
                 "loggedin"  => $session->get("user")
             ]);
 
@@ -160,7 +160,9 @@ class QuestionsController implements ContainerInjectableInterface
             "question"  => $question,
             "answers"   => $answers,
             "comments"  => $comments,
-            "tags"      => $allTags
+            "tags"      => $allTags,
+            "votesForQ" => $voteCount,
+            "loggedin"  => $session->get("user")
         ]);
 
         return $page->render([
@@ -202,7 +204,6 @@ class QuestionsController implements ContainerInjectableInterface
         }
         //If not logged in, return to Q
         return $response->redirect("q/showq?id=$id");
-
     }
 
 

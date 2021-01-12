@@ -108,12 +108,13 @@ class CreateCommentForm extends FormModel
         $meObj->updateReputationByUsername($username, 1);
         $userid = $meObj->getUserInfo($username);
         $userid = $userid["id"];
+        $commentid = $comment->id;
 
         //Create entry for voting
         $votes = new Votes();
         $votes->setDb($this->di->get("dbqb"));
 
-        $votes->createVote($postid, $userid, "comment");
+        $votes->createVote($commentid, $userid, "comment");
 
         $this->form->addOutput("Comment added");
         return true;
