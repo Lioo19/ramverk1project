@@ -97,7 +97,6 @@ class Me extends ActiveRecordModel
         $this->find("username", $username);
         //updates reputations value with the value we've given
         $this->reputation = $this->reputation + $repvalue;
-        var_dump($this->reputation);
         //makes the actual update
         $this->update();
     }

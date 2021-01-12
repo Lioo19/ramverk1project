@@ -14,7 +14,7 @@ CREATE TABLE Votes (
     "userid" INTEGER NOT NULL,
     "postid" INTEGER,
     "commentid" INTEGER,
-    "count" INTEGER DEFAULT 0,
+    "count" INTEGER,
     FOREIGN KEY ("postid") REFERENCES "Posts"("id"),
     FOREIGN KEY ("commentid") REFERENCES "Comments"("id"),
     FOREIGN KEY ("userid") REFERENCES "User"("id")

@@ -109,7 +109,7 @@ class CreateQuestionForm extends FormModel
 
             $postid = $question->getSingleQIdByTitle($title);
 
-            $votes->createVote($postid, $ownerusername, "post");
+            $votes->createVote($postid, $ownerid, "post");
             $this->createTags($tags, $postid);
 
             $this->form->addOutput("Question " .

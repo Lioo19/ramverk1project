@@ -10,8 +10,11 @@ namespace Anax\View;
 <article>
     <article>
         <div class="singleq">
+            <a class="votelink" href="<?= url("q/updatevote?id=" . $question["id"] . "&value=1&type=post") ?>">upvote</a>
+            <a class="votelink" href="<?= url("q/updatevote?id=" . $question["id"] . "&value=-1&type=post") ?>">downvote</a>
             <h1><?= $question["title"]?></h1>
             <p><?= $question["body"] ?></p>
+            <p>Points: <?= $votes ?></p>
             <p>Q asked by <i><?= $question["ownerusername"] ?></i></p>
             <a class="commentlink" href="<?= url("q/commenton?id=" . $question["id"]) ?>">Comment</a>
             <p>Tags:    </p>

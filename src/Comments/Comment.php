@@ -30,6 +30,30 @@ class Comment extends ActiveRecordModel
     public $userid;
 
     /**
+     * Get single Q by id
+     *
+     * @param string $id for q
+     *
+     * @return array | void
+     */
+    public function getSingleCById($id = "")
+    {
+        $this->find("id", $id);
+
+        $info = array(
+            "id"                => $this->id,
+            "postid"            => $this->postid,
+            "score"             => $this->score,
+            "body"              => $this->body,
+            "created"           => $this->created,
+            "deleted"           => $this->deleted,
+            "username"          => $this->username,
+            "userid"            => $this->userid
+        );
+        return $info;
+    }
+
+    /**
      * Get all users
      * username, reputation, gravatar
      *
@@ -53,7 +77,6 @@ class Comment extends ActiveRecordModel
     public function getCommentsByParentId($id = "")
     {
         $all = $this->findAllWhere("postid = ?", $id);
-
         return $all;
     }
 

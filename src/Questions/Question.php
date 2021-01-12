@@ -83,7 +83,6 @@ class Question extends ActiveRecordModel
     public function getAnswersByParentId($id = "")
     {
         $all = $this->findAllWhere("parentid = ?", $id);
-
         return $all;
     }
 

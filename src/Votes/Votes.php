@@ -27,24 +27,41 @@ class Votes extends ActiveRecordModel
     public $count;
 
     /**
-     * Create new entry in table
+     * Create new entry in votes-table
      *
      *
      * @param string $postcommentid & $userid
      *
      * @return void
      */
-    public function createVotes($postcommentid, $userid, $type)
+    public function createVote($postcommentid, $userid, $type)
     {
         if ($type === "post") {
             $this->postid = $postcommentid;
         } else {
-            $this->commentid = $postcommentid
+            $this->commentid = $postcommentid;
         }
         $this->userid = $userid;
         $this->count = 0;
 
         $this->create();
+    }
+
+    /**
+     * Updates the count of the votes-table
+     *
+     *
+     * @param string $postcommentid, $type, $value
+     *
+     * @return void
+     */
+    public function updateVote($postcommentid, $type, $value)
+    {
+        $this->findWhere($type . "id = ?", intval($postcommentid));
+        //updates reputations value with the value we've given
+        $this->count = $this->count + $value;
+        //makes the actual update
+        $this->update();
     }
 
     /**
@@ -70,14 +87,15 @@ class Votes extends ActiveRecordModel
      */
     public function getCountByPostorCommentId($id = "", $type)
     {
-        $all = $this->findAllWhere("$type = ?", $id);
-        var_dump($all);
-        return $all;
+        $all = $this->findAllWhere($type . "id = ?", $id);
+        var_dump($all[0]->count);
+        return $all[0]->count;
     }
 
     /**
      * Get all counts for Userid
      * return only counts in array
+     * Would I rather get the sum?
      *
      * @param string $id
      *

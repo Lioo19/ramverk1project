@@ -9,6 +9,7 @@ use Lioo19\Questions\HTMLForm\CreateAnswerForm;
 use Lioo19\Questions\HTMLForm\CreateCommentForm;
 use Lioo19\Comments\Comment;
 use Lioo19\Tags\PostTags;
+use Lioo19\Votes\Votes;
 use Lioo19\Tags\Tags;
 
 // use Anax\Route\Exception\ForbiddenException;
@@ -86,17 +87,20 @@ class QuestionsController implements ContainerInjectableInterface
         $question   = new Question();
         $comment    = new Comment();
         $posttags   = new PostTags();
+        $votes      = new Votes();
         $tags       = new Tags();
 
         $question->setDb($this->di->get("dbqb"));
         $comment->setDb($this->di->get("dbqb"));
         $posttags->setDb($this->di->get("dbqb"));
+        $votes->setDb($this->di->get("dbqb"));
         $tags->setDb($this->di->get("dbqb"));
         $id = $request->getGet("id", null);
 
         $answers        = $question->getAnswersByParentId($id);
         $question       = $question->getSingleQById($id);
         $posttagsForQ   = $posttags->getTagIdsByPostId($id);
+        $voteCount      = $votes->getCountByPostorCommentId($id, "post");
         $allTags        = [];
 
         foreach ($posttagsForQ as $key => $value) {
@@ -123,6 +127,7 @@ class QuestionsController implements ContainerInjectableInterface
                 "answers"   => $answers,
                 "comments"  => $comments,
                 "tags"      => $allTags,
+                "votes"     => $voteCount,
                 "loggedin"  => $session->get("user")
             ]);
 
@@ -261,5 +266,42 @@ class QuestionsController implements ContainerInjectableInterface
         $answer = $answer->updateAcceptedById($id, "false");
         //Redirect back to Q
         return $response->redirect("q/showq?id=$parentid");
+    }
+
+    /**
+     * Route for updating vote-value for q, a
+     *
+     * @return object
+     */
+    public function updateVoteAction(): object
+    {
+        $request = $this->di->get("request");
+        $response = $this->di->get("response");
+
+        $vote = new Votes();
+        $vote->setDb($this->di->get("dbqb"));
+
+        $id     = $request->getGet("id", null);
+        $value  = $request->getGet("value", null);
+        $type   = $request->getGet("type", null);
+
+        //updating the vote with the new value (works for any value)
+        $vote = $vote->updateVote($id, $type, $value);
+
+        if ($type === "comment") {
+            $comment = new Comment();
+            $comment->setDb($this->di->get("dbqb"));
+            $allinfo = $comment->getSingleCById($id);
+            $postid = $allinfo["postid"];
+            return $response->redirect("q/showq?id=$postid");
+        } elseif ($type === "answer") {
+            $answer = new Question();
+            $answer->setDb($this->di->get("dbqb"));
+            $allinfo = $answer->getSingleQById($id);
+            $parentid = $allinfo["parentid"];
+            return $response->redirect("q/showq?id=$parentid");
+        }
+        //Redirect back to Q
+        // return $response->redirect("q/showq?id=$id");
     }
 }
