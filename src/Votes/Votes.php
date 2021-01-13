@@ -29,8 +29,7 @@ class Votes extends ActiveRecordModel
     /**
      * Create new entry in votes-table
      *
-     *
-     * @param string $postcommentid & $userid
+     * @param string $postcommentid, $userid, $type
      *
      * @return void
      */
@@ -50,7 +49,6 @@ class Votes extends ActiveRecordModel
     /**
      * Updates the count of the votes-table
      *
-     *
      * @param string $postcommentid, $type, $value
      *
      * @return void
@@ -66,7 +64,6 @@ class Votes extends ActiveRecordModel
 
     /**
      * Get all votes in table
-     *
      *
      * @param string $password the password to use.
      *

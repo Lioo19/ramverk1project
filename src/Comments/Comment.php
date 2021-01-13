@@ -30,9 +30,9 @@ class Comment extends ActiveRecordModel
     public $userid;
 
     /**
-     * Get single Q by id
+     * Get single C by id
      *
-     * @param string $id for q
+     * @param string $id for c
      *
      * @return array | void
      */
@@ -51,20 +51,6 @@ class Comment extends ActiveRecordModel
             "userid"            => $this->userid
         );
         return $info;
-    }
-
-    /**
-     * Get all users
-     * username, reputation, gravatar
-     *
-     * @param string $password the password to use.
-     *
-     * @return array
-     */
-    public function getAllQ()
-    {
-        $all = $this->findAll();
-        return $all;
     }
 
     /**

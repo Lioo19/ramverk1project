@@ -119,7 +119,6 @@ foreach ($value as $key1 => $value1) {
         $classes[] = $class;
     }
 
-
     ?>
     <article <?= classList($classes) ?>>
         <?= $newAnswer ?>

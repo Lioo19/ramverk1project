@@ -32,8 +32,6 @@ class Question extends ActiveRecordModel
     public $acceptedanswer;
 
 
-
-
     /**
      * Get single Q by id
      *

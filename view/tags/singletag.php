@@ -13,7 +13,6 @@ namespace Anax\View;
     <div class="qBox tagsq">
         <a href="<?= url("q/showq?id=" . $value["id"])?>">
             <h2><?= $value["title"]?></h2>
-            <!-- <h5><?= $value["body"]?></h5> -->
             <p><i>Q asked by: <?= $value["ownerusername"]?></i></p>
     </div>
     <?php

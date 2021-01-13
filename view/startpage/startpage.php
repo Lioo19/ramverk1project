@@ -45,7 +45,6 @@ namespace Anax\View;
                 />
                 <h2><?= $value["username"]?></h2>
                 <p><?= $value["reputation"]?> points</p>
-                <!-- <p><?= $value["info"]?></p> -->
             </a>
         </div>
             <?php

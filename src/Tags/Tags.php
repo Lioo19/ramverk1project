@@ -26,7 +26,6 @@ class Tags extends ActiveRecordModel
 
     /**
      * Get all tags
-     * username, reputation, gravatar
      *
      * @param string $password the password to use.
      *

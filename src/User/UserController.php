@@ -10,23 +10,12 @@ use Lioo19\Me\Me;
 use Lioo19\Questions\Question;
 use Lioo19\Comments\Comment;
 
-// use Anax\Route\Exception\ForbiddenException;
-// use Anax\Route\Exception\NotFoundException;
-// use Anax\Route\Exception\InternalErrorException;
-
 /**
  * A sample controller to show how a controller class can be implemented.
  */
 class UserController implements ContainerInjectableInterface
 {
     use ContainerInjectableTrait;
-
-
-
-    /**
-     * @var $data description
-     */
-    //private $data;
 
     /**
      * Index action

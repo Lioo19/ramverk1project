@@ -70,11 +70,8 @@ foreach ($value as $key1 => $value1) {
                 </div>
                 <p><?= $value->body ?></p>
                 <i>From: <?= $value->ownerusername ?></i>
-                <p>Points: <?= $value->votes ?></p>
-                <?php
-                //Link for commenting on answer
-                ?>
-                <a  class="commentlink" href="<?= url("q/commenton?id=" . $value->id) ?>">Comment</a>
+                <p>Points: <?= $value->votes ?>
+                <a  class="commentlink" href="<?= url("q/commenton?id=" . $value->id) ?>">Comment</a></p>
                 <?php
                 //Link for marking as accepted answer, if the person logged in is the same as questionasker
                 //link leading to answer-id OBS OBS

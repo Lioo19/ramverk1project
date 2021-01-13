@@ -12,21 +12,12 @@ use Lioo19\Tags\PostTags;
 use Lioo19\Votes\Votes;
 use Lioo19\Tags\Tags;
 
-// use Anax\Route\Exception\ForbiddenException;
-// use Anax\Route\Exception\NotFoundException;
-// use Anax\Route\Exception\InternalErrorException;
-
 /**
  * A sample controller to show how a controller class can be implemented.
  */
 class QuestionsController implements ContainerInjectableInterface
 {
     use ContainerInjectableTrait;
-
-    /**
-     * @var $data description
-     */
-    //private $data;
 
     /**
      * Shows an overview of available questions

@@ -8,21 +8,12 @@ use Lioo19\Tags\HTMLForm\UserLoginForm;
 use Lioo19\Tags\HTMLForm\CreateUserForm;
 use Lioo19\Questions\Question;
 
-// use Anax\Route\Exception\ForbiddenException;
-// use Anax\Route\Exception\NotFoundException;
-// use Anax\Route\Exception\InternalErrorException;
-
 /**
  * A sample controller to show how a controller class can be implemented.
  */
 class TagsController implements ContainerInjectableInterface
 {
     use ContainerInjectableTrait;
-
-    /**
-     * @var $data description
-     */
-    //private $data;
 
     /**
      * Shows an overview of all tags in use
@@ -51,8 +42,6 @@ class TagsController implements ContainerInjectableInterface
 
     /**
      * Individual page for each tag
-     * Should show all questions tagged with certain tag
-     * Should I add headline on individual Tag
      *
      * @throws Exception
      *

@@ -46,8 +46,6 @@ class MeController implements ContainerInjectableInterface
         $this->data = $info->getUserInfo($username);
     }
 
-
-
     /**
      * Description.
      *
@@ -76,7 +74,6 @@ class MeController implements ContainerInjectableInterface
             "title" => $this->data["username"],
         ]);
     }
-
 
     /**
      * Description.

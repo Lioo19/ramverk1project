@@ -8,10 +8,6 @@ use Lioo19\Questions\Question;
 use Lioo19\User\User;
 use Lioo19\Tags\Tags;
 
-// use Anax\Route\Exception\ForbiddenException;
-// use Anax\Route\Exception\NotFoundException;
-// use Anax\Route\Exception\InternalErrorException;
-
 /**
  * A sample controller to show how a controller class can be implemented.
  */
