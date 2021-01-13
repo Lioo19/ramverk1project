@@ -71,15 +71,15 @@ foreach ($value as $key1 => $value1) {
                 <p><?= $value->body ?></p>
                 <i>From: <?= $value->ownerusername ?></i>
                 <p>Points: <?= $value->votes ?>
-                <a  class="commentlink" href="<?= url("q/commenton?id=" . $value->id) ?>">Comment</a></p>
+                <a  class="commentlink" href="<?= url("q/commenton?id=" . $value->id) ?>">Comment</a>
                 <?php
                 //Link for marking as accepted answer, if the person logged in is the same as questionasker
                 //link leading to answer-id OBS OBS
                 if ($value->acceptedanswer === "true") {
                     ?><p class="tiny">This is an accepted answer </p>
-                    <a href="<?= url("q/unacceptanswer?id=" . $value->id) ?>">unaccept</a><?
+                    <a href="<?= url("q/unacceptanswer?id=" . $value->id) ?>">unaccept</a></p><?
                 } elseif ($loggedin === $question["ownerusername"]) {
-                    ?><a class="commentlink" href="<?= url("q/acceptanswer?id=" . $value->id) ?>">mark as accepted answer</a>
+                    ?><a class="commentlink" href="<?= url("q/acceptanswer?id=" . $value->id) ?>">mark as accepted answer</a></p>
                     <?php
                 }?>
             </div>
@@ -98,8 +98,10 @@ foreach ($value as $key1 => $value1) {
             break;
         case 'id':
             ?>
-            <a class="votelink" href="<?= url("q/updatevote?id=" . $value1 . "&value=1&type=anscomment") ?>">upvote</a>
-            <a class="votelink" href="<?= url("q/updatevote?id=" . $value1 . "&value=-1&type=anscomment") ?>">downvote</a><?php
+            <div class="votelink">
+                <a href="<?= url("q/updatevote?id=" . $value1 . "&value=1&type=anscomment") ?>">upvote</a>
+                <a href="<?= url("q/updatevote?id=" . $value1 . "&value=-1&type=anscomment") ?>">downvote</a>
+            </div><?php
             break;
         case 'votes':
             ?><p>Points: <?= $value1 ?></p><?php
